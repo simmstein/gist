@@ -11,9 +11,10 @@ $geshi->enable_line_numbers(GESHI_NORMAL_LINE_NUMBERS);
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<link rel="stylesheet" href="components/bootstrap/dist/css/bootstrap.min.css" />
-		<link rel="stylesheet" href="app/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="app/css/bootstrap/bootstrap.min.css" />
+		<link rel="stylesheet" href="app/css/geshi/twilight.css" />
 		<link rel="stylesheet" href="app/css/app.css" />
-		<link rel="stylesheet" href="app/css/twilight.css" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>GIST</title>
 	</head>
 	<body>
@@ -26,7 +27,7 @@ $geshi->enable_line_numbers(GESHI_NORMAL_LINE_NUMBERS);
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#">XBT</a>
+					<a class="navbar-brand" href="#">#!GIST</a>
 				</div>
 				<div class="collapse navbar-collapse" id="main-menu">
 					<ul class="nav navbar-nav">
@@ -37,10 +38,7 @@ $geshi->enable_line_numbers(GESHI_NORMAL_LINE_NUMBERS);
 							</a>
 						</li>
 						<li>
-							<a href="#">Upload</a>
-						</li>
-						<li>
-							<a href="#">Profile</a>
+							<a href="#">About</a>
 						</li>
 					</ul>
 				</div>
@@ -69,7 +67,10 @@ $geshi->enable_line_numbers(GESHI_NORMAL_LINE_NUMBERS);
 							</a>
 						</li>
 						<li class="pull-right">
-							<a class="btn btn-success btn-sm">Fork</a>
+							<a class="btn btn-success btn-sm">
+								<span class="glyphicon glyphicon-copy"></span>
+								Fork
+							</a>
 						</li>
 					</ul>
 					<div class="panel panel-default">
@@ -77,19 +78,53 @@ $geshi->enable_line_numbers(GESHI_NORMAL_LINE_NUMBERS);
 						<div class="panel-body">
 							<div class="btn-toolbar">
 								<div class="btn-group" id="languages">
-									<button class="btn btn-default" value="html">HTML/XML</button>
-									<button class="btn btn-primary" value="css">CSS</button>
-									<button class="btn btn-default" value="javascript">JAVASCRIPT</button>
-									<button class="btn btn-default" value="php">PHP</button>
-									<button class="btn btn-default" value="sql">SQL</button>
-									<button class="btn btn-default" value="yaml">YAML</button>
-									<button class="btn btn-default" value="perl">PERL</button>
-									<button class="btn btn-default" value="c">C/C++</button>
-									<button class="btn btn-default" value="asp">ASP</button>
-									<button class="btn btn-default" value="python">PYTHON</button>
-									<button class="btn btn-default" value="bash">BASH</button>
-									<button class="btn btn-default" value="actionscript">ACTION SCRIPT</button>
-									<button class="btn btn-default" value="texte">TEXT</button>
+									<div class="btn-group">
+										<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+											Language XML
+											<span class="caret"></span>
+										</button>
+										<ul class="dropdown-menu" role="menu">
+											<li>
+												<a href="html">HTML/XML</a>
+											</li>
+											<li>
+												<a href="css">CSS</a>
+											</li>
+											<li>
+												<a href="javascript">JAVASCRIPT</a>
+											</li>
+											<li>
+												<a href="php">PHP</a>
+											</li>
+											<li>
+												<a href="sql">SQL</a>
+											</li>
+											<li>
+												<a href="yaml">YAML</a>
+											</li>
+											<li>
+												<a href="perl">PERL</a>
+											</li>
+											<li>
+												<a href="c">C/C++</a>
+											</li>
+											<li>
+												<a href="asp">ASP</a>
+											</li>
+											<li>
+												<a href="python">PYTHON</a>
+											</li>
+											<li>
+												<a href="bash">BASH</a>
+											</li>
+											<li>
+												<a href="actionscript">ACTION SCRIPT</a>
+											</li>
+											<li>
+												<a href="texte">TEXT</a>
+											</li>
+										</ul>
+									</div>
 								</div>
 							</div>
 

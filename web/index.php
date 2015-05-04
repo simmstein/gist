@@ -3,8 +3,9 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<link rel="stylesheet" href="components/bootstrap/dist/css/bootstrap.min.css" />
-		<link rel="stylesheet" href="app/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="app/css/bootstrap/bootstrap.min.css" />
 		<link rel="stylesheet" href="app/css/app.css" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>GIST</title>
 	</head>
 	<body>
@@ -17,7 +18,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#">XBT</a>
+					<a class="navbar-brand" href="#">#!GIST</a>
 				</div>
 				<div class="collapse navbar-collapse" id="main-menu">
 					<ul class="nav navbar-nav">
@@ -28,10 +29,7 @@
 							</a>
 						</li>
 						<li>
-							<a href="#">Upload</a>
-						</li>
-						<li>
-							<a href="#">Profile</a>
+							<a href="#">About</a>
 						</li>
 					</ul>
 				</div>
@@ -42,10 +40,14 @@
 				<li>
 					<a href="#">Home</a>
 				</li>
-				<li class="active">New gist</li>
+				<li class="active">New</li>
 			</ul>
 			<div class="row">
 				<div class="col-md-12">
+					<p class="text-primary">
+						<span class="glyphicon glyphicon-info-sign"></span>
+						En activant le chiffrement, le code déposé ne pourra pas être forké.
+					</p>
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<input type="text" class="form-control" id="name" placeholder="Title">
@@ -53,29 +55,71 @@
 						<div class="panel-body">
 							<div class="btn-toolbar">
 								<div class="btn-group" id="languages">
-									<button class="btn btn-default" value="html">HTML/XML</button>
-									<button class="btn btn-primary" value="css">CSS</button>
-									<button class="btn btn-default" value="javascript">JAVASCRIPT</button>
-									<button class="btn btn-default" value="php">PHP</button>
-									<button class="btn btn-default" value="sql">SQL</button>
-									<button class="btn btn-default" value="yaml">YAML</button>
-									<button class="btn btn-default" value="perl">PERL</button>
-									<button class="btn btn-default" value="c">C/C++</button>
-									<button class="btn btn-default" value="asp">ASP</button>
-									<button class="btn btn-default" value="python">PYTHON</button>
-									<button class="btn btn-default" value="bash">BASH</button>
-									<button class="btn btn-default" value="actionscript">ACTION SCRIPT</button>
-									<button class="btn btn-default" value="texte">TEXT</button>
+									<div class="btn-group">
+										<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+											Language XML
+											<span class="caret"></span>
+										</button>
+										<ul class="dropdown-menu" role="menu">
+											<li>
+												<a href="html">HTML/XML</a>
+											</li>
+											<li>
+												<a href="css">CSS</a>
+											</li>
+											<li>
+												<a href="javascript">JAVASCRIPT</a>
+											</li>
+											<li>
+												<a href="php">PHP</a>
+											</li>
+											<li>
+												<a href="sql">SQL</a>
+											</li>
+											<li>
+												<a href="yaml">YAML</a>
+											</li>
+											<li>
+												<a href="perl">PERL</a>
+											</li>
+											<li>
+												<a href="c">C/C++</a>
+											</li>
+											<li>
+												<a href="asp">ASP</a>
+											</li>
+											<li>
+												<a href="python">PYTHON</a>
+											</li>
+											<li>
+												<a href="bash">BASH</a>
+											</li>
+											<li>
+												<a href="actionscript">ACTION SCRIPT</a>
+											</li>
+											<li>
+												<a href="texte">TEXT</a>
+											</li>
+										</ul>
+									</div>
+									<div class="btn-group">
+										<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+											Chiffrement : non
+											<span class="caret"></span>
+										</button>
+										<ul class="dropdown-menu" role="menu">
+											<li>
+												<a href="html">oui</a>
+											</li>
+											<li>
+												<a href="css">non</a>
+											</li>
+										</ul>
+									</div>
 								</div>
 							</div>
 							<p>
 								<textarea rows="10" id="code" class="form-control"></textarea>
-							</p>
-							<p>
-								<label for="crypt">
-									Chiffrer le contenu
-								</label>
-								<input type="checkbox" id="crypt" />
 							</p>
 							<p>
 								<input type="submit" class="btn btn-primary" value="Envoyer">

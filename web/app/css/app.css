@@ -22,6 +22,10 @@ body {
 	padding-bottom: 5px;
 }
 
+#languages .btn-group:first-child {
+	margin-right: 4px;
+}
+
 #render > pre {
 	background: #222;
 	border: #222;
