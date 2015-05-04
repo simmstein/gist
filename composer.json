@@ -1,0 +1,5 @@
+{
+    "require": {
+        "geshi/geshi": "dev-master"
+    }
+}

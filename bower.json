@@ -1,0 +1,17 @@
+{
+  "name": "gist-debla,",
+  "version": "0.0.1",
+  "authors": [
+    "Simon Vieille <simon@deblan.fr>"
+  ],
+  "description": "Gist DEBLAN",
+  "main": "web/index.php",
+  "keywords": [
+    "XBT"
+  ],
+  "license": "LGPL",
+  "homepage": "https://gitlab.deblan.org/deblan/gist.deblan.org",
+  "dependencies": {
+    "bootstrap": "3.3.4"
+  }
+}

@@ -1,0 +1,37 @@
+body {
+	background: #333;
+}
+
+.navbar {
+	border-radius: 0;
+}
+
+.form-control {
+	color: #fff;
+	background: #2D2D2D;
+	border: #333;
+}
+
+#code {
+	display: block;
+	width: 100%;
+	padding: 10px;
+}
+
+#languages {
+	padding-bottom: 5px;
+}
+
+#render > pre {
+	background: #222;
+	border: #222;
+	color: #ddd;
+}
+
+#render pre ol {
+	padding-left: 50px;
+}
+
+#render li:hover {
+	background: #222;
+}
