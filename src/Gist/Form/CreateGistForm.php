@@ -34,7 +34,9 @@ class CreateGistForm extends AbstractForm
                     'rows' => 10,
                 ),
                 'constraints' => array(
-                    new NotBlank(),
+                    new NotBlank(array(
+                        'message' => $this->translator->trans('form.error.not_blank'),
+                    )),
                 ),
             )
         );
@@ -57,8 +59,8 @@ class CreateGistForm extends AbstractForm
             array(
                 'required' => true,
                 'choices' => array(
-                    0 => $this->translator->trans('form.cipher.choice.no'),
-                    1 => $this->translator->trans('form.cipher.choice.yes'),
+                    'no' => $this->translator->trans('form.cipher.choice.no'),
+                    'yes' => $this->translator->trans('form.cipher.choice.yes'),
                 ),
             )
         );

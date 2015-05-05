@@ -8,13 +8,18 @@ app:
             title: 'About'
 
 form:
+    error:
+        not_blank: 'This value should not be blank bro!'
     title:
         placeholder: 'Title'
     cipher:
+        alert: 'By enabling cipher, fork will be not possible.'
+        label: 'Cipher: %value%'
         choice:
             yes: 'Yes'
             no: 'No'
     type:
+        label: 'Language: %value%'
         choice:
             xml: 'HTML/XML'
             css: 'CSS'

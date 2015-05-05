@@ -12,7 +12,7 @@ body {
 	border: #333;
 }
 
-#code {
+#form_content {
 	display: block;
 	width: 100%;
 	padding: 10px;
@@ -43,3 +43,4 @@ body {
 .panel-heading .actions {
 	margin-top: -5px;
 }
+

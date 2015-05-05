@@ -15,11 +15,11 @@ abstract class AbstractForm
 
     protected $translator;
 
-    public function __construct(FormFactory $formFactory, Translator $translator)
+    public function __construct(FormFactory $formFactory, Translator $translator, array $data = array())
     {
         $this->translator = $translator;
 
-        $this->builder = $formFactory->createBuilder('form');
+        $this->builder = $formFactory->createBuilder('form', $data);
     }
 
     abstract public function build(array $options = array());
