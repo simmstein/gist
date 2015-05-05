@@ -10,6 +10,6 @@ $app['routing.loader'] = function ($app) {
 
 $app['routes'] = $app->extend('routes', function ($routes, $app) {
     $routes->addCollection($app['routing.loader']->load($app['routing.file']));
+
     return $routes;
 });
-

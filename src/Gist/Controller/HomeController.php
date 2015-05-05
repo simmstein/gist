@@ -15,7 +15,7 @@ class HomeController
     public function indexAction(Request $request, Application $app)
     {
         $form = new CreateGistForm($app['form.factory'], $app['translator']);
-		$form = $form->build();
+        $form = $form->build();
 
         return $app['twig']->render(
             'Home/index.html.twig',

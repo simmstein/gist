@@ -3,7 +3,7 @@
 use GitWrapper\GitWrapper;
 
 $app['git'] = function ($app) {
-	echo "ok";
+    echo "ok";
+
     return new GitWrapper();
 };
-
