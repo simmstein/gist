@@ -12,6 +12,7 @@
   "license": "LGPL",
   "homepage": "https://gitlab.deblan.org/deblan/gist.deblan.org",
   "dependencies": {
-    "bootstrap": "3.3.4"
+    "bootstrap": "3.3.4",
+	"flag-icon-css": "0.7.1"
   }
 }

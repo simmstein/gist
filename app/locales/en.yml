@@ -1,4 +1,5 @@
 app:
+    title: '#!GIST'
     title_prefix: '#!GIST - '
 
     menu:

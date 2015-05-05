@@ -3,6 +3,7 @@
     <head>
         {% block css %}
             <link rel="stylesheet" href="{{ web_path }}components/bootstrap/dist/css/bootstrap.min.css" />
+            <link rel="stylesheet" href="{{ web_path }}components/flag-icon-css/css/flag-icon.min.css" />
             <link rel="stylesheet" href="{{ web_path }}app/css/bootstrap/bootstrap.min.css" />
             <link rel="stylesheet" href="{{ web_path }}app/css/app.css" />
         {% endblock %}
@@ -23,7 +24,9 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">#!GIST</a>
+                    <a class="navbar-brand" href="{{ path('home') }}">
+                        {{ 'app.title'|trans }}
+                    </a>
                 </div>
                 <div class="collapse navbar-collapse" id="main-menu">
                     <ul class="nav navbar-nav">
@@ -38,6 +41,14 @@
                             </a>
                         </li>
                     </ul>
+                    <p class="navbar-text navbar-right">
+                        <a class="btn btn-xs" href="{{ path(app.request.get('_route'), {_locale: 'en'}) }}">
+                            <span class="flag-icon flag-icon-gb"></span>
+                        </a>
+                        <a class="btn btn-xs" href="{{ path(app.request.get('_route'), {_locale: 'fr'}) }}">
+                            <span class="flag-icon flag-icon-fr"></span>
+                        </a>
+                    </p>
                 </div>
             </div>
         </nav>
