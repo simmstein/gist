@@ -3,9 +3,13 @@
         "geshi/geshi": "dev-master",
         "silex/silex": "dev-master",
         "symfony/yaml": "~2.6",
-        "symfony/twig-bridge": "dev-master",
+        "symfony/twig-bridge": "~2.6",
         "symfony/translation": "dev-master",
-        "symfony/config": "2.8.x-dev"
+        "symfony/config": "2.8.x-dev",
+        "cpliakas/git-wrapper": "~1.4",
+        "symfony/form": "~2.6",
+        "symfony/security-csrf": "~2.6",
+        "symfony/validator": "dev-master"
     },
     "autoload": {
         "psr-0": {

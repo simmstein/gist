@@ -11,3 +11,4 @@ $app->extend('twig', function ($twig, $app) {
 
     return $twig;
 });
+

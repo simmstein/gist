@@ -6,3 +6,26 @@ app:
             title: 'Home'
         about:
             title: 'About'
+
+form:
+    title:
+        placeholder: 'Title'
+    cipher:
+        choice:
+            yes: 'Yes'
+            no: 'No'
+    type:
+        choice:
+            xml: 'HTML/XML'
+            css: 'CSS'
+            js: 'JAVASCRIPT'
+            php: 'PHP'
+            sql: 'SQL'
+            yaml: 'YAML'
+            perl: 'PERL'
+            c: 'C/C++'
+            asp: 'ASP'
+            python: 'PYTHON'
+            bash: 'BASH'
+            as: 'ACTION SCRIPT'
+            text: 'TEXT'

@@ -10,3 +10,4 @@ $app->error(function (Exception $e, $code) use ($app) {
         )
     );
 });
+
