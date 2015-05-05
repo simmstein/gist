@@ -1,0 +1,8 @@
+app:
+    title_prefix: '#!GIST - '
+
+    menu:
+        home:
+            title: 'Home'
+        about:
+            title: 'About'

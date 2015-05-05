@@ -1,0 +1,14 @@
+#!/bin/sh
+
+cd "$(dirname "$0")/.."
+
+deploy_preprod() {
+	rsync -avzoK --delete -e ssh * weblinuxtest@deblan.fr:/services/web/www/linux-test.deblan.org/project/
+}
+
+
+deploy_preprod_lan() {
+	rsync -avzoK --delete -e ssh * weblinuxtest@hinata:/services/web/www/linux-test.deblan.org/project/
+}
+
+([ -n "$1" ] && deploy_$1) || deploy_preprod

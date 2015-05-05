@@ -1,5 +1,15 @@
 {
     "require": {
-        "geshi/geshi": "dev-master"
+        "geshi/geshi": "dev-master",
+        "silex/silex": "dev-master",
+        "symfony/yaml": "~2.6",
+        "symfony/twig-bridge": "dev-master",
+        "symfony/translation": "dev-master",
+        "symfony/config": "2.8.x-dev"
+    },
+    "autoload": {
+        "psr-0": {
+            "": "src/"
+        }
     }
 }

@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Error {{ code }} - {{ name }}
+{% endblock %}
+
+{% block body %}
+	<h1>{{ name }}</h1>
+
+	<p><em>In file "{{ exception.file }}" at line {{ exception.line }}</em></p>
+	<p>{{ exception.message }}</p>
+
+	<h2>Stacktrace</h2>
+	<pre>{{ exception.traceAsString }}</pre>
+{% endblock %}

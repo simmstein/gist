@@ -1,0 +1,3 @@
+home:
+    path: /
+    defaults: { _controller: Gist\Controller\HomeController::indexAction, _locale: en }
