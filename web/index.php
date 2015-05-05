@@ -36,23 +36,17 @@
 			</div>
 		</nav>
 		<div class="container-fluid" id="container">
-			<ul class="breadcrumb">
-				<li>
-					<a href="#">Home</a>
-				</li>
-				<li class="active">New</li>
-			</ul>
 			<div class="row">
 				<div class="col-md-12">
-					<p class="text-primary">
-						<span class="glyphicon glyphicon-info-sign"></span>
-						En activant le chiffrement, le code déposé ne pourra pas être forké.
-					</p>
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<input type="text" class="form-control" id="name" placeholder="Title">
 						</div>
 						<div class="panel-body">
+							<p class="text-primary">
+								<span class="glyphicon glyphicon-info-sign"></span>
+								En activant le chiffrement, le code déposé ne pourra pas être forké.
+							</p>
 							<div class="btn-toolbar">
 								<div class="btn-group" id="languages">
 									<div class="btn-group">

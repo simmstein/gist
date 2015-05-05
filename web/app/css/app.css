@@ -39,3 +39,7 @@ body {
 #render li:hover {
 	background: #222;
 }
+
+.panel-heading .actions {
+	margin-top: -5px;
+}
