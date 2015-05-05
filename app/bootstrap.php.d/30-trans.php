@@ -26,13 +26,13 @@ $app['translator'] = $app->extend('translator', function ($translator, $app) {
     return $translator;
 });
 
-$app['routes'] = $app->extend('routes', function ($routes, $app) {
+$app['routes'] = $app->share($app->extend('routes', function ($routes, $app) {
     $routes->addPrefix('/{_locale}');
     $routes->addDefaults(array('_locale' => $app['locale_fallbacks'][0]));
     $routes->addRequirements(array('_locale' => implode('|', $app['locales'])));
 
     return $routes;
-});
+}));
 
 /**
  * Redirect home on right locale page, regarding of request accept locale or

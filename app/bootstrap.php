@@ -20,7 +20,7 @@ return call_user_func(function () {
     $files = array();
 
     foreach (new DirectoryIterator(__FILE__ . '.d') as $file) {
-        if (!$file->isDot() && $file->isFile()) {
+        if (!$file->isDot() && $file->isFile() && $file->getBasename()[0] !== '.') {
             $files[] = $file->getPathname();
         }
     }

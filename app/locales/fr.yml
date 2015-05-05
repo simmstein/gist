@@ -1,0 +1,36 @@
+app:
+    title_prefix: '#!GIST - '
+
+    menu:
+        home:
+            title: 'Accueil'
+        about:
+            title: 'À propos'
+
+form:
+    error:
+        not_blank: 'Vous devez saisir cette donnée.'
+    title:
+        placeholder: 'Titre'
+    cipher:
+        alert: 'En activant le chiffrement, le fork deviendra impossible.'
+        label: 'Chiffrer : %value%'
+        choice:
+            yes: 'Oui'
+            no: 'No'
+    type:
+        label: 'Langage : %value%'
+        choice:
+            xml: 'HTML/XML'
+            css: 'CSS'
+            js: 'JAVASCRIPT'
+            php: 'PHP'
+            sql: 'SQL'
+            yaml: 'YAML'
+            perl: 'PERL'
+            c: 'C/C++'
+            asp: 'ASP'
+            python: 'PYTHON'
+            bash: 'BASH'
+            as: 'ACTION SCRIPT'
+            text: 'TEXTE'

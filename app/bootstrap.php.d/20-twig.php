@@ -7,7 +7,7 @@ $app->register(new TwigServiceProvider(), array(
 ));
 
 $app->extend('twig', function ($twig, $app) {
-    $twig->addGlobal('web_path', '/');
+    $twig->addGlobal('web_path', $app['request']->getBaseUrl().'/');
 
     return $twig;
 });
