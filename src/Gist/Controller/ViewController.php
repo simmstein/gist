@@ -22,8 +22,8 @@ class ViewController
         }
 
         $history = $app['gist']->getHistory($gist);
-        
-		if (empty($history)) {
+
+        if (empty($history)) {
             return $this->notFoundResponse($app);
         }
 
