@@ -43,10 +43,22 @@ class GistService
         $history = [];
 
         for ($i = count($commits) - 1; $i >= 0; $i--) {
-            $history[] = array(
+            $commit = trim($commits[$i][1]);
+
+            $command = GitCommand::getInstance('show', $commit);
+            $command->setDirectory($this->gistPath);
+            $command->bypass(false);
+
+            $diff = explode("\n", $this->gitWrapper->run($command));
+            $diff = implode("\n", array_slice($diff, 11));
+
+            $data = array(
                 'commit' => trim($commits[$i][1]),
                 'date' => new \DateTime(trim($dates[$i][1])),
+                'diff' => $diff,
             );
+
+            $history[] = $data;
         }
 
         return $history;

@@ -65,6 +65,10 @@ var editorEvents = function() {
     $('#options input:checked').each(function() {
         $(this).trigger('change');
     });
+
+	$('.show-diff').click(function() {
+		$(this).next().toggle();
+	});
 }
 
 var mainEditorEvents = function() {

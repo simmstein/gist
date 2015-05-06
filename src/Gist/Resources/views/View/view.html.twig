@@ -71,17 +71,26 @@
                                     <div class="commit">
                                         <p>
                                             Commit <strong class="text-warning">{{ commit.commit }}</strong>
+                                            
+                                            {% if loop.first %}(init){% endif %}
+
                                             <br/>
                                             Date: {{ commit.date|date('date.format'|trans) }}
                                         </p>
-                                        <p>
+                                        <div>
                                             <a href="{{ path('view', {gist: gist.file, commit: commit.commit}) }}" class="btn btn-primary">
                                                 Afficher
                                             </a>
-                                            <a class="btn btn-default">
-                                                DIFF
-                                            </a>
-                                        </p>
+                                            {% if not loop.first %}
+                                                <a href="#diff-{{ loop.index }}" id="diff-{{ loop.index }}" class="btn btn-default show-diff">
+                                                    DIFF
+                                                </a>
+
+                                                <div class="diff">
+                                                    <pre>{{ commit.diff }}</pre>
+                                                </div>
+                                            {% endif %}
+                                        </div>
                                     </div>
 
                                     {% if not loop.last %}

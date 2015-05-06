@@ -26,17 +26,17 @@ body {
 	margin-right: 4px;
 }
 
-#viewer > pre {
+pre {
 	background: #222;
 	border: #222;
 	color: #ddd;
 }
 
-#viewer pre ol {
-	padding-left: 50px;
+pre ol {
+	padding-left: 50px !important;
 }
 
-#viewer li:hover {
+pre li:hover {
 	background: #222;
 }
 
@@ -44,3 +44,6 @@ body {
 	margin-top: -5px;
 }
 
+.diff {
+	display: none;
+}
