@@ -8,8 +8,8 @@ Requirements
 
 * PHP >= 5.4
 * GIT
-* Composer
-* Bower
+* Composer (php)
+* Bower (node)
 
 Installation
 ------------
