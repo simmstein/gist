@@ -1,0 +1,33 @@
+propel:
+    database:
+        connections:
+            default:
+                adapter: mysql
+                classname: Propel\Runtime\Connection\ConnectionWrapper
+                dsn: "mysql:host=localhost;dbname=gist"
+                user: root
+                password: root
+                attributes:
+                settings:
+                    charset: utf8
+                    queries:
+                        utf8: "SET NAMES utf8 COLLATE utf8_unicode_ci, COLLATION_CONNECTION = utf8_unicode_ci, COLLATION_DATABASE = utf8_unicode_ci, COLLATION_SERVER = utf8_unicode_ci"
+
+    paths:
+        projectDir: src/
+        schemaDir: src/
+        outputDir: src/
+        phpDir: src/
+        phpConfDir: app/config/propel
+        sqlDir: app/propel/sql
+        migrationDir: app/propel/migration
+
+    runtime:
+        defaultConnection: default
+        connections: [default]
+
+    generator:
+        defaultConnection: default
+        connections: [default]
+        objectModel:
+            addClassLevelComment: false

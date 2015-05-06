@@ -42,10 +42,10 @@
                         </li>
                     </ul>
                     <p class="navbar-text navbar-right">
-                        <a class="btn btn-xs" href="{{ path(app.request.get('_route'), {_locale: 'en'}) }}">
+                        <a class="btn btn-xs" href="{{ path('home', {_locale: 'en'}) }}">
                             <span class="flag-icon flag-icon-gb"></span>
                         </a>
-                        <a class="btn btn-xs" href="{{ path(app.request.get('_route'), {_locale: 'fr'}) }}">
+                        <a class="btn btn-xs" href="{{ path('home', {_locale: 'fr'}) }}">
                             <span class="flag-icon flag-icon-fr"></span>
                         </a>
                     </p>

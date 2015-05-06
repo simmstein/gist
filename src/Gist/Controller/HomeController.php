@@ -5,6 +5,7 @@ namespace Gist\Controller;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Gist\Form\CreateGistForm;
+use Gist\Model\Gist;
 
 /**
  * Class HomeController
@@ -26,7 +27,13 @@ class HomeController
             $form->submit($request);
 
             if ($form->isValid()) {
+				$gist = $app['gist']->create(new Gist(), $form->getData());
 
+				if ($gist->getCipher()) {
+
+				} else {
+
+				}
             }
         }
 

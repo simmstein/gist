@@ -16,6 +16,7 @@
 						<p><em>In file "{{ exception.file }}" at line {{ exception.line }}</em></p>
 
 						<h2>Stacktrace</h2>
+						<p>{{ exception.message }}</p>
 						<pre>{{ exception.traceAsString }}</pre>
 					{% else %}
 						<p>{{ exception.message }}</p>
