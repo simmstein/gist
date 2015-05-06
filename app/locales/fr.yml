@@ -18,7 +18,7 @@ form:
         label: 'Chiffrer : %value%'
         choice:
             yes: 'Oui'
-            no: 'No'
+            no: 'Non'
     type:
         label: 'Langage : %value%'
         choice:
