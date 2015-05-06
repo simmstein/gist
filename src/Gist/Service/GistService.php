@@ -45,7 +45,7 @@ class GistService
         for ($i = count($commits) - 1; $i >= 0; $i--) {
             $commit = trim($commits[$i][1]);
 
-            $command = GitCommand::getInstance('show', $commit);
+            $command = GitCommand::getInstance('show', '--no-color', $commit);
             $command->setDirectory($this->gistPath);
             $command->bypass(false);
 
@@ -55,7 +55,7 @@ class GistService
             $data = array(
                 'commit' => trim($commits[$i][1]),
                 'date' => new \DateTime(trim($dates[$i][1])),
-                'diff' => $diff,
+                'diff' => $this->highlight('diff', $diff),
             );
 
             $history[] = $data;

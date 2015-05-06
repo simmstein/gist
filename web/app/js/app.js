@@ -67,7 +67,7 @@ var editorEvents = function() {
     });
 
 	$('.show-diff').click(function() {
-		$(this).next().toggle();
+		$($(this).data('target')).toggle();
 	});
 }
 

@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block css %}
-    {{ parent() }}
+    <link rel="stylesheet" href="{{ web_path }}app/css/geshi/vibrant-ink.css" />
 
-    <link rel="stylesheet" href="{{ web_path }}app/css/geshi/twilight.css" />
+    {{ parent() }}
 {% endblock %}
 
 {% block body %}
@@ -70,24 +70,26 @@
                                 {% for commit in history %}
                                     <div class="commit">
                                         <p>
-                                            Commit <strong class="text-warning">{{ commit.commit }}</strong>
-                                            
-                                            {% if loop.first %}(init){% endif %}
+                                            <a href="{{ path('view', {gist: gist.file, commit: commit.commit}) }}" class="btn btn-warning btn-sm">
+                                                {{ commit.commit|slice(0, 10) }}
+                                            </a>
 
-                                            <br/>
-                                            Date: {{ commit.date|date('date.format'|trans) }}
+                                            {% if loop.first %}<span class="btn btn-info btn-sm">init</span>{% endif %}
+                                            
+                                            {% if not loop.first %}
+                                                <a href="#diff-{{ loop.index }}" data-target="#diff-{{ loop.index }}" class="btn btn-default btn-sm show-diff">
+                                                    diff
+                                                </a>
+                                            {% endif %}
+                                        </p>
+                                        <p>
+                                            {{ commit.date|date('date.format'|trans) }}
                                         </p>
                                         <div>
-                                            <a href="{{ path('view', {gist: gist.file, commit: commit.commit}) }}" class="btn btn-primary">
-                                                Afficher
-                                            </a>
                                             {% if not loop.first %}
-                                                <a href="#diff-{{ loop.index }}" id="diff-{{ loop.index }}" class="btn btn-default show-diff">
-                                                    DIFF
-                                                </a>
 
-                                                <div class="diff">
-                                                    <pre>{{ commit.diff }}</pre>
+                                                <div class="diff" id="diff-{{ loop.index }}">
+                                                    {{ commit.diff|raw }}
                                                 </div>
                                             {% endif %}
                                         </div>

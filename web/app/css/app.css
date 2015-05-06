@@ -30,6 +30,11 @@ pre {
 	background: #222;
 	border: #222;
 	color: #ddd;
+	white-space: pre-wrap;
+	white-space: -moz-pre-wrap;
+	white-space: -pre-wrap;
+	white-space: -o-pre-wrap;
+	word-wrap: break-word;
 }
 
 pre ol {
@@ -37,13 +42,30 @@ pre ol {
 }
 
 pre li:hover {
-	background: #222;
+	background: #444;
 }
 
 .panel-heading .actions {
 	margin-top: -5px;
 }
 
-.diff {
+div.diff {
 	display: none;
+}
+
+.de1 {
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+.li1 {
+	background: #333;
+}
+
+.re8 {
+	color: #52F700;
+}
+
+.kw3 {
+	color: #C6C765;
 }
