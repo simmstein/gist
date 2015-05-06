@@ -18,6 +18,11 @@ Installation
 	$ cd gist
 	$ make
 
+Git
+---
+	$ git config --global user.email "you@example.com"
+	$ git config --global user.name "Your Name"
+
 Composer
 --------
 

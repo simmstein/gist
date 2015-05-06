@@ -3,5 +3,11 @@
 *.swp
 app/config/propel/
 app/propel/
+data/git
 deploy
+tags
 propel.yaml
+composer.lock
+composer.json
+bower.json
+.bowerrc
