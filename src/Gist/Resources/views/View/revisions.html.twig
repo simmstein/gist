@@ -11,10 +11,10 @@
         <div class="col-md-12">
             {% if not gist.cipher %}
                 <ul class="nav nav-tabs">
-                    <li class="active">
+                    <li>
                         <a href="{{ path('view', {gist: gist.file}) }}">View</a>
                     </li>
-                    <li>
+                    <li class="active">
                         <a href="{{ path('revisions', {gist: gist.file}) }}">
                             Révisions
                             <span class="badge">{{ history|length }}</span>
@@ -22,6 +22,7 @@
                     </li>
                 </ul>    
             {% endif %}
+
             <div class="panel panel-default">
                 <div class="panel-heading">
                     {% if not gist.cipher %}
@@ -45,33 +46,8 @@
                 </div>
                 <div class="panel-body">
                     <div class="tab-content">
-                        <div id="view" class="tab-pane active in">
-							<div class="pull-right">
-								<span class="btn btn-warning btn-xs">
-									{{ commit|slice(0, 10) }}
-								</span>
-							</div>
-                            <div class="btn-toolbar">
-                                <div class="btn-group" id="languages">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                            Language XML
-                                            <span class="caret"></span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div id="viewer">
-                                {% if gist.cipher %}
-                                    <pre>{{ content }}</pre>
-                                {% else %}
-                                    {{ content|raw }}
-                                {% endif %}
-                            </div>
-                        </div>
                         {% if not gist.cipher %}
-                            <div id="revisions" class="tab-pane out">
+                            <div id="revisions" class="tab-pane in active">
                                 {% for commit in history %}
                                     <div class="commit">
                                         <p>

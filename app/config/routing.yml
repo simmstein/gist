@@ -3,5 +3,9 @@ home:
     defaults: {_controller: Gist\Controller\EditController::createAction, _locale: en}
 
 view:
-    path: /{gist}/{commit}
+    path: /view/{gist}/{commit}
     defaults: {_controller: Gist\Controller\ViewController::viewAction, _locale: en, commit: 0}
+
+revisions:
+    path: /revs/{gist}
+    defaults: {_controller: Gist\Controller\ViewController::revisionsAction, _locale: en}

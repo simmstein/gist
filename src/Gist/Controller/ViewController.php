@@ -35,7 +35,31 @@ class ViewController
                 'gist' => $gist,
                 'type' => $gist->getType(),
                 'history' => $history,
+                'commit' => $commit,
                 'content' => $app['gist']->highlight($gist->getType(), $content),
+            )
+        );
+    }
+
+    public function revisionsAction(Request $request, Application $app, $gist)
+    {
+        $gist = GistQuery::create()->findOneByFile($gist);
+
+        if (null === $gist) {
+            return $this->notFoundResponse($app);
+        }
+
+        $history = $app['gist']->getHistory($gist);
+
+        if (empty($history)) {
+            return $this->notFoundResponse($app);
+        }
+
+        return $app['twig']->render(
+            'View/revisions.html.twig',
+            array(
+                'gist' => $gist,
+                'history' => $history,
             )
         );
     }
@@ -45,7 +69,7 @@ class ViewController
         return $app['twig']->render('View/notFound.html.twig');
     }
 
-    protected function getContentByCommit(Application $app, Gist $gist, $commit, $history)
+    protected function getContentByCommit(Application $app, Gist $gist, &$commit, $history)
     {
         if ($commit === 0) {
             $commit = $history[0]['commit'];
