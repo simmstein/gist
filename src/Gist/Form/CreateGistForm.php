@@ -73,7 +73,7 @@ class CreateGistForm extends AbstractForm
         $types = array(
             'xml' => '',
             'css' => '',
-            'js' => '',
+            'javascript' => '',
             'php' => '',
             'sql' => '',
             'yaml'=> '',
@@ -82,7 +82,7 @@ class CreateGistForm extends AbstractForm
             'asp' => '',
             'python' => '',
             'bash' => '',
-            'as' => '',
+            'actionscript3' => '',
             'text' => '',
         );
 

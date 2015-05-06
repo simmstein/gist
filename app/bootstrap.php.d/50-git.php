@@ -5,11 +5,14 @@ use Gist\Service\GistService;
 
 $app['gist_path'] = $app['root_path'].'/data/git';
 
-$app['git'] = function ($app) {
-    $wrapper = new GitWrapper('/usr/bin/git');
-    return $wrapper->init($app['gist_path']);
+$app['git_wrapper'] = function ($app) {
+    return new GitWrapper('/usr/bin/git');
+};
+
+$app['git_working_copy'] = function ($app) {
+    return $app['git_wrapper']->init($app['gist_path']);
 };
 
 $app['gist'] = function ($app) {
-    return new GistService($app['gist_path'], $app['git']);
+    return new GistService($app['gist_path'], $app['git_wrapper'], $app['git_working_copy'], $app['geshi']);
 };

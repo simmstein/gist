@@ -14,6 +14,9 @@ gist:
         title: 'Oops!'
         message: 'The gist was not found...'
 
+date:
+    format: 'Y-m-d h:i:s'
+
 form:
     error:
         not_blank: 'This value should not be blank bro!'
@@ -30,7 +33,7 @@ form:
         choice:
             xml: 'HTML/XML'
             css: 'CSS'
-            js: 'JAVASCRIPT'
+            javascript: 'JAVASCRIPT'
             php: 'PHP'
             sql: 'SQL'
             yaml: 'YAML'
@@ -39,5 +42,5 @@ form:
             asp: 'ASP'
             python: 'PYTHON'
             bash: 'BASH'
-            as: 'ACTION SCRIPT'
+            actionscript3: 'ACTION SCRIPT'
             text: 'TEXT'

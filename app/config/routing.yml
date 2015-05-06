@@ -1,7 +1,7 @@
 home:
     path: /
-    defaults: { _controller: Gist\Controller\EditController::createAction, _locale: en }
+    defaults: {_controller: Gist\Controller\EditController::createAction, _locale: en}
 
 view:
-    path: /{gist}
-    defaults: { _controller: Gist\Controller\ViewController::viewAction, _locale: en }
+    path: /{gist}/{commit}
+    defaults: {_controller: Gist\Controller\ViewController::viewAction, _locale: en, commit: 0}
