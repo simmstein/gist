@@ -14,8 +14,8 @@ Requirements
 Installation
 ------------
 
-	$ git clone https://gitlab.deblan.org/deblan/gist.deblan.org.git
-	$ cd gist.deblan.org.git
+	$ git clone https://gitlab.deblan.org/deblan/gist
+	$ cd gist
 	$ make
 
 Composer
