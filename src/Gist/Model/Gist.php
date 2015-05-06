@@ -16,9 +16,7 @@ class Gist extends BaseGist
             $this->setType($data['type']);
         }
 
-        if (isset($data['cipher'])) {
-            $this->setCipher(in_array($data['cipher'], [true, 'yes']));
-        }
+        $this->setCipher(isset($data['cipher']) && $data['cipher'] === 'yes');
 
         return $this;
     }

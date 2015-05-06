@@ -8,6 +8,12 @@ app:
         about:
             title: 'À propos'
 
+gist:
+    untitled: 'Sans titre'
+    404:
+        title: 'Arf...'
+        message: "Ce gist n'existe pas."
+
 form:
     error:
         not_blank: 'Vous devez saisir cette donnée.'

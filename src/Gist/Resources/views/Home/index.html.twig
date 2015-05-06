@@ -2,7 +2,7 @@
 
 {% block body %}
     <div class="row">
-        <form action="{{ path('home') }}" method="post">
+        <form action="{{ path('home') }}" method="post" id="main-form">
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -82,4 +82,14 @@
             {{ form_widget(form._token) }}
         </form>
     </div>
+{% endblock %}
+
+{% block js %}
+	{{ parent() }}
+
+	{% if gist is not null %}
+		<script type="text/javascript">
+			document.location.href = '{{ path("view", {gist: gist.file}) }}'{% if gist.cipher %} + '#' + (document.location.href).split('#')[1]{% endif %};
+		</script>
+	{% endif %}
 {% endblock %}

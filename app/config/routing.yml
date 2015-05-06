@@ -1,3 +1,7 @@
 home:
     path: /
-    defaults: { _controller: Gist\Controller\HomeController::indexAction, _locale: en }
+    defaults: { _controller: Gist\Controller\EditController::createAction, _locale: en }
+
+view:
+    path: /{gist}
+    defaults: { _controller: Gist\Controller\ViewController::viewAction, _locale: en }

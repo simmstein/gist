@@ -8,6 +8,12 @@ app:
         about:
             title: 'About'
 
+gist:
+    untitled: 'Untitled'
+    404:
+        title: 'Oops!'
+        message: 'The gist was not found...'
+
 form:
     error:
         not_blank: 'This value should not be blank bro!'

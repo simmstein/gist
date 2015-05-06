@@ -26,17 +26,17 @@ body {
 	margin-right: 4px;
 }
 
-#render > pre {
+#viewer > pre {
 	background: #222;
 	border: #222;
 	color: #ddd;
 }
 
-#render pre ol {
+#viewer pre ol {
 	padding-left: 50px;
 }
 
-#render li:hover {
+#viewer li:hover {
 	background: #222;
 }
 

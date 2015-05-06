@@ -11,9 +11,9 @@ use Gist\Model\Gist;
  * Class HomeController
  * @author Simon Vieille <simon@deblan.fr>
  */
-class HomeController
+class EditController
 {
-    public function indexAction(Request $request, Application $app)
+    public function createAction(Request $request, Application $app)
     {
         $data = array(
             'type' => 'xml',
@@ -27,19 +27,14 @@ class HomeController
             $form->submit($request);
 
             if ($form->isValid()) {
-				$gist = $app['gist']->create(new Gist(), $form->getData());
-
-				if ($gist->getCipher()) {
-
-				} else {
-
-				}
+                $gist = $app['gist']->create(new Gist(), $form->getData());
             }
         }
 
         return $app['twig']->render(
             'Home/index.html.twig',
             array(
+                'gist' => isset($gist) ? $gist : null,
                 'form' => $form->createView(),
             )
         );
