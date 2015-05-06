@@ -1,0 +1,7 @@
+*.svn
+*.git
+*.swp
+app/config/propel/
+app/propel/
+deploy
+propel.yaml
