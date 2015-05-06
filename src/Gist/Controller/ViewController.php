@@ -30,10 +30,6 @@ class ViewController
 
     protected function notFoundResponse(Application $app)
     {
-        return $app['twig']->render(
-            'View/notFound.html.twig',
-            array(
-            )
-        );
+        return $app['twig']->render('View/notFound.html.twig');
     }
 }

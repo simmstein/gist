@@ -1,98 +1,98 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-	<div class="row">
-		<div class="col-md-12">
-			{% if not gist.cipher %}
-				<ul class="nav nav-tabs">
-					<li class="active">
-						<a href="#view" data-toggle="tab">View</a>
-					</li>
-					<li>
-						<a href="#revisions" data-toggle="tab">
-							Révisions
-							<span class="badge">4</span>
-						</a>
-					</li>
-				</ul>	
-			{% endif %}
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					{% if not gist.cipher %}
-						<div class="pull-right actions">
-							<a class="btn btn-default btn-sm">
-								<span class="glyphicon glyphicon-eye-open"></span>
-								RAW
-							</a>
-							<a class="btn btn-default btn-sm">
-								<span class="glyphicon glyphicon-save-file"></span>
-								Download
-							</a>
-							<a class="btn btn-success btn-sm">
-								<span class="glyphicon glyphicon-copy"></span>
-								Fork
-							</a>
-						</div>
-					{% endif %}
+    <div class="row">
+        <div class="col-md-12">
+            {% if not gist.cipher %}
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a href="#view" data-toggle="tab">View</a>
+                    </li>
+                    <li>
+                        <a href="#revisions" data-toggle="tab">
+                            Révisions
+                            <span class="badge">4</span>
+                        </a>
+                    </li>
+                </ul>    
+            {% endif %}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    {% if not gist.cipher %}
+                        <div class="pull-right actions">
+                            <a class="btn btn-default btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                RAW
+                            </a>
+                            <a class="btn btn-default btn-sm">
+                                <span class="glyphicon glyphicon-save-file"></span>
+                                Download
+                            </a>
+                            <a class="btn btn-success btn-sm">
+                                <span class="glyphicon glyphicon-copy"></span>
+                                Fork
+                            </a>
+                        </div>
+                    {% endif %}
 
-					{{ gist.title ? gist.title : 'gist.untitled'|trans }}
-				</div>
-				<div class="panel-body">
-					<div class="tab-content">
-						<div id="view" class="tab-pane active in">
-							<div class="btn-toolbar">
-								<div class="btn-group" id="languages">
-									<div class="btn-group">
-										<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-											Language XML
-											<span class="caret"></span>
-										</button>
-									</div>
-								</div>
-							</div>
+                    {{ gist.title ? gist.title : 'gist.untitled'|trans }}
+                </div>
+                <div class="panel-body">
+                    <div class="tab-content">
+                        <div id="view" class="tab-pane active in">
+                            <div class="btn-toolbar">
+                                <div class="btn-group" id="languages">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                            Language XML
+                                            <span class="caret"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
 
-							<div id="viewer">
-								{% if gist.cipher %}
-									<pre>
-										{{ 'foo' }}
-									</pre>	
-								{% endif %}
-							</div>
-						</div>
-						{% if not gist.cipher %}
-							<div id="revisions" class="tab-pane out">
-								<div class="commit">
-									<p>
-										Commit <strong class="text-warning">82110bbb53fbc5bf010ea4a50d999ab7cb22ae4f</strong>
-										<br/>
-										Date:   Mon May 4 23:09:44 2015 +0200
-									</p>
+                            <div id="viewer">
+                                {% if gist.cipher %}
+                                    <pre>
+                                        {{ 'foo' }}
+                                    </pre>    
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% if not gist.cipher %}
+                            <div id="revisions" class="tab-pane out">
+                                <div class="commit">
+                                    <p>
+                                        Commit <strong class="text-warning">82110bbb53fbc5bf010ea4a50d999ab7cb22ae4f</strong>
+                                        <br/>
+                                        Date:   Mon May 4 23:09:44 2015 +0200
+                                    </p>
 
-									<p>
-										<a class="btn btn-primary">
-											Afficher
-										</a>
-										<a class="btn btn-default">
-											DIFF
-										</a>
-									</p>
-								</div>
-								<hr>
-							</div>
-						{% endif %}
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                                    <p>
+                                        <a class="btn btn-primary">
+                                            Afficher
+                                        </a>
+                                        <a class="btn btn-default">
+                                            DIFF
+                                        </a>
+                                    </p>
+                                </div>
+                                <hr>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
 {% block js %}
-	{{ parent() }}
+    {{ parent() }}
 
-	{% if gist is not null %}
-		<script type="text/javascript">
-			document.location.href = '{{ path("view", {gist: gist.file}) }}'{% if gist.cipher %} + '#' + (document.location.href).split('#')[1]{% endif %};
-		</script>
-	{% endif %}
+    {% if gist is not null %}
+        <script type="text/javascript">
+            document.location.href = '{{ path("view", {gist: gist.file}) }}'{% if gist.cipher %} + '#' + (document.location.href).split('#')[1]{% endif %};
+        </script>
+    {% endif %}
 {% endblock %}

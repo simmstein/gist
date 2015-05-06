@@ -85,11 +85,11 @@
 {% endblock %}
 
 {% block js %}
-	{{ parent() }}
+    {{ parent() }}
 
-	{% if gist is not null %}
-		<script type="text/javascript">
-			document.location.href = '{{ path("view", {gist: gist.file}) }}'{% if gist.cipher %} + '#' + (document.location.href).split('#')[1]{% endif %};
-		</script>
-	{% endif %}
+    {% if gist is not null %}
+        <script type="text/javascript">
+            document.location.href = '{{ path("view", {gist: gist.file}) }}'{% if gist.cipher %} + '#' + (document.location.href).split('#')[1]{% endif %};
+        </script>
+    {% endif %}
 {% endblock %}
