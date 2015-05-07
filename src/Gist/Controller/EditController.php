@@ -11,7 +11,7 @@ use Gist\Model\Gist;
  * Class HomeController
  * @author Simon Vieille <simon@deblan.fr>
  */
-class EditController
+class EditController extends Controller
 {
     public function createAction(Request $request, Application $app)
     {
@@ -38,5 +38,16 @@ class EditController
                 'form' => $form->createView(),
             )
         );
+    }
+    
+	public function cloneAction(Request $request, Application $app, $gist, $commit)
+    {
+        $viewOptions = $this->getViewOptions($request, $app, $gist, $commit);
+
+        if (is_array($viewOptions)) {
+            return $app['twig']->render('View/view.html.twig', $viewOptions);
+        } else {
+            return $this->notFoundResponse($app);
+        }
     }
 }
