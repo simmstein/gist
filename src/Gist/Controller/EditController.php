@@ -5,7 +5,10 @@ namespace Gist\Controller;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Gist\Form\CreateGistForm;
+use Gist\Form\CloneGistForm;
 use Gist\Model\Gist;
+use GitWrapper\GitException;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
  * Class HomeController
@@ -32,7 +35,7 @@ class EditController extends Controller
         }
 
         return $app['twig']->render(
-            'Home/index.html.twig',
+            'Edit/index.html.twig',
             array(
                 'gist' => isset($gist) ? $gist : null,
                 'form' => $form->createView(),
@@ -44,10 +47,39 @@ class EditController extends Controller
     {
         $viewOptions = $this->getViewOptions($request, $app, $gist, $commit);
 
-        if (is_array($viewOptions)) {
-            return $app['twig']->render('View/view.html.twig', $viewOptions);
-        } else {
-            return $this->notFoundResponse($app);
+        $data = array(
+            'type' => $viewOptions['gist']->getType(),
+            'content' => $viewOptions['raw_content'],
+            'cipher' => 'no',
+        );
+
+        $form = new CloneGistForm($app['form.factory'], $app['translator'], $data);
+        $form = $form->build();
+
+        if ($request->isMethod('post')) {
+            $form->submit($request);
+
+            if ($form->isValid()) {
+                try {
+                    $gist = $app['gist']->commit($viewOptions['gist'], $form->getData());
+                } catch (GitException $e) {
+
+                }
+
+                $history = $app['gist']->getHistory($gist);
+
+                return new RedirectResponse($app['url_generator']->generate(
+                    'view',
+                    array(
+                        'gist' => $gist->getFile(),
+                        'commit' => array_pop($history)['commit'],
+                    )
+                ));
+            }
         }
+
+        $viewOptions['form'] = $form->createView();
+
+        return $app['twig']->render('Edit/clone.html.twig', $viewOptions);
     }
 }

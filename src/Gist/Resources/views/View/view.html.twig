@@ -36,9 +36,9 @@
                                 <span class="glyphicon glyphicon-save-file"></span>
                                 {{ 'gist.action.download'|trans }}
                             </a>
-                            <a class="btn btn-success btn-sm">
+                            <a href="{{ path('clone', app.request.attributes.get('_route_params')) }}" class="btn btn-success btn-sm">
                                 <span class="glyphicon glyphicon-copy"></span>
-                                {{ 'gist.action.fork'|trans }}
+                                {{ 'gist.action.clone'|trans }}
                             </a>
                         </div>
                     {% endif %}

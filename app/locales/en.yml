@@ -18,7 +18,7 @@ gist:
         history: 'Commit(s)'
         raw: 'RAW'
         download: 'Download'
-        fork: 'Fork'
+        clone: 'Clone'
 
 date:
     format: 'Y-m-d h:i:s'
@@ -34,6 +34,7 @@ form:
         choice:
             yes: 'Yes'
             no: 'No'
+    submit: 'Send'
     type:
         label: 'Language: %value%'
         choice:

@@ -89,6 +89,17 @@ class GistService
         return $gist;
     }
 
+    public function commit(Gist $gist, array $data)
+    {
+        file_put_contents($this->gistPath.'/'.$gist->getFile(), $data['content']);
+
+        $this->gitWorkingCopy
+            ->add($gist->getFile())
+            ->commit('Update');
+
+        return $gist;
+    }
+
     public function highlight($type, $content)
     {
         $this->geshi->set_source($content);

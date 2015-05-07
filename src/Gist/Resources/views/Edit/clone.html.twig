@@ -2,11 +2,11 @@
 
 {% block body %}
     <div class="row">
-        <form action="{{ path('home') }}" method="post" id="main-form">
+        <form action="" method="post" id="main-form">
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        {{ form_widget(form.title) }}
+                        {{ gist.title ? gist.title : 'gist.untitled'|trans }}
                     </div>
                     <div class="panel-body">
                         <p class="text-primary hide" id="cipher-alert">
@@ -47,25 +47,6 @@
                                         </span>
                                         <span class="caret"></span>
                                     </button>
-                                    <ul class="dropdown-menu" role="menu">
-                                        {% for item in form.cipher.vars.choices %}
-                                            <li>
-                                                <input 
-                                                    {% if item.value == form.cipher.vars.value %}checked{% endif %} 
-                                                    data-id="#cipher-label" type="radio" class="hide cipher-input" 
-                                                    data-title="{{ item.label }}" 
-                                                    value="{{ item.value }}" 
-                                                    name="form[cipher]"
-                                                    id="cipher-{{ loop.index }}" />
-
-                                                <a href="#">    
-                                                    <label for="cipher-{{ loop.index }}">
-                                                        {{ item.label }}
-                                                    </label>
-                                                </a>
-                                            </li>
-                                        {% endfor %}
-                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -74,7 +55,7 @@
                             {{ form_widget(form.content) }}
                         </p>
                         <p>
-                            <input type="submit" class="btn btn-primary" value="Envoyer">
+                            <input type="submit" class="btn btn-primary" value="{{ 'form.submit'|trans }}">
                         </p>
                     </div>
                 </div>
@@ -82,14 +63,4 @@
             {{ form_widget(form._token) }}
         </form>
     </div>
-{% endblock %}
-
-{% block js %}
-    {{ parent() }}
-
-    {% if gist is not null %}
-        <script type="text/javascript">
-            document.location.href = '{{ path("view", {gist: gist.file}) }}'{% if gist.cipher %} + '#' + (document.location.href).split('#')[1]{% endif %};
-        </script>
-    {% endif %}
 {% endblock %}

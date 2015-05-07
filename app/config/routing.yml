@@ -2,6 +2,10 @@ home:
     path: /
     defaults: {_controller: Gist\Controller\EditController::createAction, _locale: en}
 
+clone:
+    path: /clone/{gist}/{commit}
+    defaults: {_controller: Gist\Controller\EditController::cloneAction, _locale: en, commit: 0}
+
 view:
     path: /view/{gist}/{commit}
     defaults: {_controller: Gist\Controller\ViewController::viewAction, _locale: en, commit: 0}
