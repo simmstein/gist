@@ -39,8 +39,8 @@ class EditController extends Controller
             )
         );
     }
-    
-	public function cloneAction(Request $request, Application $app, $gist, $commit)
+
+    public function cloneAction(Request $request, Application $app, $gist, $commit)
     {
         $viewOptions = $this->getViewOptions($request, $app, $gist, $commit);
 
