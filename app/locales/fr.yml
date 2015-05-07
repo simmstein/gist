@@ -13,6 +13,12 @@ gist:
     404:
         title: 'Arf...'
         message: "Ce gist n'existe pas."
+    action:
+        view: 'Afficher'
+        history: 'Révision(s)'
+        raw: 'RAW'
+        download: 'Télécharger'
+        fork: 'Clôner'
 
 date:
     format: 'd/m/Y H\hi s\s'

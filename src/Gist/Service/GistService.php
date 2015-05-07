@@ -66,7 +66,7 @@ class GistService
 
     public function getContent(Gist $gist, $commit)
     {
-        $command = GitCommand::getInstance('cat-file', '--textconv', $commit.':'.$gist->getFile());
+        $command = GitCommand::getInstance('cat-file', '-p', $commit.':'.$gist->getFile());
         $command->setDirectory($this->gistPath);
         $command->bypass(false);
 

@@ -25,4 +25,19 @@ class Gist extends BaseGist
     {
         $this->setFile(uniqid());
     }
+
+    public function getTypeAsExtension()
+    {
+        $data = array(
+            'javascript' => 'js',
+            'yaml'=> 'yml',
+            'perl' => 'pl',
+            'python' => 'py',
+            'bash' => 'sh',
+            'actionscript3' => 'as',
+            'text' => 'txt',
+        );
+
+        return str_replace(array_keys($data), array_values($data), $this->getType());
+    }
 }

@@ -6,6 +6,14 @@ view:
     path: /view/{gist}/{commit}
     defaults: {_controller: Gist\Controller\ViewController::viewAction, _locale: en, commit: 0}
 
+raw:
+    path: /raw/{gist}/{commit}
+    defaults: {_controller: Gist\Controller\ViewController::rawAction, _locale: en, commit: 0}
+
+download:
+    path: /download/{gist}/{commit}
+    defaults: {_controller: Gist\Controller\ViewController::downloadAction, _locale: en, commit: 0}
+
 revisions:
     path: /revs/{gist}
     defaults: {_controller: Gist\Controller\ViewController::revisionsAction, _locale: en}

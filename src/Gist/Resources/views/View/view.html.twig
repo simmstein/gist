@@ -12,11 +12,13 @@
             {% if not gist.cipher %}
                 <ul class="nav nav-tabs">
                     <li class="active">
-                        <a href="{{ path('view', {gist: gist.file}) }}">View</a>
+                        <a href="{{ path('view', {gist: gist.file}) }}">
+                            {{ 'gist.action.view'|trans }}
+                        </a>
                     </li>
                     <li>
                         <a href="{{ path('revisions', {gist: gist.file}) }}">
-                            Révisions
+                            {{ 'gist.action.history'|trans }}
                             <span class="badge">{{ history|length }}</span>
                         </a>
                     </li>
@@ -26,17 +28,17 @@
                 <div class="panel-heading">
                     {% if not gist.cipher %}
                         <div class="pull-right actions">
-                            <a class="btn btn-default btn-sm">
+                            <a href="{{ path('raw', app.request.attributes.get('_route_params')) }}" class="btn btn-default btn-sm">
                                 <span class="glyphicon glyphicon-eye-open"></span>
-                                RAW
+                                {{ 'gist.action.raw'|trans }}
                             </a>
-                            <a class="btn btn-default btn-sm">
+                            <a href="{{ path('download', app.request.attributes.get('_route_params')) }}" class="btn btn-default btn-sm">
                                 <span class="glyphicon glyphicon-save-file"></span>
-                                Download
+                                {{ 'gist.action.download'|trans }}
                             </a>
                             <a class="btn btn-success btn-sm">
                                 <span class="glyphicon glyphicon-copy"></span>
-                                Fork
+                                {{ 'gist.action.fork'|trans }}
                             </a>
                         </div>
                     {% endif %}
@@ -46,11 +48,11 @@
                 <div class="panel-body">
                     <div class="tab-content">
                         <div id="view" class="tab-pane active in">
-							<div class="pull-right">
-								<span class="btn btn-warning btn-xs">
-									{{ commit|slice(0, 10) }}
-								</span>
-							</div>
+                            <div class="pull-right">
+                                <span class="btn btn-warning btn-xs">
+                                    {{ commit|slice(0, 10) }}
+                                </span>
+                            </div>
                             <div class="btn-toolbar">
                                 <div class="btn-group" id="languages">
                                     <div class="btn-group">

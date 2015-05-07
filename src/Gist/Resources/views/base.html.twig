@@ -41,14 +41,16 @@
                             </a>
                         </li>
                     </ul>
-                    <p class="navbar-text navbar-right">
-                        <a class="btn btn-xs" href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({_locale: 'en'})) }}">
-                            <span class="flag-icon flag-icon-gb"></span>
-                        </a>
-                        <a class="btn btn-xs" href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({_locale: 'fr'})) }}">
-                            <span class="flag-icon flag-icon-fr"></span>
-                        </a>
-                    </p>
+                    {% block langs %}
+                        <p class="navbar-text navbar-right">
+                            <a class="btn btn-xs" href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({_locale: 'en'})) }}">
+                                <span class="flag-icon flag-icon-gb"></span>
+                            </a>
+                            <a class="btn btn-xs" href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({_locale: 'fr'})) }}">
+                                <span class="flag-icon flag-icon-fr"></span>
+                            </a>
+                        </p>
+                    {% endblock %}
                 </div>
             </div>
         </nav>

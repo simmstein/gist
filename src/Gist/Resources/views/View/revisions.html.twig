@@ -12,11 +12,13 @@
             {% if not gist.cipher %}
                 <ul class="nav nav-tabs">
                     <li>
-                        <a href="{{ path('view', {gist: gist.file}) }}">View</a>
+                        <a href="{{ path('view', {gist: gist.file}) }}">
+                            {{ 'gist.action.view'|trans }}
+                        </a>
                     </li>
                     <li class="active">
                         <a href="{{ path('revisions', {gist: gist.file}) }}">
-                            Révisions
+                            {{ 'gist.action.history'|trans }}
                             <span class="badge">{{ history|length }}</span>
                         </a>
                     </li>
@@ -25,23 +27,6 @@
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    {% if not gist.cipher %}
-                        <div class="pull-right actions">
-                            <a class="btn btn-default btn-sm">
-                                <span class="glyphicon glyphicon-eye-open"></span>
-                                RAW
-                            </a>
-                            <a class="btn btn-default btn-sm">
-                                <span class="glyphicon glyphicon-save-file"></span>
-                                Download
-                            </a>
-                            <a class="btn btn-success btn-sm">
-                                <span class="glyphicon glyphicon-copy"></span>
-                                Fork
-                            </a>
-                        </div>
-                    {% endif %}
-
                     {{ gist.title ? gist.title : 'gist.untitled'|trans }}
                 </div>
                 <div class="panel-body">

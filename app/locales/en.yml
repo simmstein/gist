@@ -13,6 +13,12 @@ gist:
     404:
         title: 'Oops!'
         message: 'The gist was not found...'
+    action:
+        view: 'View'
+        history: 'Commit(s)'
+        raw: 'RAW'
+        download: 'Download'
+        fork: 'Fork'
 
 date:
     format: 'Y-m-d h:i:s'
