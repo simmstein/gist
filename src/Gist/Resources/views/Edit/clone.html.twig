@@ -13,36 +13,6 @@
                             <span class="glyphicon glyphicon-info-sign"></span>
                             {{ 'form.cipher.alert'|trans }}
                         </p>
-                        <div class="btn-toolbar">
-                            <div class="btn-group" id="options">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                        <span id="type-label" data-tpl="{{ 'form.type.label'|trans }}">
-                                        </span>
-                                        <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        {% for item in form.type.vars.choices %}
-                                            <li>
-                                                <input 
-                                                    {% if item.value == form.type.vars.value %}checked{% endif %} 
-                                                    data-id="#type-label" type="radio"  class="hide" 
-                                                    data-title="{{ item.label }}"  
-                                                    value="{{ item.value }}" 
-                                                    name="form[type]" 
-                                                    id="type-{{ loop.index }}" />
-
-                                                <a href="#">    
-                                                    <label for="type-{{ loop.index }}">
-                                                        {{ item.label }}
-                                                    </label>
-                                                </a>
-                                            </li>
-                                        {% endfor %}
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
                         <p>
                             {{ form_errors(form.content) }}
                             {{ form_widget(form.content) }}

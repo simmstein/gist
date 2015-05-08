@@ -14,6 +14,8 @@ class CloneGistForm extends CreateGistForm
 
         $this->builder->remove('cipher');
 
+        $this->builder->remove('type');
+
         return $this->builder;
     }
 }
