@@ -66,9 +66,9 @@ var editorEvents = function() {
         $(this).trigger('change');
     });
 
-	$('.show-diff').click(function() {
-		$($(this).data('target')).toggle();
-	});
+    $('.show-diff').click(function() {
+        $($(this).data('target')).toggle();
+    });
 }
 
 var mainEditorEvents = function() {
@@ -94,8 +94,28 @@ var mainEditorEvents = function() {
     });
 }
 
+var viewerEvents = function() {
+    if (0 === $('.syntaxhighlighter').length) {
+        return;
+    }
+
+    $(document).ready(function() {
+        var url = document.location.href;
+        var parts = url.split('#key=');
+
+        if (parts.length === 2) {
+            var decrypted = CryptoJS.AES.decrypt($('.syntaxhighlighter').html(), parts[1], {
+                format: JsonFormatter
+            });
+            $('.syntaxhighlighter').text(decrypted.toString(CryptoJS.enc.Utf8));
+            SyntaxHighlighter.all();
+        }
+    });
+}
+
 var bootstrap = function() {
     editorEvents();
+    viewerEvents();
     mainEditorEvents();
 }
 

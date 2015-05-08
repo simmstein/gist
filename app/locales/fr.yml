@@ -34,7 +34,7 @@ form:
         choice:
             yes: 'Oui'
             no: 'Non'
-    submit: 'Send'
+    submit: 'Envoyer'
     type:
         label: 'Langage : %value%'
         choice:
