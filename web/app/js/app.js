@@ -95,7 +95,9 @@ var mainEditorEvents = function() {
 }
 
 var viewerEvents = function() {
-    if (0 === $('.syntaxhighlighter').length) {
+    var $render = $('.syntaxhighlighter');
+
+    if (0 === $render.length) {
         return;
     }
 
@@ -104,10 +106,10 @@ var viewerEvents = function() {
         var parts = url.split('#key=');
 
         if (parts.length === 2) {
-            var decrypted = CryptoJS.AES.decrypt($('.syntaxhighlighter').html(), parts[1], {
+            var decrypted = CryptoJS.AES.decrypt($render.html(), parts[1], {
                 format: JsonFormatter
             });
-            $('.syntaxhighlighter').text(decrypted.toString(CryptoJS.enc.Utf8));
+            $render.text(decrypted.toString(CryptoJS.enc.Utf8));
             SyntaxHighlighter.all();
         }
     });

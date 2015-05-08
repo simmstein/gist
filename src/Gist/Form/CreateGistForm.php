@@ -65,7 +65,7 @@ class CreateGistForm extends AbstractForm
             )
         );
 
-        return $this->builder->getForm();
+        return $this->builder;
     }
 
     protected function getTypes()

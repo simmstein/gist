@@ -24,7 +24,7 @@ class EditController extends Controller
         );
 
         $form = new CreateGistForm($app['form.factory'], $app['translator'], $data);
-        $form = $form->build();
+        $form = $form->build()->getForm();
 
         if ($request->isMethod('post')) {
             $form->submit($request);
@@ -54,7 +54,7 @@ class EditController extends Controller
         );
 
         $form = new CloneGistForm($app['form.factory'], $app['translator'], $data);
-        $form = $form->build();
+        $form = $form->build()->getForm();
 
         if ($request->isMethod('post')) {
             $form->submit($request);
@@ -63,7 +63,7 @@ class EditController extends Controller
                 try {
                     $gist = $app['gist']->commit($viewOptions['gist'], $form->getData());
                 } catch (GitException $e) {
-
+                    $gist = $viewOptions['gist'];
                 }
 
                 $history = $app['gist']->getHistory($gist);

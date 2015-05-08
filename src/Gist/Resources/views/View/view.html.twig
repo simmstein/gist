@@ -35,6 +35,10 @@
                 <div class="panel-heading">
                     {% if not gist.cipher %}
                         <div class="pull-right actions">
+                            <span class="btn btn-warning btn-xs">
+                                {{ commit|slice(0, 10) }}
+                            </span>
+
                             <a href="{{ path('raw', app.request.attributes.get('_route_params')) }}" class="btn btn-default btn-sm">
                                 <span class="glyphicon glyphicon-eye-open"></span>
                                 {{ 'gist.action.raw'|trans }}
@@ -51,29 +55,14 @@
                     {% endif %}
 
                     {{ gist.title ? gist.title : 'gist.untitled'|trans }}
+
                 </div>
                 <div class="panel-body">
                     <div class="tab-content">
                         <div id="view" class="tab-pane active in">
-                            <div class="pull-right">
-                                <span class="btn btn-warning btn-xs">
-                                    {{ commit|slice(0, 10) }}
-                                </span>
-                            </div>
-                            <div class="btn-toolbar">
-                                <div class="btn-group" id="languages">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                            Language XML
-                                            <span class="caret"></span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
                             <div id="viewer">
                                 {% if gist.cipher %}
-                                    <pre class="brush: js; syntaxhighlighter">{{ raw_content|raw }}</pre>
+                                    <pre class="brush: {{ gist.type }}; syntaxhighlighter">{{ raw_content|raw }}</pre>
                                 {% else %}
                                     {{ content|raw }}
                                 {% endif %}

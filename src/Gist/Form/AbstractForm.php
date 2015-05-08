@@ -22,5 +22,10 @@ abstract class AbstractForm
         $this->builder = $formFactory->createBuilder('form', $data);
     }
 
+    public function getForm()
+    {
+        return $this->builder->getForm();
+    }
+
     abstract public function build(array $options = array());
 }
