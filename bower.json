@@ -1,13 +1,14 @@
 {
-  "name": "gist-debla,",
+  "name": "gist",
   "version": "0.0.1",
   "authors": [
     "Simon Vieille <simon@deblan.fr>"
   ],
-  "description": "Gist DEBLAN",
+  "description": "GIST is an open-source application to share code.",
   "main": "web/index.php",
   "keywords": [
-    "XBT"
+    "Gist",
+    "GIT"
   ],
   "license": "LGPL",
   "homepage": "https://gitlab.deblan.org/deblan/gist.deblan.org",
