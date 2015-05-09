@@ -1,11 +1,9 @@
 COMPOSER ?= composer
 BOWER ?= bower
+GIT ?= git
+MKDIR ?= mkdir
 
-all: composer
-all: bower
-
-prod: COMPOSER_INSTALL_FLAGS += --no-dev
-prod: all optimize
+all: update
 
 composer:
 	@echo
@@ -32,5 +30,18 @@ update:
 	#
 	# Updating application's depencies.
 	#
+	$(GIT) pull origin master
+	${MKDIR} -p data/git
 	$(COMPOSER) update
 	$(BOWER) install
+
+propel:
+	@echo
+	#
+	# Propel migration.
+	#
+	./vendor/propel/propel/bin/propel config:convert
+	./vendor/propel/propel/bin/propel model:build --recursive
+	./vendor/propel/propel/bin/propel migration:diff --recursive
+	./vendor/propel/propel/bin/propel migration:migrate --recursive
+	./vendor/propel/propel/bin/propel model:build --recursive
