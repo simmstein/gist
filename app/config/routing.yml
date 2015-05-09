@@ -10,6 +10,14 @@ view:
     path: /view/{gist}/{commit}
     defaults: {_controller: Gist\Controller\ViewController::viewAction, _locale: en, commit: 0}
 
+embed:
+    path: /embed/{gist}/{commit}
+    defaults: {_controller: Gist\Controller\ViewController::embedAction, _locale: en, commit: 0}
+
+embedjs:
+    path: /embedjs/{gist}/{commit}
+    defaults: {_controller: Gist\Controller\ViewController::embedJsAction, _locale: en, commit: 0}
+
 raw:
     path: /raw/{gist}/{commit}
     defaults: {_controller: Gist\Controller\ViewController::rawAction, _locale: en, commit: 0}

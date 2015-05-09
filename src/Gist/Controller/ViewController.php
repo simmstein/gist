@@ -25,6 +25,30 @@ class ViewController extends Controller
         }
     }
 
+    public function embedAction(Request $request, Application $app, $gist, $commit)
+    {
+        $viewOptions = $this->getViewOptions($request, $app, $gist, $commit);
+
+        if (is_array($viewOptions)) {
+            return $app['twig']->render('View/embed.html.twig', $viewOptions);
+        } else {
+            return $this->notFoundResponse($app);
+        }
+    }
+
+    public function embedJsAction(Request $request, Application $app, $gist, $commit)
+    {
+        $viewOptions = $this->getViewOptions($request, $app, $gist, $commit);
+
+        return new Response(
+            $app['twig']->render('View/embedJs.html.twig', $viewOptions),
+            200,
+            array(
+                'Content-Type' => 'text/javascript',
+            )
+        );
+    }
+
     public function rawAction(Request $request, Application $app, $gist, $commit)
     {
         $viewOptions = $this->getViewOptions($request, $app, $gist, $commit);

@@ -1,0 +1,93 @@
+{% extends 'base.html.twig' %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ web_path }}app/css/geshi/vibrant-ink.css" />
+    
+    {{ parent() }}
+
+    <style type="text/css">
+        #embed {
+            padding: 0;
+        }
+
+        #viewer {
+            background: #222;
+        }
+
+        pre {
+            font-size: 9px;
+            padding: 0;
+        }
+
+        .panel-body {
+            padding: 0;
+        }
+
+		.panel {
+			margin-bottom: 0;
+		}
+
+        pre ol {
+            padding-left: 0 !important;
+            list-style: none;
+        }
+    </style>
+{% endblock %}
+
+{% block title %}{{ gist.title ? gist.title : 'gist.untitled'|trans }} - {{ commit|slice(0, 10) }}{% endblock %}
+
+{% block nav %}{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-12" id="embed">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    {% if not gist.cipher %}
+                        <div class="pull-right actions">
+                            <span class="btn btn-warning btn-xs">
+                                {{ commit|slice(0, 10) }}
+                            </span>
+
+                            <a target="_blank" href="{{ path('raw', app.request.attributes.get('_route_params')) }}" class="btn btn-default btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                {{ 'gist.action.raw'|trans }}
+                            </a>
+                            <a target="_blank" href="{{ path('download', app.request.attributes.get('_route_params')) }}" class="btn btn-default btn-sm">
+                                <span class="glyphicon glyphicon-save-file"></span>
+                                {{ 'gist.action.download'|trans }}
+                            </a>
+                            <a target="_blank" href="{{ path('clone', app.request.attributes.get('_route_params')) }}" class="btn btn-success btn-sm">
+                                <span class="glyphicon glyphicon-copy"></span>
+                                {{ 'gist.action.clone'|trans }}
+                            </a>
+                        </div>
+                    {% endif %}
+
+                    {{ gist.title ? gist.title : 'gist.untitled'|trans }}
+                </div>
+                <div class="panel-body">
+                    <div class="tab-content">
+                        <div id="view" class="tab-pane active in">
+                            <div id="viewer">
+                                {% if gist.cipher %}
+                                    <pre class="brush: {{ gist.type }}; syntaxhighlighter">{{ raw_content|raw }}</pre>
+                                {% else %}
+                                    {{ content|raw }}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer %}{% endblock %}
+
+{% block js %}
+    {{ parent() }}
+
+    <script type="text/javascript" src="{{ web_path }}components/iframe-resizer/js/iframeResizer.contentWindow.min.js"></script>
+{% endblock %}

@@ -19,9 +19,13 @@ gist:
         raw: 'RAW'
         download: 'Télécharger'
         clone: 'Clôner'
+        embed: 'Insérer : '
 
 date:
     format: 'd/m/Y H\hi s\s'
+
+footer:
+    text: '<p>Propulsé avec <a href="https://gitlab.deblan.org/deblan/gist">GIST</a></p>'
 
 form:
     error:

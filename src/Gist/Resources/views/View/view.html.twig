@@ -67,6 +67,11 @@
                                     {{ content|raw }}
                                 {% endif %}
                             </div>
+
+							<p id="embed" class="pull-right">
+								{{ 'gist.action.embed'|trans }}
+								<input type="text" class="form-control" value="{{ '<div id="gist-' ~ gist.file ~ '-' ~ commit ~ '" class="gist-container"></div><script src="' ~ app.request.getSchemeAndHttpHost() ~ path('embedjs', app.request.attributes.get('_route_params')) ~ '"></script>' }}" />
+							</p>
                         </div>
                         {% if not gist.cipher %}
                             <div id="revisions" class="tab-pane out">
