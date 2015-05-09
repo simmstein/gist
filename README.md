@@ -72,13 +72,13 @@ Assuming `~/bin` exists ans is in `$PATH`.
 
 	npm install -g bower
 
-#### D#ependencies Installation (from `bower.json`)
+#### Dependencies Installation (from `bower.json`)
 
     bower install
 
-#### De#pendencies Update
+#### D#pendencies Update
 
-    bower inxtall
+    bower install
 
 
 Makefile
