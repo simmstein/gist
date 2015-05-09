@@ -19,7 +19,7 @@ class EditController extends Controller
     public function createAction(Request $request, Application $app)
     {
         $data = array(
-            'type' => 'xml',
+            'type' => 'html',
             'cipher' => 'no',
         );
 

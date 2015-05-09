@@ -40,7 +40,7 @@ class Controller
             'history' => $history,
             'commit' => $commit,
             'raw_content' => $content,
-            'content' => $app['gist']->highlight($gist->getType(), $content),
+            'content' => $app['gist']->highlight($gist->getGeshiType(), $content),
         );
     }
 

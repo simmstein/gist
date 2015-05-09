@@ -38,7 +38,8 @@ form:
     type:
         label: 'Language: %value%'
         choice:
-            xml: 'HTML/XML'
+            html: 'HTML'
+            xml: 'XML'
             css: 'CSS'
             javascript: 'JAVASCRIPT'
             php: 'PHP'

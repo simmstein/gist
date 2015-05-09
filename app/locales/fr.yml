@@ -18,7 +18,7 @@ gist:
         history: 'Révision(s)'
         raw: 'RAW'
         download: 'Télécharger'
-        fork: 'Clôner'
+        clone: 'Clôner'
 
 date:
     format: 'd/m/Y H\hi s\s'
@@ -38,7 +38,8 @@ form:
     type:
         label: 'Langage : %value%'
         choice:
-            xml: 'HTML/XML'
+            html: 'HTML'
+            xml: 'XML'
             css: 'CSS'
             javascript: 'JAVASCRIPT'
             php: 'PHP'

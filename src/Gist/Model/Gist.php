@@ -26,6 +26,15 @@ class Gist extends BaseGist
         $this->setFile(uniqid());
     }
 
+    public function getGeshiType()
+    {
+        $data = array(
+            'html' => 'xml',
+        );
+
+        return str_replace(array_keys($data), array_values($data), $this->getType());
+    }
+
     public function getTypeAsExtension()
     {
         $data = array(

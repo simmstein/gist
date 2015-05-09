@@ -71,11 +71,12 @@ class CreateGistForm extends AbstractForm
     protected function getTypes()
     {
         $types = array(
-            'xml' => '',
+            'html' => '',
             'css' => '',
             'javascript' => '',
             'php' => '',
             'sql' => '',
+            'xml' => '',
             'yaml'=> '',
             'perl' => '',
             'c' => '',
