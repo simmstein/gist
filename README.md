@@ -76,7 +76,7 @@ Assuming `~/bin` exists ans is in `$PATH`.
 
     bower install
 
-#### D#pendencies Update
+#### Dependencies Update
 
     bower install
 
