@@ -28,7 +28,7 @@ optimize:
 update:
 	@echo
 	#
-	# Updating application's depencies.
+	# Updating application's dependencies.
 	#
 	$(GIT) pull origin master
 	${MKDIR} -p data/git

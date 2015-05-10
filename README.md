@@ -2,6 +2,7 @@ GIST
 ====
 
 GIST is an open-source application to share code.
+https://www.deblan.io/post/517/gist-est-dans-la-place
 
 Requirements
 ------------
@@ -21,6 +22,8 @@ Installation
 	$ mv propel-dist.yaml propel.yaml
 	$ # EDIT propel.yml (dsn)
 	$ make propel
+
+Screencast: https://asciinema.org/a/19814
 
 ### Git
 
