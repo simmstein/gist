@@ -6,6 +6,8 @@
     {{ parent() }}
 {% endblock %}
 
+{% block title %}{{ gist.title ? gist.title : 'gist.untitled'|trans }} - {{ 'gist.action.history'|trans }}{% endblock %}
+
 {% block body %}
     <div class="row">
         <div class="col-md-12">

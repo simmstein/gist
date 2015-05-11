@@ -100,23 +100,37 @@ var mainEditorEvents = function() {
     });
 }
 
+var getKey = function() {
+    var url = document.location.href;
+    var parts = url.split('#key=');
+
+    if (parts.length === 2) {
+        return parts[1];
+    }
+
+    return null;
+}
+
 var viewerEvents = function() {
     var $render = $('.syntaxhighlighter');
 
-    if (0 === $render.length) {
-        return;
-    }
-
     $(document).ready(function() {
-        var url = document.location.href;
-        var parts = url.split('#key=');
+        var key = getKey();
+        var $embedInput = $('#embed-input');
+        var to = ' ';
 
-        if (parts.length === 2) {
-            var decrypted = CryptoJS.AES.decrypt($render.html(), parts[1], {
+        if (0 !== $render.length && key) {
+            var decrypted = CryptoJS.AES.decrypt($render.html(), key, {
                 format: JsonFormatter
             });
             $render.text(decrypted.toString(CryptoJS.enc.Utf8));
             SyntaxHighlighter.all();
+
+            to = ' data-key="#key=' + key + '" ';
+        }
+
+        if ($embedInput.length) {
+            $embedInput.val($embedInput.val().replace('%key%', to));
         }
     });
 }

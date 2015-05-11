@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block css %}
-    <link rel="stylesheet" href="{{ web_path }}app/css/geshi/vibrant-ink.css" />
-
     {% if gist.cipher %}
         <link type="text/css" rel="Stylesheet" href="{{ web_path }}components/SyntaxHighlighter/styles/shCoreRDark.css" />
         <link type="text/css" rel="Stylesheet" href="{{ web_path }}components/SyntaxHighlighter/styles/shThemeRDark.css" />
+    {% else %}
+        <link rel="stylesheet" href="{{ web_path }}app/css/geshi/vibrant-ink.css" />
     {% endif %}
 
     {{ parent() }}
@@ -68,47 +68,11 @@
                                 {% endif %}
                             </div>
 
-							<p id="embed" class="pull-right">
-								{{ 'gist.action.embed'|trans }}
-								<input type="text" class="form-control" value="{{ '<div id="gist-' ~ gist.file ~ '-' ~ commit ~ '" class="gist-container"></div><script src="' ~ app.request.getSchemeAndHttpHost() ~ path('embedjs', app.request.attributes.get('_route_params')) ~ '"></script>' }}" />
-							</p>
+                            <p id="embed" class="pull-right">
+                                {{ 'gist.action.embed'|trans }}
+                                <input type="text" class="form-control" id="embed-input" value="{{ '<div%key%id="gist-' ~ gist.file ~ '-' ~ commit ~ '" class="gist-container"></div><script src="' ~ app.request.getSchemeAndHttpHost() ~ path('embedjs', app.request.attributes.get('_route_params')) ~ '"></script>' }}" />
+                            </p>
                         </div>
-                        {% if not gist.cipher %}
-                            <div id="revisions" class="tab-pane out">
-                                {% for commit in history %}
-                                    <div class="commit">
-                                        <p>
-                                            <a href="{{ path('view', {gist: gist.file, commit: commit.commit}) }}" class="btn btn-warning btn-sm">
-                                                {{ commit.commit|slice(0, 10) }}
-                                            </a>
-
-                                            {% if loop.first %}<span class="btn btn-info btn-sm">init</span>{% endif %}
-                                            
-                                            {% if not loop.first %}
-                                                <a href="#diff-{{ loop.index }}" data-target="#diff-{{ loop.index }}" class="btn btn-default btn-sm show-diff">
-                                                    diff
-                                                </a>
-                                            {% endif %}
-                                        </p>
-                                        <p>
-                                            {{ commit.date|date('date.format'|trans) }}
-                                        </p>
-                                        <div>
-                                            {% if not loop.first %}
-
-                                                <div class="diff" id="diff-{{ loop.index }}">
-                                                    {{ commit.diff|raw }}
-                                                </div>
-                                            {% endif %}
-                                        </div>
-                                    </div>
-
-                                    {% if not loop.last %}
-                                        <hr />    
-                                    {% endif %}
-                                {% endfor %}
-                            </div>
-                        {% endif %}
                     </div>
                 </div>
             </div>

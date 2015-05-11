@@ -1,10 +1,17 @@
 (function() {
     var iFrameResizeLoaded = function() {
+        var div = document.getElementById('gist-{{ gist.file }}-{{ commit }}');
         var iframeId = 'gist-' + (Math.floor(Math.random() * (10000 - 1)) + 1).toString();
         var iframe = document.createElement('iframe');
+        var url = '{{ app.request.getSchemeAndHttpHost() ~ path('embed', app.request.attributes.get('_route_params')|merge({_locale: 'en'})) }}';
+        
+        if (div.getAttribute('data-key')) {
+            url = [url, div.getAttribute('data-key')].join('');
+        }
+
         iframe.setAttribute('id', iframeId);
         iframe.setAttribute('frameborder', 0);
-        iframe.setAttribute('src', '{{ app.request.getSchemeAndHttpHost() ~ path('embed', app.request.attributes.get('_route_params')|merge({_locale: 'en'})) }}');
+        iframe.setAttribute('src', url);
         iframe.setAttribute('style', 'width: 100%');
         document.getElementById('gist-{{ gist.file }}-{{ commit }}').appendChild(iframe);
 

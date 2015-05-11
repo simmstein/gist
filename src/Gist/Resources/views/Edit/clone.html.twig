@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}{{ gist.title ? gist.title : 'gist.untitled'|trans }} - {{ 'gist.action.clone'|trans }}{% endblock %}
+
 {% block body %}
     <div class="row">
         <form action="" method="post" id="main-form">
