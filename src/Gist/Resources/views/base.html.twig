@@ -26,7 +26,7 @@
                             <span class="icon-bar"></span>
                         </button>
                         <a class="navbar-brand" href="{{ path('home') }}">
-                            {{ 'app.title'|trans }}
+                            {{ 'app.title'|trans }} <span class="badge badge-info">beta</span>
                         </a>
                     </div>
                     <div class="collapse navbar-collapse" id="main-menu">
@@ -61,10 +61,10 @@
             {% block body %}{% endblock %}
 
             {% block footer %}
-				<hr />
-				<footer>
-					{{ 'footer.text'|trans|raw }}
-				</footer>
+                <hr />
+                <footer>
+                    {{ 'footer.text'|trans|raw }}
+                </footer>
             {% endblock %}    
         </div>
         {% block js %}
