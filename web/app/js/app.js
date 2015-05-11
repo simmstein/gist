@@ -69,6 +69,12 @@ var editorEvents = function() {
     $('.show-diff').click(function() {
         $($(this).data('target')).toggle();
     });
+
+    if ((document.location.href).indexOf('#diff-') !== -1) {
+        var anchor = '#' + (document.location.href).toString().split('#')[1];
+        $('.show-diff[href="' + anchor + '"]').click();
+        document.location.href = anchor;
+    }
 }
 
 var mainEditorEvents = function() {
