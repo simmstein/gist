@@ -127,6 +127,10 @@ var viewerEvents = function() {
             SyntaxHighlighter.all();
 
             to = ' data-key="#key=' + key + '" ';
+
+            $('.lang').each(function() {
+                $(this).attr('href', $(this).attr('href') + '#key=' + key);
+            });
         }
 
         if ($embedInput.length) {
