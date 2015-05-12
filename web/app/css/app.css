@@ -69,3 +69,7 @@ div.diff {
 .kw3 {
 	color: #C6C765;
 }
+
+#viewer .syntaxhighlighter td {
+	vertical-align: top !important;
+}
