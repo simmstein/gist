@@ -4,6 +4,8 @@ GIST
 GIST is an open-source application to share code.
 https://www.deblan.io/post/517/gist-est-dans-la-place
 
+![Gist](https://upload.deblan.org/u/2015-05/554e2c12.png "Gist")
+
 Requirements
 ------------
 
