@@ -50,9 +50,11 @@
                 <div class="panel-heading">
                     {% if not gist.cipher %}
                         <div class="pull-right actions">
-                            <span class="btn btn-warning btn-xs">
-                                {{ commit|slice(0, 10) }}
-                            </span>
+                            <a target="_blank" href="{{ path('view', app.request.attributes.get('_route_params')) }}" class="btn btn-default btn-sm">
+                                <span class="btn btn-warning btn-xs">
+                                    {{ commit|slice(0, 10) }}
+                                </span>
+                            </a>
 
                             <a target="_blank" href="{{ path('raw', app.request.attributes.get('_route_params')) }}" class="btn btn-default btn-sm">
                                 <span class="glyphicon glyphicon-eye-open"></span>

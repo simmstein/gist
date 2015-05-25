@@ -70,7 +70,7 @@
 
                             <p id="embed" class="pull-right">
                                 {{ 'gist.action.embed'|trans }}
-                                <input type="text" class="form-control" id="embed-input" value="{{ '<div%key%id="gist-' ~ gist.file ~ '-' ~ commit ~ '" class="gist-container"></div><script src="' ~ app.request.getSchemeAndHttpHost() ~ path('embedjs', app.request.attributes.get('_route_params')) ~ '"></script>' }}" />
+                                <input type="text" class="form-control" id="embed-input" value="{{ '<div%key%id="gist-' ~ gist.file ~ '-' ~ commit ~ '" class="gist-container"></div><script src="' ~ app.request.getSchemeAndHttpHost() ~ path('embedjs', app.request.attributes.get('_route_params')) ~ '" async></script>' }}" />
                             </p>
                         </div>
                     </div>
