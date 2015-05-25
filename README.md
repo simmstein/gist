@@ -22,7 +22,7 @@ Installation
 	$ cd gist
 	$ make
 	$ mv propel-dist.yaml propel.yaml
-	$ # EDIT propel.yml (dsn)
+	$ # EDIT propel.yaml (dsn)
 	$ make propel
 
 Screencast: https://asciinema.org/a/19814
