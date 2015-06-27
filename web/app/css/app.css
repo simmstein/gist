@@ -73,3 +73,7 @@ div.diff {
 #viewer .syntaxhighlighter td {
 	vertical-align: top !important;
 }
+
+#options {
+	margin-bottom: 17px;
+}
