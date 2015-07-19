@@ -9,7 +9,7 @@ use Gist\Model\Gist;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Class HomeController
+ * Class ViewController
  * @author Simon Vieille <simon@deblan.fr>
  */
 class ViewController extends Controller

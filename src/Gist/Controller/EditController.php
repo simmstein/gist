@@ -11,7 +11,7 @@ use GitWrapper\GitException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
- * Class HomeController
+ * Class EditController
  * @author Simon Vieille <simon@deblan.fr>
  */
 class EditController extends Controller
