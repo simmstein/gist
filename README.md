@@ -95,3 +95,27 @@ A Makefile is provided to automate some tasks.
 * `make optimize` will run Composer's autoloader dump script with classmap
 * `make update` will update the application
 * `make propel` will generate propel's files
+
+API
+---
+
+### Create a new gist
+
+**POST** /{locale}/api/create
+Params:
+
+* ```form[title]```: String (required, can be empty)
+* ```form[type]```: String (required)
+  Values: html, css, javascript, php, sql, xml, yaml, perl, c, asp, python, bash, actionscript3, text
+* ```form[content]```: String (required)
+
+Responses:
+
+* Code ```200```: A json which contains gist's information
+  Example:
+  ```javascript
+{"url":"https:\/\/gist.deblan.org\/en\/view\/55abcfa7771e0\/f4afbf72967dd95e3461490dcaa310d728d6a97d","gist":{"Id":66,"Title":"test prod","Cipher":false,"Type":"javascript","File":"55abcfa7771e0","CreatedAt":"2015-07-19T16:26:15Z","UpdatedAt":"2015-07-19T16:26:15Z"}}
+  ```
+* Code ```405```: Method Not Allowed
+* Code ```400```: Bad Request
+

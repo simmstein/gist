@@ -65,7 +65,7 @@ class ApiController extends Controller
     protected function invalidRequestResponse($message = null)
     {
         $data = [
-            'error' => 'Bad request',
+            'error' => 'Bad Request',
             'message' => $message,
         ];
 
