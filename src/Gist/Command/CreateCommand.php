@@ -21,7 +21,7 @@ class CreateCommand extends Command
             ->addOption('title', 't', InputOption::VALUE_REQUIRED, 'Title of the gist')
             ->addOption('show-url', 'u', InputOption::VALUE_NONE, 'Display only the gist url')
             ->setHelp(<<<EOF
-The <info>%command.name%</info> provides a client to create a gist using an API.
+Provides a client to create a gist using an API.
 
 Arguments:
     <info>input</info>
