@@ -25,7 +25,7 @@ The <info>%command.name%</info> provides a client to create a gist using an API.
 
 Arguments:
     <info>input</info>
-        Identify the source of the content: a file path (eg: <comment>/path/to/file</comment>) or standard input (<comment>-</comment>)
+        Identify the source of the content: path of the file (eg: <comment>/path/to/file</comment>) or standard input (<comment>-</comment>)
 
     <info>type</info>
         Defines the type of code: {$types}
