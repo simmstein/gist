@@ -114,7 +114,18 @@ Params:
 * Code ```200```: A json which contains gist's information
   Example:
   ```javascript
-{"url":"https:\/\/gist.deblan.org\/en\/view\/55abcfa7771e0\/f4afbf72967dd95e3461490dcaa310d728d6a97d","gist":{"Id":66,"Title":"test prod","Cipher":false,"Type":"javascript","File":"55abcfa7771e0","CreatedAt":"2015-07-19T16:26:15Z","UpdatedAt":"2015-07-19T16:26:15Z"}}
+{
+    "url":"https:\/\/gist.deblan.org\/en\/view\/55abcfa7771e0\/f4afbf72967dd95e3461490dcaa310d728d6a97d",
+    "gist": {
+        "Id":66,
+        "Title": "test prod",
+        "Cipher": false,
+        "Type": "javascript",
+        "File": "55abcfa7771e0",
+        "CreatedAt": "2015-07-19T16:26:15Z",
+        "UpdatedAt": "2015-07-19T16:26:15Z"
+    }
+}
   ```
 * Code ```405```: Method Not Allowed
 * Code ```400```: Bad Request
