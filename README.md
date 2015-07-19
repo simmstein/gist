@@ -109,7 +109,7 @@ Params:
   Values: html, css, javascript, php, sql, xml, yaml, perl, c, asp, python, bash, actionscript3, text
 * ```form[content]```: String (required)
 
-Responses:
+#### Responses:
 
 * Code ```200```: A json which contains gist's information
   Example:
