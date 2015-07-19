@@ -156,7 +156,7 @@ Options:
   -v|vv|vvv, --verbose  Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
 
 Help:
- Provides a client to create a gist using an API.
+ Provides a client to create a gist using the API.
  
  Arguments:
      input
@@ -173,3 +173,8 @@ Help:
      --show-url, -u
          Display only the url of the gist
 ```
+
+#### Personal instance
+
+If you install Gist on your server, the have to modify the ```base_uri``` of the API.
+Edit ```app/bootstrap.php.d/60-api.php``` and modify ```https://gist.deblan.org/```.
