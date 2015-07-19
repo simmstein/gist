@@ -1,6 +1,10 @@
 #!/usr/bin/env php
 <?php
 
+use Gist\Command\CreateCommand;
+
 $app = require __DIR__.'/bootstrap.php';
+
+$app['console']->add(new CreateCommand());
 
 $app['console']->run();
