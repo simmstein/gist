@@ -29,3 +29,7 @@ download:
 revisions:
     path: /revs/{gist}
     defaults: {_controller: Gist\Controller\ViewController::revisionsAction, _locale: en}
+
+api_create:
+    path: /api/create
+    defaults: {_controller: Gist\Controller\ApiController::createAction, _locale: en}
