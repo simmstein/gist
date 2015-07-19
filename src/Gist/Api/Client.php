@@ -31,6 +31,6 @@ class Client extends BaseClient
             return json_decode($response->getBody()->getContents(), true);
         }
 
-        return false;
+        return [];
     }
 }
