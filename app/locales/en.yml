@@ -25,7 +25,7 @@ date:
     format: 'Y-m-d h:i:s'
 
 footer:
-    text: '<p>Powered by <a href="https://gitlab.deblan.org/deblan/gist">GIST</a></p>'
+    text: '<p>Powered by <a href="https://gitlab.deblan.org/deblan/gist">GIST</a>, it''s open source :)</p>'
 
 form:
     error:

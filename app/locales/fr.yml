@@ -25,7 +25,7 @@ date:
     format: 'd/m/Y H\hi s\s'
 
 footer:
-    text: '<p>Propulsé avec <a href="https://gitlab.deblan.org/deblan/gist">GIST</a></p>'
+    text: '<p>Propulsé par <a href="https://gitlab.deblan.org/deblan/gist">GIST</a>, c''est libre :)</p>'
 
 form:
     error:
