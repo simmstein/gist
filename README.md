@@ -116,7 +116,7 @@ Params:
 {
     "url": "https:\/\/gist.deblan.org\/en\/view\/55abcfa7771e0\/f4afbf72967dd95e3461490dcaa310d728d6a97d",
     "gist": {
-        "Id":66,
+        "Id": 66,
         "Title": "test prod",
         "Cipher": false,
         "Type": "javascript",
