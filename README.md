@@ -111,8 +111,7 @@ Params:
 
 #### Responses:
 
-* Code ```200```: A json which contains gist's information
-  Example:
+* Code ```200```: A json which contains gist's information. Example:
   ```javascript
 {
     "url": "https:\/\/gist.deblan.org\/en\/view\/55abcfa7771e0\/f4afbf72967dd95e3461490dcaa310d728d6a97d",
