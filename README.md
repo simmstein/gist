@@ -85,7 +85,6 @@ Assuming `~/bin` exists ans is in `$PATH`.
 
     bower install
 
-
 Makefile
 --------
 
@@ -95,6 +94,7 @@ A Makefile is provided to automate some tasks.
 * `make optimize` will run Composer's autoloader dump script with classmap
 * `make update` will update the application
 * `make propel` will generate propel's files
+* `make run` will run development server on http://127.0.0.1:8080/
 
 API
 ---
@@ -115,7 +115,7 @@ Params:
   Example:
   ```javascript
 {
-    "url":"https:\/\/gist.deblan.org\/en\/view\/55abcfa7771e0\/f4afbf72967dd95e3461490dcaa310d728d6a97d",
+    "url": "https:\/\/gist.deblan.org\/en\/view\/55abcfa7771e0\/f4afbf72967dd95e3461490dcaa310d728d6a97d",
     "gist": {
         "Id":66,
         "Title": "test prod",
