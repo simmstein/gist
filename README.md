@@ -162,7 +162,7 @@ Help:
          Identify the source of the content: path of the file (eg: /path/to/file) or standard input (-)
  
      type
-         Defines the type of code: html, css, javascript, php, sql, xml, , perl, c, asp, python, bash, actionscript3, text
+         Defines the type of code: html, css, javascript, php, sql, xml, yaml, perl, c, asp, python, bash, actionscript3, text
          Default value: text
  
  Options:
