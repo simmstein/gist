@@ -97,7 +97,7 @@ EOF
             'php',
             'sql',
             'xml',
-            'yaml'=> '',
+            'yaml',
             'perl',
             'c',
             'asp',
