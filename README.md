@@ -175,5 +175,5 @@ Help:
 
 #### Personal instance
 
-If you install Gist on your server, the have to modify the ```base_uri``` of the API.
+If you install Gist on your server, you have to modify the ```base_uri``` of the API.
 Edit ```app/bootstrap.php.d/60-api.php``` and modify ```https://gist.deblan.org/```.
