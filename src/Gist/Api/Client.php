@@ -11,7 +11,7 @@ use GuzzleHttp\Client as BaseClient;
 class Client extends BaseClient
 {
     const CREATE = '/en/api/create';
-    const UPDATE = '/en/api/update/{id}';
+    const UPDATE = '/en/api/update/{gist}';
 
     public function create($title, $type, $content)
     {
@@ -35,10 +35,10 @@ class Client extends BaseClient
         return [];
     }
     
-    public function update($id, $content)
+    public function update($gist, $content)
     {
         $response = $this->post(
-            str_replace('{id}', $id, self::UPDATE),
+            str_replace('{gist}', $gist, self::UPDATE),
             array(
                 'form_params' => array(
                     'form' => array(

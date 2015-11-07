@@ -54,19 +54,17 @@ class ApiController extends Controller
         return $this->invalidRequestResponse('Invalid field(s)');
     }
     
-    public function updateAction(Request $request, Application $app, $id)
+    public function updateAction(Request $request, Application $app, $gist)
     {
         if (false === $request->isMethod('post')) {
             return $this->invalidMethodResponse('POST method is required.');
         }
 
-        if (!ctype_digit($id)) {
-            return $this->invalidRequestResponse('Invalid Gist');
-        }
-
         $gist = GistQuery::create()
             ->filterByCipher(false)
-            ->filterById((int) $id)
+            ->filterById((int) $gist)
+            ->_or()
+            ->filterByFile($gist)
             ->findOne();
 
         if (!$gist) {

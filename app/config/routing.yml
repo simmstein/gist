@@ -35,5 +35,5 @@ api_create:
     defaults: {_controller: Gist\Controller\ApiController::createAction, _locale: en}
 
 api_update:
-    path: /api/update/{id}
+    path: /api/update/{gist}
     defaults: {_controller: Gist\Controller\ApiController::updateAction, _locale: en}

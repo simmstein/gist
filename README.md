@@ -203,15 +203,15 @@ Help:
  
      --show-url, -u
          Display only the url of the gist
-$ ./app/console --help create
-Usage:
+$ ./app/console --help update
+Usage:                           
   update [options] [--] <input>
 
 Arguments:
   input                 Input
 
 Options:
-      --id=ID           Gist Id
+      --gist=GIST       Id or File of the gist
   -u, --show-url        Display only the gist url
   -i, --show-id         Display only the gist Id
   -h, --help            Display this help message
@@ -234,8 +234,8 @@ Help:
          Default value: text
  
  Options:
-     --id
-         Defines the Gist to update by using its ID
+     --gist
+         Defines the Gist to update by using its Id or its File
  
      --show-id, -i
          Display only the Id of the gist

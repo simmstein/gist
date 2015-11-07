@@ -17,7 +17,7 @@ class UpdateCommand extends Command
             ->setName('update')
             ->setDescription('Update a gist using the API')
             ->addArgument('input', InputArgument::REQUIRED, 'Input')
-            ->addOption('id', null, InputOption::VALUE_REQUIRED, 'Gist Id')
+            ->addOption('gist', null, InputOption::VALUE_REQUIRED, 'Id or File of the gist')
             ->addOption('show-url', 'u', InputOption::VALUE_NONE, 'Display only the gist url')
             ->addOption('show-id', 'i', InputOption::VALUE_NONE, 'Display only the gist Id')
             ->setHelp(<<<EOF
@@ -32,8 +32,8 @@ Arguments:
         Default value: <comment>text</comment>
 
 Options:
-    <info>--id</info>
-        Defines the Gist to update by using its ID
+    <info>--gist</info>
+        Defines the Gist to update by using its Id or its File
 
     <info>--show-id</info>, <info>-i</info>
         Display only the Id of the gist
@@ -49,7 +49,7 @@ EOF
         //$output->writeln(sprintf('<comment>%s</comment> bar.', 'test'));
 
         $file = $input->getArgument('input');
-        $id = $input->getOption('id');
+        $gist = $input->getOption('gist');
 
         if ($file === '-') {
             $content = file_get_contents('php://stdin');
@@ -73,7 +73,7 @@ EOF
             $output->writeln(sprintf('<error>You can not create an empty gist.</error>', $type));
         }
 
-        $gist = $this->getSilexApplication()['api_client']->update($id, $content);
+        $gist = $this->getSilexApplication()['api_client']->update($gist, $content);
 
         if ($input->getOption('show-url')) {
             $output->writeln($gist['url']);
