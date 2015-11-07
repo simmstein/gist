@@ -8,4 +8,4 @@ $app['config.locator'] = function ($app) {
     return new FileLocator($app['config.locator.path']);
 };
 
-$app['env'] = 'prod';
+$app['env'] = 'dev';
