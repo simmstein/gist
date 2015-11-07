@@ -2,9 +2,11 @@
 <?php
 
 use Gist\Command\CreateCommand;
+use Gist\Command\UpdateCommand;
 
 $app = require __DIR__.'/bootstrap.php';
 
 $app['console']->add(new CreateCommand());
+$app['console']->add(new UpdateCommand());
 
 $app['console']->run();

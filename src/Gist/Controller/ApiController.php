@@ -7,6 +7,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Gist\Model\Gist;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Gist\Form\ApiCreateGistForm;
+use Gist\Model\GistQuery;
+use Gist\Form\ApiUpdateGistForm;
 
 /**
  * Class ApiController
@@ -34,6 +36,56 @@ class ApiController extends Controller
         if ($form->isValid()) {
             $gist = $app['gist']->create(new Gist(), $form->getData());
             $gist->setCipher(false)->save();
+
+            $history = $app['gist']->getHistory($gist);
+
+            return new JsonResponse(array(
+                'url' => $request->getSchemeAndHttpHost().$app['url_generator']->generate(
+                    'view',
+                    array(
+                        'gist' => $gist->getFile(),
+                        'commit' => array_pop($history)['commit'],
+                    )
+                ),
+                'gist' => $gist->toArray(),
+            ));
+        }
+
+        return $this->invalidRequestResponse('Invalid field(s)');
+    }
+    
+    public function updateAction(Request $request, Application $app, $id)
+    {
+        if (false === $request->isMethod('post')) {
+            return $this->invalidMethodResponse('POST method is required.');
+        }
+
+        if (!ctype_digit($id)) {
+            return $this->invalidRequestResponse('Invalid Gist');
+        }
+
+        $gist = GistQuery::create()
+            ->filterByCipher(false)
+            ->filterById((int) $id)
+            ->findOne();
+
+        if (!$gist) {
+            return $this->invalidRequestResponse('Invalid Gist');
+        }
+
+        $form = new ApiUpdateGistForm(
+            $app['form.factory'],
+            $app['translator'],
+            [],
+            ['csrf_protection' => false]
+        );
+
+        $form = $form->build()->getForm();
+
+        $form->submit($request);
+
+        if ($form->isValid()) {
+            $gist = $app['gist']->commit($gist, $form->getData());
 
             $history = $app['gist']->getHistory($gist);
 

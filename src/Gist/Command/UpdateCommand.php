@@ -8,17 +8,16 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
-class CreateCommand extends Command
+class UpdateCommand extends Command
 {
     protected function configure()
     {
         $types = implode(', ', $this->getTypes());
         $this
-            ->setName('create')
-            ->setDescription('Create a gist using the API')
+            ->setName('update')
+            ->setDescription('Update a gist using the API')
             ->addArgument('input', InputArgument::REQUIRED, 'Input')
-            ->addArgument('type', InputArgument::OPTIONAL, 'Type', 'text')
-            ->addOption('title', 't', InputOption::VALUE_REQUIRED, 'Title of the gist')
+            ->addOption('id', null, InputOption::VALUE_REQUIRED, 'Gist Id')
             ->addOption('show-url', 'u', InputOption::VALUE_NONE, 'Display only the gist url')
             ->addOption('show-id', 'i', InputOption::VALUE_NONE, 'Display only the gist Id')
             ->setHelp(<<<EOF
@@ -33,9 +32,9 @@ Arguments:
         Default value: <comment>text</comment>
 
 Options:
-    <info>--title</info>, <info>-t</info>
-        Defines a title
-    
+    <info>--id</info>
+        Defines the Gist to update by using its ID
+
     <info>--show-id</info>, <info>-i</info>
         Display only the Id of the gist
 
@@ -50,8 +49,7 @@ EOF
         //$output->writeln(sprintf('<comment>%s</comment> bar.', 'test'));
 
         $file = $input->getArgument('input');
-        $type = $input->getArgument('type');
-        $title = $input->getOption('title');
+        $id = $input->getOption('id');
 
         if ($file === '-') {
             $content = file_get_contents('php://stdin');
@@ -71,17 +69,11 @@ EOF
             $content = file_get_contents($file);
         }
 
-        if (!in_array($type, $this->getTypes())) {
-            $output->writeln(sprintf('<error>%s: invalid type.</error>', $type));
-
-            return false;
-        }
-
         if (trim($content) === '') {
             $output->writeln(sprintf('<error>You can not create an empty gist.</error>', $type));
         }
 
-        $gist = $this->getSilexApplication()['api_client']->create($title, $type, $content);
+        $gist = $this->getSilexApplication()['api_client']->update($id, $content);
 
         if ($input->getOption('show-url')) {
             $output->writeln($gist['url']);

@@ -129,6 +129,34 @@ Params:
 * Code ```405```: Method Not Allowed
 * Code ```400```: Bad Request
 
+### Update an existing Gist
+
+**POST** /{locale}/api/update/{id}
+Params:
+
+* ```{id}```: Gist Id (required)
+* ```form[content]```: String (required)
+
+#### Responses:
+
+* Code ```200```: A json which contains gist's information. Example:
+  ```javascript
+{
+    "url": "https:\/\/gist.deblan.org\/en\/view\/55abcfa7771e0\/abcgi72967dd95e3461490dcaa310d728d6adef",
+    "gist": {
+        "Id": 66,
+        "Title": "test prod",
+        "Cipher": false,
+        "Type": "javascript",
+        "File": "55abcfa7771e0",
+        "CreatedAt": "2015-07-19T16:26:15Z",
+        "UpdatedAt": "2015-07-19T16:30:15Z"
+    }
+}
+  ```
+* Code ```405```: Method Not Allowed
+* Code ```400```: Bad Request
+
 Console
 -------
 
@@ -146,6 +174,7 @@ Arguments:
 Options:
   -t, --title=TITLE     Title of the gist
   -u, --show-url        Display only the gist url
+  -i, --show-id         Display only the gist Id
   -h, --help            Display this help message
   -q, --quiet           Do not output any message
   -V, --version         Display this application version
@@ -168,6 +197,48 @@ Help:
  Options:
      --title, -t
          Defines a title
+     
+     --show-id, -i
+         Display only the Id of the gist
+ 
+     --show-url, -u
+         Display only the url of the gist
+$ ./app/console --help create
+Usage:
+  update [options] [--] <input>
+
+Arguments:
+  input                 Input
+
+Options:
+      --id=ID           Gist Id
+  -u, --show-url        Display only the gist url
+  -i, --show-id         Display only the gist Id
+  -h, --help            Display this help message
+  -q, --quiet           Do not output any message
+  -V, --version         Display this application version
+      --ansi            Force ANSI output
+      --no-ansi         Disable ANSI output
+  -n, --no-interaction  Do not ask any interactive question
+  -v|vv|vvv, --verbose  Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
+
+Help:
+ Provides a client to create a gist using the API.
+ 
+ Arguments:
+     input
+         Identify the source of the content: path of the file (eg: /path/to/file) or standard input (-)
+ 
+     type
+         Defines the type of code: html, css, javascript, php, sql, xml, yaml, perl, c, asp, python, bash, actionscript3, text
+         Default value: text
+ 
+ Options:
+     --id
+         Defines the Gist to update by using its ID
+ 
+     --show-id, -i
+         Display only the Id of the gist
  
      --show-url, -u
          Display only the url of the gist

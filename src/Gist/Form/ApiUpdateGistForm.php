@@ -3,16 +3,18 @@
 namespace Gist\Form;
 
 /**
- * Class ApiCreateGistForm
+ * Class ApiUpdateGistForm
  * @author Simon Vieille <simon@deblan.fr>
  */
-class ApiCreateGistForm extends CreateGistForm
+class ApiUpdateGistForm extends ApiCreateGistForm
 {
     public function build(array $options = array())
     {
         parent::build($options);
 
-        $this->builder->remove('cipher');
+        $this->builder
+            ->remove('title')
+            ->remove('type');
 
         return $this->builder;
     }
