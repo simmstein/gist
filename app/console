@@ -3,10 +3,12 @@
 
 use Gist\Command\CreateCommand;
 use Gist\Command\UpdateCommand;
+use Gist\Command\StatsCommand;
 
 $app = require __DIR__.'/bootstrap.php';
 
 $app['console']->add(new CreateCommand());
 $app['console']->add(new UpdateCommand());
+$app['console']->add(new StatsCommand());
 
 $app['console']->run();

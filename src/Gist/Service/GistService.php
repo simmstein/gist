@@ -7,6 +7,7 @@ use GitWrapper\GitWorkingCopy;
 use GitWrapper\GitWrapper;
 use GitWrapper\GitCommand;
 use GeSHi;
+use Gist\Model\GistQuery;
 
 /**
  * Class GistService
@@ -28,6 +29,11 @@ class GistService
         $this->gitWrapper = $gitWrapper;
         $this->gitWorkingCopy = $gitWorkingCopy;
         $this->geshi = $geshi;
+    }
+
+    public function getGists()
+    {
+        return GistQuery::create()->find();
     }
 
     public function getHistory(Gist $gist)
