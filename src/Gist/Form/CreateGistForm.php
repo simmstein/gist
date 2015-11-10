@@ -33,6 +33,7 @@ class CreateGistForm extends AbstractForm
                     'class' => 'form-control',
                     'rows' => 10,
                 ),
+                'trim' => false,
                 'constraints' => array(
                     new NotBlank(array(
                         'message' => $this->translator->trans('form.error.not_blank'),
