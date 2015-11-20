@@ -59,7 +59,7 @@ EOF
 
         $table = new Table($output);
         $table
-            ->setHeaders(array('With encryption', 'Without encryption', 'Commits', 'Total'))
+            ->setHeaders(array('Without encryption', 'With encryption', 'Commits', 'Total'))
             ->setRows(array(
                 array(
                     $total - $v = array_sum($withEncryption), 
@@ -79,8 +79,8 @@ EOF
 
         $table->setHeaders(array(
             'Type',
-            'With encryption', 
             'Without encryption', 
+            'With encryption', 
             'Commits', 
             'Total',
         ));
@@ -93,8 +93,8 @@ EOF
 
             $rows[] = array(
                 $lang,
-                $totalWithEncryption,
                 $totalWithoutEncyption,
+                $totalWithEncryption,
                 $commits[$lang],
                 $total,
             );
