@@ -13,6 +13,7 @@
         iframe.setAttribute('frameborder', 0);
         iframe.setAttribute('src', url);
         iframe.setAttribute('style', 'width: 100%');
+        iframe.setAttribute('class', 'gist-iframe');
         document.getElementById('gist-{{ gist.file }}-{{ commit }}').appendChild(iframe);
 
         iFrameResize({}, iframe);
@@ -21,7 +22,6 @@
     if (typeof iFrameResize == 'undefined') {
         var script = document.createElement('script');
         script.setAttribute('id', 'gist-iframe-resizer');
-        script.setAttribute('class', 'gist-iframe');
         script.setAttribute('src', '{{ app.request.getSchemeAndHttpHost() ~ web_path }}components/iframe-resizer/js/iframeResizer.min.js');
         script.onload = iFrameResizeLoaded;
         document.getElementsByTagName('head')[0].appendChild(script);
