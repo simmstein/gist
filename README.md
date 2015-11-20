@@ -160,7 +160,7 @@ Params:
 Console
 -------
 
-Gist provides a CLI for using API:
+### Create and update gists:
 
 ```
 $ ./app/console --help create
@@ -203,6 +203,7 @@ Help:
  
      --show-url, -u
          Display only the url of the gist
+
 $ ./app/console --help update
 Usage:                           
   update [options] [--] <input>
@@ -244,7 +245,39 @@ Help:
          Display only the url of the gist
 ```
 
-#### Personal instance
+### Show stats
+
+```
+$ app/console stats
+Gists statistics
+
++--------------------+-----------------+---------+-------+
+| Without encryption | With encryption | Commits | Total |
++--------------------+-----------------+---------+-------+
+| 132                | 19              | 178     | 151   |
++--------------------+-----------------+---------+-------+
+
+Details by type
+
++------------+--------------------+-----------------+---------+-------+
+| Type       | Without encryption | With encryption | Commits | Total |
++------------+--------------------+-----------------+---------+-------+
+| bash       | 20                 | 3               | 28      | 23    |
+| c          | 0                  | 1               | 1       | 1     |
+| css        | 3                  | 0               | 4       | 3     |
+| html       | 31                 | 3               | 44      | 34    |
+| javascript | 11                 | 0               | 12      | 11    |
+| php        | 22                 | 2               | 27      | 24    |
+| python     | 2                  | 1               | 3       | 3     |
+| sql        | 2                  | 0               | 3       | 2     |
+| text       | 31                 | 6               | 43      | 37    |
+| xml        | 7                  | 2               | 9       | 9     |
+| yaml       | 3                  | 1               | 4       | 4     |
++------------+--------------------+-----------------+---------+-------+
+
+```
+
+### Personal instance
 
 If you install Gist on your server, you have to modify the ```base_uri``` of the API.
 Edit ```app/bootstrap.php.d/60-api.php``` and modify ```https://gist.deblan.org/```.
