@@ -280,4 +280,4 @@ Details by type
 ### Personal instance
 
 If you install Gist on your server, you have to modify the ```base_uri``` of the API.
-Edit ```app/bootstrap.php.d/60-api.php``` and modify ```https://gist.deblan.org/```.
+Edit ```app/bootstrap.php.d/60-api.php``` and replace ```https://gist.deblan.org/```.
