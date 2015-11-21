@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Silex\Application;
 use Gist\Model\User;
 use Gist\Form\UserRegisterForm;
+use Gist\Form\UserLoginForm;
 
 /**
  * Class LoginController
@@ -49,6 +50,32 @@ class LoginController extends Controller
                 'form'    => $form->createView(),
                 'error'   => isset($error) ? $error : '',
                 'success' => isset($success) ? $success : '',
+            ] 
+        );
+    }
+    
+    public function loginAction(Request $request, Application $app)
+    {
+        $user = $app['user.provider']->createUser();
+
+        $form = new UserLoginForm(
+            $app['form.factory'],
+            $app['translator'],
+            $user,
+            ['csrf_protection' => false]
+        );
+
+        $form = $form->build()->getForm();
+
+        if ($request->isMethod('post')) {
+            $error = $app['translator']->trans('login.login.invalid');
+        }
+
+        return $app['twig']->render(
+            'Login/login.html.twig',
+            [
+                'form'  => $form->createView(),
+                'error' => isset($error) ? $error : '',
             ] 
         );
     }

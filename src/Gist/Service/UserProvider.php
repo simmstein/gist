@@ -106,6 +106,6 @@ class UserProvider implements UserProviderInterface
 
     public function supportsClass($class)
     {
-        return $class === 'Gist\\Model\\User';
+        return $class === 'Gist\Model\User';
     }
 }

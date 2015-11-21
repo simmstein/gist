@@ -4,10 +4,6 @@
 	{{ 'login.register.title'|trans }}
 {% endblock %}
 
-{% block langs %}
-
-{% endblock %}
-
 {% block body %}
     <div class="row">
 		{% if error %}
@@ -25,7 +21,7 @@
 				</div>
 			</div>
 		{% else %}
-			<form action="{{ path('login_register') }}" method="post" id="main-form">
+			<form action="{{ path('register') }}" method="post" id="main-form">
 				<div class="col-md-12">
 					<div class="panel panel-default">
 						<div class="panel-heading">

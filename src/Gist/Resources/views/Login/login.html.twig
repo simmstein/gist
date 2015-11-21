@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ 'login.login.title'|trans }}
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+		{% if error %}
+			<div class="col-md-12">
+				<div class="alert alert-warning">
+					{{ error }}
+				</div>
+			</div>
+		{% endif %}
+
+		<form action="{{ path('_login_check') }}" method="post" id="main-form">
+			<div class="col-md-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						{{ 'login.login.title'|trans }}
+					</div>
+					<div class="panel-body">
+						<p>
+							{{ form_errors(form._username) }}
+							{{ form_widget(form._username) }}
+						</p>			
+						
+						<p>
+							{{ form_errors(form._password) }}
+							{{ form_widget(form._password) }}
+						</p>			
+						
+						<p>
+							<input type="submit" class="btn btn-primary" value="{{ 'form.submit'|trans }}">
+						</p>
+					</div>
+				</div>
+			</div>
+		</form>
+    </div>
+{% endblock %}

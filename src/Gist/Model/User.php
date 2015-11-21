@@ -11,4 +11,9 @@ class User extends BaseUser implements UserInterface
     {
         $this->setPassword(null);
     }
+
+    public function getRoles()
+    {
+        return explode(',', parent::getRoles());
+    }
 }

@@ -28,6 +28,14 @@ footer:
     text: '<p>Powered by <a href="https://gitlab.deblan.org/deblan/gist">GIST</a>, it''s open source :) - <a href="https://gitlab.deblan.org/deblan/gist#api">API</a></p>'
 
 login:
+    login:
+        title: 'Login'
+        invalid: 'Invalid username or password.'
+        form:
+            username:
+                placeholder: 'Username'
+            password:
+                placeholder: 'Password'
     register:
         title: 'New account'
         already_exists: 'This username is already registred!'
