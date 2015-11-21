@@ -26,6 +26,10 @@ download:
     path: /download/{gist}/{commit}
     defaults: {_controller: Gist\Controller\ViewController::downloadAction, _locale: en, commit: 0}
 
+login_register:
+    path: /login
+    defaults: {_controller: Gist\Controller\LoginController::registerAction, _locale: en}
+
 revisions:
     path: /revs/{gist}
     defaults: {_controller: Gist\Controller\ViewController::revisionsAction, _locale: en}

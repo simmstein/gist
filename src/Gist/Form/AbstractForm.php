@@ -15,7 +15,7 @@ abstract class AbstractForm
 
     protected $translator;
 
-    public function __construct(FormFactory $formFactory, Translator $translator, array $data = array(), $formFactoryOptions = array())
+    public function __construct(FormFactory $formFactory, Translator $translator, $data = null, $formFactoryOptions = array())
     {
         $this->translator = $translator;
 

@@ -27,6 +27,17 @@ date:
 footer:
     text: '<p>Powered by <a href="https://gitlab.deblan.org/deblan/gist">GIST</a>, it''s open source :) - <a href="https://gitlab.deblan.org/deblan/gist#api">API</a></p>'
 
+login:
+    register:
+        title: 'New account'
+        already_exists: 'This username is already registred!'
+        registred: 'Congratulations, your account is created!'
+        form:
+            username:
+                placeholder: 'Username'
+            password:
+                placeholder: 'Password'
+
 form:
     error:
         not_blank: 'This value should not be blank bro!'

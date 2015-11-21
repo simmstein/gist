@@ -27,6 +27,18 @@ date:
 footer:
     text: '<p>Propulsé par <a href="https://gitlab.deblan.org/deblan/gist">GIST</a>, c''est libre :) - <a href="https://gitlab.deblan.org/deblan/gist#api">API</a></p>'
 
+login:
+    register:
+        title: 'Nouveau compte'
+        already_exists: 'Ce nom d''utilisateur est déjà enregistré'
+        registred: 'Félicitation, votre compte a bien été créé !'
+        form:
+            username:
+                placeholder: 'Nom d''utilisateur'
+            password:
+                placeholder: 'Mot de passe'
+
+
 form:
     error:
         not_blank: 'Vous devez saisir cette donnée.'

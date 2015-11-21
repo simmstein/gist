@@ -58,18 +58,17 @@ class UserProvider implements UserProviderInterface
             ->count() > 0;
     }
 
-    public function registerUser($username, $password)
+    public function createUser()
     {
-        $user = new User();
+        return new User();
+    }
 
-        $salt = $this->saltGenerator->generate(64);
+    public function registerUser(User $user, $password)
+    {
+        $user->setSalt($this->saltGenerator->generate(64));
 
         $user
-            ->setUsername($username)
             ->setRoles('ROLE_USER')
-            ->setSalt($salt);
-
-        $user
             ->setPassword($this->encoder->encodePassword($user, $password))
             ->save();
 

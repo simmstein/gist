@@ -40,6 +40,9 @@ class UserCreateCommand extends Command
             $password = $helper->ask($input, $output, $question);
         }
 
-        $userProvider->registerUser($username, $password);
+        $user = $userProvider->createUser();
+        $user->setUsername($username);
+
+        $userProvider->registerUser($user, $password);
     }
 }
