@@ -2,12 +2,26 @@
 <database defaultIdMethod="native" name="default" namespace="Gist\Model">
    <table name="gist">
 		<column name="id" type="INTEGER" primaryKey="true" required="true" autoIncrement="true"/>
-		
 		<column name="title" type="VARCHAR" size="255" required="false" />
 		<column name="cipher" type="BOOLEAN" required="true" defaultValue="false" />
 		<column name="type" type="VARCHAR" size="30" required="true" />
 		<column name="file" type="VARCHAR" size="30" required="true" />
+        <column name="user_id" type="INTEGER" required="false" />
+        
+        <foreign-key foreignTable="user" onDelete="setnull" onUpdate="cascade">
+            <reference local="user_id" foreign="id"/>
+        </foreign-key>
 
 		<behavior name="timestampable"/>
 	</table>
+
+    <table name="user">
+        <column name="id" type="INTEGER" primaryKey="true" required="true" autoIncrement="true"/>
+        <column name="username" type="VARCHAR" size="255" required="true" />
+        <column name="password" type="VARCHAR" size="255" required="true" />
+        <column name="roles" type="VARCHAR" size="255" required="true" />
+        <column name="salt" type="VARCHAR" size="64" required="true" />
+
+        <behavior name="timestampable"/>
+    </table>
 </database>

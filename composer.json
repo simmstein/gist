@@ -10,7 +10,8 @@
         "symfony/security-csrf": "~2.6",
         "knplabs/console-service-provider": "~1.0",
         "propel/propel": "~2.0@dev",
-        "guzzlehttp/guzzle": "~6.0"
+        "guzzlehttp/guzzle": "~6.0",
+        "symfony/security": "^2.7"
     },
     "autoload": {
         "psr-0": {

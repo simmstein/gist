@@ -4,11 +4,13 @@
 use Gist\Command\CreateCommand;
 use Gist\Command\UpdateCommand;
 use Gist\Command\StatsCommand;
+use Gist\Command\UserCreateCommand;
 
 $app = require __DIR__.'/bootstrap.php';
 
 $app['console']->add(new CreateCommand());
 $app['console']->add(new UpdateCommand());
 $app['console']->add(new StatsCommand());
+$app['console']->add(new UserCreateCommand());
 
 $app['console']->run();
