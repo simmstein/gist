@@ -79,7 +79,7 @@ class LoginController extends Controller
 
         $form = $form->build()->getForm();
 
-        if ($request->query->get('error')) {
+        if ($app['security.last_error']($request)) {
             $error = $app['translator']->trans('login.login.invalid');
         }
 
@@ -90,13 +90,5 @@ class LoginController extends Controller
                 'error' => isset($error) ? $error : '',
             ]
         );
-    }
-
-    public function loginCheckAction()
-    {
-    }
-
-    public function logoutAction()
-    {
     }
 }

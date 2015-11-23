@@ -44,7 +44,6 @@ $app->get('/', function (Request $request) use ($app) {
     $accept = AcceptHeader::fromString($request->headers->get('Accept-Language'));
     $cookie = $request->cookies->get('locale');
 
-    
     if (!empty($cookie) && in_array($cookie, $app['locales'])) {
         $foundLocale = $cookie;
     } else {

@@ -37,7 +37,7 @@ $app['security.authentication_listener.factory.form'] = $app->protect(function (
             $app['security.authentication_provider.'.$name.'.form']
         );
     });
-    
+   
     return [
         'security.authentication_provider.'.$name.'.form',
         'security.authentication_listener.'.$name.'.form',
@@ -55,12 +55,13 @@ $app->register(
                 'anonymous' => true,
                 'form' => [
                     'login_path' => '_login',
-                    'check_path' => '_login_check',
+                    'check_path' => '/login_check',
                     'always_use_default_target_path' => true,
-                    'default_target_path' => $app['url_generator']->generate('my'),
+                    'default_target_path' => '/',
                 ],
                 'logout' => [
                     'path' => '/logout',
+                    'target' => '/',
                 ],
                 'users' => $app->share(function () use ($app) {
                     return $app['user.provider'];

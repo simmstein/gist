@@ -30,11 +30,15 @@ register:
     path: /register
     defaults: {_controller: Gist\Controller\LoginController::registerAction, _locale: en}
 
+login:
+    path: /login
+    defaults: {_controller: Gist\Controller\LoginController::loginAction, _locale: en}
+
 _login:
     path: /login
     defaults: {_controller: Gist\Controller\LoginController::loginAction, _locale: en}
 
-_login_check:
+login_check:
     path: /login_check
 
 logout:
