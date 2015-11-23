@@ -1,5 +1,43 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}{{ 'my.title'|trans }}{% endblock %}
+
 {% block body %}
-	foo
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+					{{ 'my.title'|trans }}
+				</div>
+                <div class="panel-body">
+                    <div class="tab-content">
+						{% for gist in user.gists %}
+							<div class="commit">
+								<p>
+									<strong>{{ gist.title ? gist.title : 'gist.untitled'|trans }}</strong>, 							
+									{{ gist.createdAt|date('date.format'|trans) }}
+								</p>
+									
+								<p>
+									<button class="btn btn-info btn-sm">
+										{{ gist.type }}	
+									</button>
+
+									{% if not gist.cipher %}
+										<a href="{{ path('view', {gist: gist.file}) }}" class="btn btn-warning btn-sm">
+											View
+										</a>
+									{% else %}
+										<button class="btn btn-error btn-sm">
+											<span class="glyphicon glyphicon-lock"></span>
+										</button>
+									{% endif %}
+								</p>
+							</div>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 {% endblock %}

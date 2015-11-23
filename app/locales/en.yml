@@ -17,6 +17,9 @@ app:
             my:
                 title: 'Account'
 
+my:
+    title: 'My gists'
+
 gist:
     untitled: 'Untitled'
     404:
