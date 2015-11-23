@@ -2,18 +2,19 @@
 
 namespace Gist\Service;
 
-use Gist\Model\Gist;
+use Gist\Model\Gist as GistModel;
 use GitWrapper\GitWorkingCopy;
 use GitWrapper\GitWrapper;
 use GitWrapper\GitCommand;
 use GeSHi;
 use Gist\Model\GistQuery;
+use Gist\Model\User;
 
 /**
- * Class GistService
+ * Class Gist
  * @author Simon Vieille <simon@deblan.fr>
  */
-class GistService
+class Gist
 {
     protected $gistPath;
 
@@ -36,7 +37,7 @@ class GistService
         return GistQuery::create()->find();
     }
 
-    public function getHistory(Gist $gist)
+    public function getHistory(GistModel $gist)
     {
         $command = GitCommand::getInstance('log', '--format=medium', $gist->getFile());
         $command->setDirectory($this->gistPath);
@@ -70,7 +71,7 @@ class GistService
         return $history;
     }
 
-    public function getContent(Gist $gist, $commit)
+    public function getContent(GistModel $gist, $commit)
     {
         $command = GitCommand::getInstance('cat-file', '-p', $commit.':'.$gist->getFile());
         $command->setDirectory($this->gistPath);
@@ -79,7 +80,7 @@ class GistService
         return $this->gitWrapper->run($command);
     }
 
-    public function create(Gist $gist, array $data)
+    public function create(GistModel $gist, array $data, $user = null)
     {
         $gist->hydrateWith($data);
         $gist->generateFilename();
@@ -90,12 +91,16 @@ class GistService
             ->add($gist->getFile())
             ->commit('Init');
 
+        if (is_object($user) && $user instanceof User) {
+            $gist->setUser($user);
+        }
+
         $gist->save();
 
         return $gist;
     }
 
-    public function commit(Gist $gist, array $data)
+    public function commit(GistModel $gist, array $data)
     {
         file_put_contents($this->gistPath.'/'.$gist->getFile(), $data['content']);
 

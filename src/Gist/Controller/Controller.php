@@ -14,8 +14,22 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class Controller
 {
-    protected function notFoundResponse(Application $app)
+    protected $app;
+
+    public function __construct(Application $app)
     {
+        $this->app = $app;
+    }
+
+    public function getApp()
+    {
+        return $this->app;
+    }
+
+    protected function notFoundResponse()
+    {
+        $app = $this->getApp();
+
         return new Response(
             $app['twig']->render(
                 'View/notFound.html.twig',
@@ -25,8 +39,10 @@ class Controller
         );
     }
     
-    protected function getViewOptions(Request $request, Application $app, $gist, $commit)
+    protected function getViewOptions(Request $request, $gist, $commit)
     {
+        $app = $this->getApp();
+
         $gist = GistQuery::create()->findOneByFile($gist);
 
         if (null === $gist) {
@@ -39,7 +55,7 @@ class Controller
             return null;
         }
 
-        $content = $this->getContentByCommit($app, $gist, $commit, $history);
+        $content = $this->getContentByCommit($gist, $commit, $history);
 
         return array(
             'gist' => $gist,
@@ -51,8 +67,10 @@ class Controller
         );
     }
 
-    protected function getContentByCommit(Application $app, Gist $gist, &$commit, $history)
+    protected function getContentByCommit(Gist $gist, &$commit, $history)
     {
+        $app = $this->getApp();
+
         if ($commit === 0) {
             $commit = $history[0]['commit'];
         } else {
@@ -72,8 +90,10 @@ class Controller
         return $app['gist']->getContent($gist, $commit);
     }
 
-    public function getUser(Application $app)
+    public function getUser()
     {
+        $app = $this->getApp();
+
         $securityContext = $app['security'];
         $securityToken = $securityContext->getToken();
 
@@ -84,10 +104,12 @@ class Controller
         return $securityToken->getUser();
     }
 
-    public function render($template, array $params, Application $app)
+    public function render($template, array $params)
     {
+        $app = $this->getApp();
+
         if (!isset($params['user'])) {
-            $params['user'] = $this->getUser($app);
+            $params['user'] = $this->getUser();
         }
 
         return $app['twig']->render(

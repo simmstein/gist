@@ -2,9 +2,7 @@
 
 namespace Gist\Controller;
 
-use Gist\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Silex\Application;
 
 /**
  * Class MyController
@@ -12,10 +10,8 @@ use Silex\Application;
  */
 class MyController extends Controller
 {
-    public function myAction(Request $request, Application $app)
+    public function myAction(Request $request)
     {
-        echo '<pre>', var_dump($this->getUser($app)), '</pre>';
-        die;
+        $app = $this->getApp();
     }
 }
-

@@ -2,7 +2,6 @@
 
 namespace Gist\Controller;
 
-use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Gist\Model\Gist;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -16,8 +15,10 @@ use Gist\Form\ApiUpdateGistForm;
  */
 class ApiController extends Controller
 {
-    public function createAction(Request $request, Application $app)
+    public function createAction(Request $request)
     {
+        $app = $this->getApp();
+
         if (false === $request->isMethod('post')) {
             return $this->invalidMethodResponse('POST method is required.');
         }
@@ -53,9 +54,11 @@ class ApiController extends Controller
 
         return $this->invalidRequestResponse('Invalid field(s)');
     }
-    
-    public function updateAction(Request $request, Application $app, $gist)
+
+    public function updateAction(Request $request, $gist)
     {
+        $app = $this->getApp();
+
         if (false === $request->isMethod('post')) {
             return $this->invalidMethodResponse('POST method is required.');
         }

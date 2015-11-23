@@ -14,34 +14,38 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class ViewController extends Controller
 {
-    public function viewAction(Request $request, Application $app, $gist, $commit)
+    public function viewAction(Request $request, $gist, $commit)
     {
-        $viewOptions = $this->getViewOptions($request, $app, $gist, $commit);
+        $app = $this->getApp();
+
+        $viewOptions = $this->getViewOptions($request, $gist, $commit);
 
         if (is_array($viewOptions)) {
-            return $this->render('View/view.html.twig', $viewOptions, $app);
+            return $this->render('View/view.html.twig', $viewOptions);
         } else {
-            return $this->notFoundResponse($app);
+            return $this->notFoundResponse();
         }
     }
 
-    public function embedAction(Request $request, Application $app, $gist, $commit)
+    public function embedAction(Request $request, $gist, $commit)
     {
-        $viewOptions = $this->getViewOptions($request, $app, $gist, $commit);
+        $app = $this->getApp();
+
+        $viewOptions = $this->getViewOptions($request, $gist, $commit);
 
         if (is_array($viewOptions)) {
             return $app['twig']->render('View/embed.html.twig', $viewOptions);
         } else {
-            return $this->notFoundResponse($app);
+            return $this->notFoundResponse();
         }
     }
 
-    public function embedJsAction(Request $request, Application $app, $gist, $commit)
+    public function embedJsAction(Request $request, $gist, $commit)
     {
-        $viewOptions = $this->getViewOptions($request, $app, $gist, $commit);
+        $viewOptions = $this->getViewOptions($request, $gist, $commit);
 
         return new Response(
-            $this->render('View/embedJs.html.twig', $viewOptions, $app),
+            $this->render('View/embedJs.html.twig', $viewOptions),
             200,
             array(
                 'Content-Type' => 'text/javascript',
@@ -49,9 +53,9 @@ class ViewController extends Controller
         );
     }
 
-    public function rawAction(Request $request, Application $app, $gist, $commit)
+    public function rawAction(Request $request, $gist, $commit)
     {
-        $viewOptions = $this->getViewOptions($request, $app, $gist, $commit);
+        $viewOptions = $this->getViewOptions($request, $gist, $commit);
 
         if (is_array($viewOptions)) {
             return new Response(
@@ -62,13 +66,15 @@ class ViewController extends Controller
                 )
             );
         } else {
-            return $this->notFoundResponse($app);
+            return $this->notFoundResponse();
         }
     }
 
-    public function downloadAction(Request $request, Application $app, $gist, $commit)
+    public function downloadAction(Request $request, $gist, $commit)
     {
-        $viewOptions = $this->getViewOptions($request, $app, $gist, $commit);
+        $app = $this->getApp();
+
+        $viewOptions = $this->getViewOptions($request, $gist, $commit);
 
         if (is_array($viewOptions)) {
             $gist = $viewOptions['gist'];
@@ -88,18 +94,20 @@ class ViewController extends Controller
         }
     }
 
-    public function revisionsAction(Request $request, Application $app, $gist)
+    public function revisionsAction(Request $request, $gist)
     {
+        $app = $this->getApp();
+
         $gist = GistQuery::create()->findOneByFile($gist);
 
         if (null === $gist) {
-            return $this->notFoundResponse($app);
+            return $this->notFoundResponse();
         }
 
         $history = $app['gist']->getHistory($gist);
 
         if (empty($history)) {
-            return $this->notFoundResponse($app);
+            return $this->notFoundResponse();
         }
 
         return $this->render(
@@ -107,8 +115,7 @@ class ViewController extends Controller
             array(
                 'gist' => $gist,
                 'history' => $history,
-            ),
-            $app
+            )
         );
     }
 }

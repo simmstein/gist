@@ -2,7 +2,6 @@
 
 namespace Gist\Controller;
 
-use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Gist\Form\CreateGistForm;
 use Gist\Form\CloneGistForm;
@@ -16,8 +15,10 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
  */
 class EditController extends Controller
 {
-    public function createAction(Request $request, Application $app)
+    public function createAction(Request $request)
     {
+        $app = $this->getApp();
+
         $data = array(
             'type' => 'html',
             'cipher' => 'no',
@@ -30,7 +31,7 @@ class EditController extends Controller
             $form->submit($request);
 
             if ($form->isValid()) {
-                $gist = $app['gist']->create(new Gist(), $form->getData());
+                $gist = $app['gist']->create(new Gist(), $form->getData(), $this->getUser());
             }
         }
 
@@ -39,14 +40,15 @@ class EditController extends Controller
             array(
                 'gist' => isset($gist) ? $gist : null,
                 'form' => $form->createView(),
-            ),
-            $app
+            )
         );
     }
 
-    public function cloneAction(Request $request, Application $app, $gist, $commit)
+    public function cloneAction(Request $request, $gist, $commit)
     {
-        $viewOptions = $this->getViewOptions($request, $app, $gist, $commit);
+        $app = $this->getApp();
+
+        $viewOptions = $this->getViewOptions($request, $gist, $commit);
 
         $data = array(
             'type' => $viewOptions['gist']->getType(),
@@ -81,6 +83,6 @@ class EditController extends Controller
 
         $viewOptions['form'] = $form->createView();
 
-        return $this->render('Edit/clone.html.twig', $viewOptions, $app);
+        return $this->render('Edit/clone.html.twig', $viewOptions);
     }
 }

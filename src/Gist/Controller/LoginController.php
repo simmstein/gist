@@ -2,9 +2,7 @@
 
 namespace Gist\Controller;
 
-use Gist\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Silex\Application;
 use Gist\Model\User;
 use Gist\Form\UserRegisterForm;
 use Gist\Form\UserLoginForm;
@@ -16,8 +14,10 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class LoginController extends Controller
 {
-    public function registerAction(Request $request, Application $app)
+    public function registerAction(Request $request)
     {
+        $app = $this->getApp();
+
         if (false === $app['enable_registration']) {
             return new Response('', 403);
         }
@@ -55,13 +55,14 @@ class LoginController extends Controller
                 'form'    => $form->createView(),
                 'error'   => isset($error) ? $error : '',
                 'success' => isset($success) ? $success : '',
-            ],
-            $app
+            ]
         );
     }
-    
-    public function loginAction(Request $request, Application $app)
+
+    public function loginAction(Request $request)
     {
+        $app = $this->getApp();
+
         if (false === $app['enable_login']) {
             return new Response('', 403);
         }
@@ -86,17 +87,15 @@ class LoginController extends Controller
             [
                 'form'  => $form->createView(),
                 'error' => isset($error) ? $error : '',
-            ],
-            $app
+            ]
         );
     }
 
     public function loginCheckAction()
     {
     }
-    
+
     public function logoutAction()
     {
     }
 }
-

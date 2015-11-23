@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <database defaultIdMethod="native" name="default" namespace="Gist\Model">
-   <table name="gist">
+   <table name="gist" isCrossRef="true">
 		<column name="id" type="INTEGER" primaryKey="true" required="true" autoIncrement="true"/>
 		<column name="title" type="VARCHAR" size="255" required="false" />
 		<column name="cipher" type="BOOLEAN" required="true" defaultValue="false" />
@@ -15,7 +15,7 @@
 		<behavior name="timestampable"/>
 	</table>
 
-    <table name="user">
+    <table name="user" isCrossRef="true">
         <column name="id" type="INTEGER" primaryKey="true" required="true" autoIncrement="true"/>
         <column name="username" type="VARCHAR" size="255" required="true" />
         <column name="password" type="VARCHAR" size="255" required="true" />
