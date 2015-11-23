@@ -35,12 +35,10 @@ _login:
     defaults: {_controller: Gist\Controller\LoginController::loginAction, _locale: en}
 
 _login_check:
-    path: /my/login_check
-    defaults: {_locale: en}
+    path: /login_check
 
 _logout:
-    path: /my/logout
-    defaults: {_locale: en}
+    path: /logout
 
 my:
     path: /my

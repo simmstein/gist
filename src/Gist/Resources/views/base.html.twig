@@ -36,6 +36,33 @@
                                     {{ 'app.menu.home.title'|trans }}
                                 </a>
                             </li>
+							
+							{% if user != 'anon.' %}
+								<li>
+									<a href="{{ path('my') }}">
+										{{ 'app.menu.my.my.title'|trans }}
+									</a>
+								</li>
+								<li>
+									<a href="{{ path('_logout') }}">
+										{{ 'app.menu.my.logout.title'|trans }}
+									</a>
+								</li>
+							{% elseif app.enable_login %}
+								<li>
+									<a href="{{ path('_login') }}">
+										{{ 'app.menu.my.login.title'|trans }}
+									</a>
+								</li>
+
+								{% if app.enable_registration %}
+									<li>
+										<a href="{{ path('register') }}">
+											{{ 'app.menu.my.register.title'|trans }}
+										</a>
+									</li>
+								{% endif %}
+							{% endif %}
                             <li>
                                 <a href="https://gitlab.deblan.org/deblan/gist/src/master/README.md">
                                     {{ 'app.menu.about.title'|trans }}

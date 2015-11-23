@@ -7,6 +7,15 @@ app:
             title: 'Home'
         about:
             title: 'About'
+        my:
+            login:
+                title: 'Login'
+            logout:
+                title: 'Logout'
+            register:
+                title: 'Register'
+            my:
+                title: 'Account'
 
 gist:
     untitled: 'Untitled'

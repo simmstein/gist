@@ -10,7 +10,7 @@ use InvalidArgumentException;
  */
 class SaltGenerator
 {
-    public function generate($length = 64)
+    public function generate($length = 32)
     {
         if (!is_numeric($length)) {
             throw new InvalidArgumentException('Paramter length must be a valid integer.');

@@ -8,6 +8,7 @@ use Silex\Application;
 use Gist\Model\User;
 use Gist\Form\UserRegisterForm;
 use Gist\Form\UserLoginForm;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class LoginController
@@ -17,6 +18,10 @@ class LoginController extends Controller
 {
     public function registerAction(Request $request, Application $app)
     {
+        if (false === $app['enable_registration']) {
+            return new Response('', 403);
+        }
+
         $user = $app['user.provider']->createUser();
 
         $form = new UserRegisterForm(
@@ -44,18 +49,23 @@ class LoginController extends Controller
             }
         }
 
-        return $app['twig']->render(
+        return $this->render(
             'Login/register.html.twig',
             [
                 'form'    => $form->createView(),
                 'error'   => isset($error) ? $error : '',
                 'success' => isset($success) ? $success : '',
-            ] 
+            ],
+            $app
         );
     }
     
     public function loginAction(Request $request, Application $app)
     {
+        if (false === $app['enable_login']) {
+            return new Response('', 403);
+        }
+
         $user = $app['user.provider']->createUser();
 
         $form = new UserLoginForm(
@@ -67,17 +77,26 @@ class LoginController extends Controller
 
         $form = $form->build()->getForm();
 
-        if ($request->isMethod('post')) {
+        if ($request->query->get('error')) {
             $error = $app['translator']->trans('login.login.invalid');
         }
 
-        return $app['twig']->render(
+        return $this->render(
             'Login/login.html.twig',
             [
                 'form'  => $form->createView(),
                 'error' => isset($error) ? $error : '',
-            ] 
+            ],
+            $app
         );
+    }
+
+    public function loginCheckAction()
+    {
+    }
+    
+    public function logoutAction()
+    {
     }
 }
 

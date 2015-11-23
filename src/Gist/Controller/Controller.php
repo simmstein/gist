@@ -6,6 +6,7 @@ use Silex\Application;
 use Gist\Model\Gist;
 use Symfony\Component\HttpFoundation\Request;
 use Gist\Model\GistQuery;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class Controller
@@ -15,9 +16,15 @@ class Controller
 {
     protected function notFoundResponse(Application $app)
     {
-        return $app['twig']->render('View/notFound.html.twig');
+        return new Response(
+            $app['twig']->render(
+                'View/notFound.html.twig',
+                []
+            ),
+            404
+        );
     }
-
+    
     protected function getViewOptions(Request $request, Application $app, $gist, $commit)
     {
         $gist = GistQuery::create()->findOneByFile($gist);
@@ -63,5 +70,29 @@ class Controller
         }
 
         return $app['gist']->getContent($gist, $commit);
+    }
+
+    public function getUser(Application $app)
+    {
+        $securityContext = $app['security'];
+        $securityToken = $securityContext->getToken();
+
+        if (!$securityToken) {
+            return null;
+        }
+
+        return $securityToken->getUser();
+    }
+
+    public function render($template, array $params, Application $app)
+    {
+        if (!isset($params['user'])) {
+            $params['user'] = $this->getUser($app);
+        }
+
+        return $app['twig']->render(
+            $template,
+            $params
+        );
     }
 }

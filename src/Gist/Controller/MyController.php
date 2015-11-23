@@ -14,7 +14,8 @@ class MyController extends Controller
 {
     public function myAction(Request $request, Application $app)
     {
-        return 'test';
+        echo '<pre>', var_dump($this->getUser($app)), '</pre>';
+        die;
     }
 }
 

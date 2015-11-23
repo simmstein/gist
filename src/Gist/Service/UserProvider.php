@@ -65,11 +65,11 @@ class UserProvider implements UserProviderInterface
 
     public function registerUser(User $user, $password)
     {
-        $user->setSalt($this->saltGenerator->generate(64));
+        $user->setSalt($this->saltGenerator->generate());
 
         $user
             ->setRoles('ROLE_USER')
-            ->setPassword($this->encoder->encodePassword($user, $password))
+            ->setPassword($this->encoder->encodePassword($password, $user->getSalt()))
             ->save();
 
         return $user;
@@ -78,7 +78,7 @@ class UserProvider implements UserProviderInterface
     public function updateUserPassword(User $user, $password)
     {
         $user
-            ->setPassword($this->encoder->encodePassword($password))
+            ->setPassword($this->encoder->encodePassword($password, $user->getSalt()))
             ->save();
 
         return $user;

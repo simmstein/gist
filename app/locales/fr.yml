@@ -7,6 +7,15 @@ app:
             title: 'Accueil'
         about:
             title: 'À propos'
+        my:
+            login:
+                title: 'Connexion'
+            logout:
+                title: 'Déconnexion'
+            register:
+                title: 'S''inscrire'
+            my:
+                title: 'Mon compte'
 
 gist:
     untitled: 'Sans titre'
