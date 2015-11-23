@@ -7,6 +7,7 @@ use Gist\Model\User;
 use Gist\Form\UserRegisterForm;
 use Gist\Form\UserLoginForm;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\SecurityContext;
 
 /**
  * Class LoginController

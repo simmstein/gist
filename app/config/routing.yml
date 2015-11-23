@@ -37,8 +37,8 @@ _login:
 _login_check:
     path: /login_check
 
-_logout:
-    path: /logout
+logout:
+    path: /my/logout
 
 my:
     path: /my

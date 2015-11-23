@@ -37,14 +37,14 @@
                                 </a>
                             </li>
 							
-							{% if user != 'anon.' %}
+							{% if user %}
 								<li>
 									<a href="{{ path('my') }}">
 										{{ 'app.menu.my.my.title'|trans }}
 									</a>
 								</li>
 								<li>
-									<a href="{{ path('_logout') }}">
+									<a href="{{ path('logout') }}">
 										{{ 'app.menu.my.logout.title'|trans }}
 									</a>
 								</li>

@@ -94,19 +94,29 @@ class Controller
     {
         $app = $this->getApp();
 
-        $securityContext = $app['security'];
+        $securityContext = $app['security.token_storage'];
         $securityToken = $securityContext->getToken();
 
         if (!$securityToken) {
             return null;
         }
 
-        return $securityToken->getUser();
+        $user = $securityToken->getUser();
+
+        if (!is_object($user)) {
+            return null;
+        }
+
+        return $user;
     }
 
-    public function render($template, array $params)
+    public function render($template, array $params = null)
     {
         $app = $this->getApp();
+
+        if (null === $params) {
+            $params = [];
+        }
 
         if (!isset($params['user'])) {
             $params['user'] = $this->getUser();

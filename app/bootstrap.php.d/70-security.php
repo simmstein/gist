@@ -7,6 +7,7 @@ use Silex\Provider\SessionServiceProvider;
 use Gist\Security\AuthenticationProvider;
 use Gist\Security\AuthenticationListener;
 use Gist\Security\AuthenticationEntryPoint;
+use Symfony\Component\Security\Http\HttpUtils;
 
 $app['enable_registration'] = true;
 $app['enable_login'] = true;
@@ -25,26 +26,22 @@ $app['user.provider'] = $app->share(function ($app) {
 $app->register(new SessionServiceProvider());
 
 
-$app['security.authentication_listener.factory.form_login'] = $app->protect(function ($name, $options) use ($app) {
-    $app['security.authentication_provider.'.$name.'.form_login'] = $app->share(function ($app) {
+$app['security.authentication_listener.factory.form'] = $app->protect(function ($name, $options) use ($app) {
+    $app['security.authentication_provider.'.$name.'.form'] = $app->share(function ($app) {
         return new AuthenticationProvider($app['user.provider']);
     });
     
-    $app['security.authentication_listener.'.$name.'.form_login'] = $app->share(function ($app) use ($name) {
+    $app['security.authentication_listener.'.$name.'.form'] = $app->share(function ($app) use ($name) {
         return new AuthenticationListener(
             $app['security.token_storage'], 
-            $app['security.authentication_provider.'.$name.'.form_login']
+            $app['security.authentication_provider.'.$name.'.form']
         );
     });
     
-    $app['security.authentication.entry_point.'.$name.'.form_login'] = $app->share(function ($app) use ($name) {
-        return new AuthenticationEntryPoint($app['url_generator']);
-    });
-    
     return [
-        'security.authentication_provider.'.$name.'.form_login',
-        'security.authentication_listener.'.$name.'.form_login',
-        'security.authentication.entry_point.'.$name.'.form_login',
+        'security.authentication_provider.'.$name.'.form',
+        'security.authentication_listener.'.$name.'.form',
+        null,
         'pre_auth'
     ];
 });
@@ -54,15 +51,16 @@ $app->register(
     [
         'security.firewalls' => [
             'default' => [
-                'pattern' => '^/[a-z]{2}/',
+                'pattern' => '^/',
                 'anonymous' => true,
-                'http' => false,
-                'form_login' => [
-                    'login_path' => '/login',
-                    'check_path' => '/login_check',
+                'form' => [
+                    'login_path' => '_login',
+                    'check_path' => '_login_check',
+                    'always_use_default_target_path' => true,
+                    'default_target_path' => $app['url_generator']->generate('my'),
                 ],
                 'logout' => [
-                    'logout_path' => '/logout'
+                    'path' => '/logout',
                 ],
                 'users' => $app->share(function () use ($app) {
                     return $app['user.provider'];
