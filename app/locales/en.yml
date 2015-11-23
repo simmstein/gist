@@ -19,6 +19,7 @@ app:
 
 my:
     title: 'My gists'
+    nothing: 'Nothing yet!'
 
 gist:
     untitled: 'Untitled'

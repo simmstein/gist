@@ -19,6 +19,7 @@ app:
 
 my:
     title: 'Mes Gists'
+    nothing: 'Rien pour le moment !'
 
 gist:
     untitled: 'Sans titre'

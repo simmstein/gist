@@ -11,30 +11,36 @@
 				</div>
                 <div class="panel-body">
                     <div class="tab-content">
-						{% for gist in user.gists %}
-							<div class="commit">
-								<p>
-									<strong>{{ gist.title ? gist.title : 'gist.untitled'|trans }}</strong>, 							
-									{{ gist.createdAt|date('date.format'|trans) }}
-								</p>
-									
-								<p>
-									<button class="btn btn-info btn-sm">
-										{{ gist.type }}	
-									</button>
+						{% set gists = user.gists %}
 
-									{% if not gist.cipher %}
-										<a href="{{ path('view', {gist: gist.file}) }}" class="btn btn-warning btn-sm">
-											View
-										</a>
-									{% else %}
-										<button class="btn btn-error btn-sm">
-											<span class="glyphicon glyphicon-lock"></span>
+						{% if gists|length == 0 %}
+							{{ 'my.nothing'|trans }}
+						{% else %}
+							{% for gist in user.gists %}
+								<div class="commit">
+									<p>
+										<strong>{{ gist.title ? gist.title : 'gist.untitled'|trans }}</strong>, 							
+										{{ gist.createdAt|date('date.format'|trans) }}
+									</p>
+										
+									<p>
+										<button class="btn btn-info btn-sm">
+											{{ gist.type }}	
 										</button>
-									{% endif %}
-								</p>
-							</div>
-						{% endfor %}
+
+										{% if not gist.cipher %}
+											<a href="{{ path('view', {gist: gist.file}) }}" class="btn btn-warning btn-sm">
+												View
+											</a>
+										{% else %}
+											<button class="btn btn-error btn-sm">
+												<span class="glyphicon glyphicon-lock"></span>
+											</button>
+										{% endif %}
+									</p>
+								</div>
+							{% endfor %}
+						{% endif %}
 					</div>
 				</div>
 			</div>
