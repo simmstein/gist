@@ -5,6 +5,8 @@ use Symfony\Component\HttpFoundation\AcceptHeader;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Translation\Loader\YamlFileLoader;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Cookie;
 
 $app->register(new TranslationServiceProvider(), array(
     'locale' => 'en',
@@ -40,14 +42,19 @@ $app['routes'] = $app->share($app->extend('routes', function ($routes, $app) {
  */
 $app->get('/', function (Request $request) use ($app) {
     $accept = AcceptHeader::fromString($request->headers->get('Accept-Language'));
+    $cookie = $request->cookies->get('locale');
 
-    // Default locale fallback
-    $foundLocale = $app['translator']->getLocale();
+    
+    if (!empty($cookie) && in_array($cookie, $app['locales'])) {
+        $foundLocale = $cookie;
+    } else {
+        $foundLocale = $app['translator']->getLocale();
 
-    foreach ($app['locales'] as $locale) {
-        if ($accept->has($locale)) {
-            $foundLocale = $locale;
-            break;
+        foreach ($app['locales'] as $locale) {
+            if ($cookie === $locale || $accept->has($locale)) {
+                $foundLocale = $locale;
+                break;
+            }
         }
     }
 
@@ -55,4 +62,9 @@ $app->get('/', function (Request $request) use ($app) {
         'home',
         array('_locale' => $foundLocale)
     ));
+});
+
+$app->after(function(Request $request, Response $response) use ($app) {
+    $cookie = new Cookie('locale', $request->attributes->get('_locale'), strtotime('+1 month'));
+    $response->headers->setCookie($cookie); 
 });
