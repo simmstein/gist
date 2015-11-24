@@ -198,3 +198,7 @@ Edit `app/bootstrap.php.d/70-security.php` and modify the value of `$app['enable
 #### Disabling registration
 
 Edit `app/bootstrap.php.d/70-security.php` and modify the value of `$app['enable_registration']` with `false`.
+
+### Debug
+
+`app_dev.php` is the development router. Access is granted for an IP range defined in the same file.
