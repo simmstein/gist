@@ -175,7 +175,7 @@ $ app/console --help update
 ### Create user
 
 ```
-$ app/console stats
+$ app/console --help user:create
 ```
 
 ### Show stats
