@@ -85,6 +85,11 @@ Assuming `~/bin` exists ans is in `$PATH`.
 
     bower install
 
+### Upgrade
+	
+	$ make update
+	$ make propel
+
 Makefile
 --------
 
