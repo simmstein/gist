@@ -163,121 +163,38 @@ Console
 ### Create and update gists:
 
 ```
-$ ./app/console --help create
-Usage:
-  create [options] [--] <input> [<type>]
+$ app/console --help create
+$ app/console --help update
+```
 
-Arguments:
-  input                 Input
-  type                  Type [default: "text"]
+### Create user
 
-Options:
-  -t, --title=TITLE     Title of the gist
-  -u, --show-url        Display only the gist url
-  -i, --show-id         Display only the gist Id
-  -h, --help            Display this help message
-  -q, --quiet           Do not output any message
-  -V, --version         Display this application version
-      --ansi            Force ANSI output
-      --no-ansi         Disable ANSI output
-  -n, --no-interaction  Do not ask any interactive question
-  -v|vv|vvv, --verbose  Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
-
-Help:
- Provides a client to create a gist using the API.
- 
- Arguments:
-     input
-         Identify the source of the content: path of the file (eg: /path/to/file) or standard input (-)
- 
-     type
-         Defines the type of code: html, css, javascript, php, sql, xml, yaml, perl, c, asp, python, bash, actionscript3, text
-         Default value: text
- 
- Options:
-     --title, -t
-         Defines a title
-     
-     --show-id, -i
-         Display only the Id of the gist
- 
-     --show-url, -u
-         Display only the url of the gist
-
-$ ./app/console --help update
-Usage:                           
-  update [options] [--] <input>
-
-Arguments:
-  input                 Input
-
-Options:
-      --gist=GIST       Id or File of the gist
-  -u, --show-url        Display only the gist url
-  -i, --show-id         Display only the gist Id
-  -h, --help            Display this help message
-  -q, --quiet           Do not output any message
-  -V, --version         Display this application version
-      --ansi            Force ANSI output
-      --no-ansi         Disable ANSI output
-  -n, --no-interaction  Do not ask any interactive question
-  -v|vv|vvv, --verbose  Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
-
-Help:
- Provides a client to create a gist using the API.
- 
- Arguments:
-     input
-         Identify the source of the content: path of the file (eg: /path/to/file) or standard input (-)
- 
-     type
-         Defines the type of code: html, css, javascript, php, sql, xml, yaml, perl, c, asp, python, bash, actionscript3, text
-         Default value: text
- 
- Options:
-     --gist
-         Defines the Gist to update by using its Id or its File
- 
-     --show-id, -i
-         Display only the Id of the gist
- 
-     --show-url, -u
-         Display only the url of the gist
+```
+$ app/console stats
 ```
 
 ### Show stats
 
 ```
-$ app/console stats
-Gists statistics
-
-+--------------------+-----------------+---------+-------+
-| Without encryption | With encryption | Commits | Total |
-+--------------------+-----------------+---------+-------+
-| 132                | 19              | 178     | 151   |
-+--------------------+-----------------+---------+-------+
-
-Details by type
-
-+------------+--------------------+-----------------+---------+-------+
-| Type       | Without encryption | With encryption | Commits | Total |
-+------------+--------------------+-----------------+---------+-------+
-| bash       | 20                 | 3               | 28      | 23    |
-| c          | 0                  | 1               | 1       | 1     |
-| css        | 3                  | 0               | 4       | 3     |
-| html       | 31                 | 3               | 44      | 34    |
-| javascript | 11                 | 0               | 12      | 11    |
-| php        | 22                 | 2               | 27      | 24    |
-| python     | 2                  | 1               | 3       | 3     |
-| sql        | 2                  | 0               | 3       | 2     |
-| text       | 31                 | 6               | 43      | 37    |
-| xml        | 7                  | 2               | 9       | 9     |
-| yaml       | 3                  | 1               | 4       | 4     |
-+------------+--------------------+-----------------+---------+-------+
-
+$ app/console --help stats
 ```
 
-### Personal instance
+Configuration
+-------------
+
+### API
+
+#### Personal instance
 
 If you install Gist on your server, you have to modify the ```base_uri``` of the API.
 Edit ```app/bootstrap.php.d/60-api.php``` and replace ```https://gist.deblan.org/```.
+
+### Authentication
+
+#### Disabling login
+
+Edit `app/bootstrap.php.d/70-security.php` and modify the value of `$app['enable_login']` with `false`.
+
+#### Disabling registration
+
+Edit `app/bootstrap.php.d/70-security.php` and modify the value of `$app['enable_registration']` with `false`.
