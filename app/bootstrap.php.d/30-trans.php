@@ -63,9 +63,13 @@ $app->get('/', function (Request $request) use ($app) {
     ));
 });
 
-$app->after(function(Request $request, Response $response) use ($app) {
-    $value = $request->cookies->get('locale');
+$app->after(function (Request $request, Response $response) use ($app) {
+    if ($response instanceof RedirectResponse) {
+        return;
+    }
+
+    $value = $request->get('_locale');
 
     $cookie = new Cookie('locale', $value, strtotime('+1 month'));
-    $response->headers->setCookie($cookie); 
+    $response->headers->setCookie($cookie);
 });
