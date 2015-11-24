@@ -8,6 +8,7 @@ use Gist\Form\UserRegisterForm;
 use Gist\Form\UserLoginForm;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\SecurityContext;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
  * Class LoginController

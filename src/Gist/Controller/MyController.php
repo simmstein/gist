@@ -12,8 +12,6 @@ class MyController extends Controller
 {
     public function myAction(Request $request)
     {
-        $app = $this->getApp();
-
         return $this->render('My/my.html.twig');
     }
 }

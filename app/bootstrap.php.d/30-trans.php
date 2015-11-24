@@ -42,10 +42,10 @@ $app['routes'] = $app->share($app->extend('routes', function ($routes, $app) {
  */
 $app->get('/', function (Request $request) use ($app) {
     $accept = AcceptHeader::fromString($request->headers->get('Accept-Language'));
-    $cookie = $request->cookies->get('locale');
+    $cookieValue = $request->cookies->get('locale');
 
-    if (!empty($cookie) && in_array($cookie, $app['locales'])) {
-        $foundLocale = $cookie;
+    if (!empty($cookieValue) && in_array($cookieValue, $app['locales'])) {
+        $foundLocale = $cookieValue;
     } else {
         $foundLocale = $app['translator']->getLocale();
 
@@ -64,6 +64,8 @@ $app->get('/', function (Request $request) use ($app) {
 });
 
 $app->after(function(Request $request, Response $response) use ($app) {
-    $cookie = new Cookie('locale', $request->attributes->get('_locale'), strtotime('+1 month'));
+    $value = $request->cookies->get('locale');
+
+    $cookie = new Cookie('locale', $value, strtotime('+1 month'));
     $response->headers->setCookie($cookie); 
 });

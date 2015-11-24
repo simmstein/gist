@@ -44,7 +44,7 @@
 									</a>
 								</li>
 								<li>
-									<a href="{{ path('logout') }}">
+									<a href="{{ path('logout', {target_url: path('home')}) }}">
 										{{ 'app.menu.my.logout.title'|trans }}
 									</a>
 								</li>

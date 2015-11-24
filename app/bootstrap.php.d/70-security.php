@@ -3,10 +3,11 @@
 use Gist\Service\UserProvider;
 use Silex\Provider\SecurityServiceProvider;
 use Gist\Service\SaltGenerator;
-use Silex\Provider\SessionServiceProvider;
 use Gist\Security\AuthenticationProvider;
 use Gist\Security\AuthenticationListener;
 use Gist\Security\AuthenticationEntryPoint;
+use Gist\Security\LogoutSuccessHandler;
+use Silex\Provider\SessionServiceProvider;
 use Symfony\Component\Security\Http\HttpUtils;
 
 $app['enable_registration'] = true;
@@ -25,7 +26,6 @@ $app['user.provider'] = $app->share(function ($app) {
 
 $app->register(new SessionServiceProvider());
 
-
 $app['security.authentication_listener.factory.form'] = $app->protect(function ($name, $options) use ($app) {
     $app['security.authentication_provider.'.$name.'.form'] = $app->share(function ($app) {
         return new AuthenticationProvider($app['user.provider']);
@@ -37,7 +37,7 @@ $app['security.authentication_listener.factory.form'] = $app->protect(function (
             $app['security.authentication_provider.'.$name.'.form']
         );
     });
-   
+
     return [
         'security.authentication_provider.'.$name.'.form',
         'security.authentication_listener.'.$name.'.form',
@@ -45,7 +45,7 @@ $app['security.authentication_listener.factory.form'] = $app->protect(function (
         'pre_auth'
     ];
 });
-
+     
 $app->register(
     new SecurityServiceProvider(),
     [
@@ -56,12 +56,11 @@ $app->register(
                 'form' => [
                     'login_path' => '_login',
                     'check_path' => '/login_check',
-                    'always_use_default_target_path' => true,
+                    'always_use_default_target_path' => false,
                     'default_target_path' => '/',
                 ],
                 'logout' => [
                     'path' => '/logout',
-                    'target' => '/',
                 ],
                 'users' => $app->share(function () use ($app) {
                     return $app['user.provider'];
@@ -73,3 +72,12 @@ $app->register(
         ]
     ]
 );
+
+$app['security.authentication.logout_handler._proto'] = $app->protect(function ($name, $options) use ($app) {
+    return $app->share(function () use ($name, $options, $app) {
+        return new LogoutSuccessHandler(
+            $app['security.http_utils'],
+            isset($options['target_url']) ? $options['target_url'] : '/'
+        );
+    });
+});
