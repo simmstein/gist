@@ -38,7 +38,8 @@ pre ol {
 	clear: none;
 }
 pre ol li div {
-	color:#F26100;
+	/*color: #F26100;*/
+	color: #D2C0B4;
 }
 
 /* Line highlights */
