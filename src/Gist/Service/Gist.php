@@ -77,7 +77,7 @@ class Gist
         $command->setDirectory($this->gistPath);
         $command->bypass(false);
 
-        return $this->gitWrapper->run($command);
+        return str_replace("\r\n", "\n", $this->gitWrapper->run($command));
     }
 
     public function create(GistModel $gist, array $data, $user = null)
