@@ -212,7 +212,7 @@ Edit `app/bootstrap.php.d/70-security.php` and modify the value of `$app['enable
 Deployment
 ----------
 
-Gist uses [Magallanes](http://magephp.com/) to mange deployment. 
+Gist uses [Magallanes](http://magephp.com/) to manage deployment. 
 	
 	$ composer global require andres-montanez/magallanes
 	$ # if the envvar PATH contains "$HOME/bin/"
