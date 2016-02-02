@@ -207,3 +207,18 @@ Edit `app/bootstrap.php.d/70-security.php` and modify the value of `$app['enable
 ### Debug
 
 `app_dev.php` is the development router. Access is granted for an IP range defined in the same file.
+
+
+Deployment
+----------
+
+Gist uses [Magallanes](http://magephp.com/) to mange deployment. 
+	
+	$ composer global require andres-montanez/magallanes
+	$ # if the envvar PATH contains "$HOME/bin/"
+	$ ln -s ~/.composer/vendor/bin/mage ~/bin/mage
+
+There is an example of the configuration of an environment in `.mage/config/environment/prod.yml-dist`.
+
+	$ mage deploy to:prod
+

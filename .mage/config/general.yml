@@ -1,0 +1,7 @@
+# global settings
+name: Gist
+email: 
+notifications: false
+logging: true
+maxlogs: 30
+ssh_needs_tty: false

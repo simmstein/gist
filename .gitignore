@@ -1,3 +1,5 @@
+.mage/config/environment/*.yml
+.mage/logs/*.log
 composer.lock
 vendor/
 tags

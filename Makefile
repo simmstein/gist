@@ -52,4 +52,3 @@ propel:
 	./vendor/propel/propel/bin/propel model:build --recursive
 	./vendor/propel/propel/bin/propel migration:diff --recursive
 	./vendor/propel/propel/bin/propel migration:migrate --recursive
-	./vendor/propel/propel/bin/propel model:build --recursive
