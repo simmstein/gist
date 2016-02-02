@@ -220,7 +220,7 @@ Gist uses [Magallanes](http://magephp.com/) to manage deployment.
 	# if the envvar PATH contains "$HOME/bin/"
 	$ ln -s ~/.composer/vendor/bin/mage ~/bin/mage
 
-### Locale installation
+### Local installation
 	
 	$ composer require andres-montanez/magallanes
 
