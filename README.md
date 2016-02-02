@@ -213,12 +213,21 @@ Deployment
 ----------
 
 Gist uses [Magallanes](http://magephp.com/) to manage deployment. 
-	
+
+### Global installation
+
 	$ composer global require andres-montanez/magallanes
 	# if the envvar PATH contains "$HOME/bin/"
 	$ ln -s ~/.composer/vendor/bin/mage ~/bin/mage
 
+### Locale installation
+	
+	$ composer require andres-montanez/magallanes
+
 There is an example of the configuration of an environment in `.mage/config/environment/prod.yml-dist`.
 
+	# global installation
 	$ mage deploy to:prod
 
+	# local installation
+	$ ./vendor/andres-montanez/magallanes/bin/mage
