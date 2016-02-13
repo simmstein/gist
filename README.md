@@ -18,7 +18,7 @@ Requirements
 Installation
 ------------
 
-	$ git clone https://gitlab.deblan.org/deblan/gist
+	$ git clone https://gitnet.fr/deblan/gist
 	$ cd gist
 	$ make
 	$ mv propel-dist.yaml propel.yaml
@@ -230,4 +230,4 @@ There is an example of the configuration of an environment in `.mage/config/envi
 	$ mage deploy to:prod
 
 	# local installation
-	$ ./vendor/andres-montanez/magallanes/bin/mage
+	$ ./vendor/andres-montanez/magallanes/bin/mage deploy to:prod
