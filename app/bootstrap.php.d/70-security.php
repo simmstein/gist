@@ -2,6 +2,7 @@
 
 use Gist\Service\UserProvider;
 use Silex\Provider\SecurityServiceProvider;
+use Silex\Provider\RememberMeServiceProvider;
 use Gist\Service\SaltGenerator;
 use Gist\Security\AuthenticationProvider;
 use Gist\Security\AuthenticationListener;
@@ -12,6 +13,7 @@ use Symfony\Component\Security\Http\HttpUtils;
 
 $app['enable_registration'] = true;
 $app['enable_login'] = true;
+$app['token'] = 'ThisTokenIsNotSoSecretChangeIt';
 
 $app['salt_generator'] = $app->share(function($app) {
     return new SaltGenerator();
@@ -23,8 +25,6 @@ $app['user.provider'] = $app->share(function ($app) {
         $app['salt_generator']
     );
 });
-
-$app->register(new SessionServiceProvider());
 
 $app['security.authentication_listener.factory.form'] = $app->protect(function ($name, $options) use ($app) {
     $app['security.authentication_provider.'.$name.'.form'] = $app->share(function ($app) {
@@ -65,6 +65,11 @@ $app->register(
                 'users' => $app->share(function () use ($app) {
                     return $app['user.provider'];
                 }),
+                'remember_me' => [
+                    'key' => $app['token'],
+                    'path' => '/',
+                    'always_remember_me' => false,
+                ],
             ],
         ],
         'security.access_rules' => [
@@ -72,6 +77,9 @@ $app->register(
         ]
     ]
 );
+
+$app->register(new SessionServiceProvider());
+$app->register(new RememberMeServiceProvider());
 
 $app['security.authentication.logout_handler._proto'] = $app->protect(function ($name, $options) use ($app) {
     return $app->share(function () use ($name, $options, $app) {

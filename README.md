@@ -25,6 +25,8 @@ Installation
 	$ # EDIT propel.yaml (dsn)
 	$ make propel
 
+Edit `app/bootstrap.php.d/70-security.php` and modify the valye of `$app['token']` with a strong secret phrase.
+	
 Screencast: https://asciinema.org/a/19814
 
 ### Git

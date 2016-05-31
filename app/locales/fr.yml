@@ -46,9 +46,11 @@ login:
         invalid: 'Nom d''utilisateur ou mot de passe incorrect.'
         form:
             username:
-                placeholder: 'Username'
+                placeholder: 'Nom d''utilisateur'
             password:
-                placeholder: 'Password'
+                placeholder: 'Mot de passe'
+            remember_me:
+                label: 'Se souvenir de moi'
     register:
         title: 'Nouveau compte'
         already_exists: 'Ce nom d''utilisateur est déjà enregistré'

@@ -19,7 +19,7 @@ class UserLoginForm extends AbstractForm
                 'required' => true,
                 'attr' => array(
                     'class' => 'form-control',
-                    'placeholder' => $this->translator->trans('login.register.form.username.placeholder'),
+                    'placeholder' => $this->translator->trans('login.login.form.username.placeholder'),
                 ),
                 'constraints' => array(
                     new NotBlank(array(
@@ -36,13 +36,26 @@ class UserLoginForm extends AbstractForm
                 'required' => true,
                 'attr' => array(
                     'class' => 'form-control',
-                    'placeholder' => $this->translator->trans('login.register.form.password.placeholder'),
+                    'placeholder' => $this->translator->trans('login.login.form.password.placeholder'),
                 ),
-                'trim' => false,
                 'constraints' => array(
                     new NotBlank(array(
                         'message' => $this->translator->trans('form.error.not_blank'),
                     )),
+                ),
+            )
+        );
+        
+        $this->builder->add(
+            '_remember_me',
+            'checkbox',
+            array(
+                'label' => $this->translator->trans('login.login.form.remember_me.label'),
+                'required' => false,
+                'mapped' => false,
+                'attr' => array(
+                ),
+                'constraints' => array(
                 ),
             )
         );

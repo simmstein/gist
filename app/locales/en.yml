@@ -49,6 +49,8 @@ login:
                 placeholder: 'Username'
             password:
                 placeholder: 'Password'
+            remember_me:
+                label: 'Remember me'
     register:
         title: 'New account'
         already_exists: 'This username is already registred!'
