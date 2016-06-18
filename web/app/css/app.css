@@ -77,3 +77,8 @@ div.diff {
 #options {
 	margin-bottom: 17px;
 }
+
+.btn-delete {
+    background: #DE3336;
+    color: #fff;
+}

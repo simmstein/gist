@@ -33,6 +33,7 @@ gist:
         download: 'Télécharger'
         clone: 'Clôner'
         embed: 'Insérer : '
+        add: 'Ajouter'
 
 date:
     format: 'd/m/Y H\hi s\s'
@@ -74,6 +75,8 @@ form:
             yes: 'Oui'
             no: 'Non'
     submit: 'Envoyer'
+    success:
+        gist: 'Votre Gist a bien a été supprimé.'
     type:
         label: 'Langage : %value%'
         choice:

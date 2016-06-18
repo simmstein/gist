@@ -33,6 +33,7 @@ gist:
         download: 'Download'
         clone: 'Clone'
         embed: 'Embed:'
+        add: 'New'
 
 date:
     format: 'Y-m-d h:i:s'
@@ -73,6 +74,8 @@ form:
             yes: 'Yes'
             no: 'No'
     submit: 'Send'
+    success:
+        gist: 'Gist removed.'
     type:
         label: 'Language: %value%'
         choice:

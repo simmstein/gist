@@ -27,4 +27,12 @@ class User extends BaseUser implements UserInterface
 
         return parent::getGists($criteria, $con);
     }
+
+    public function getGistsPager($page, $maxPerPage = 10) 
+    {
+        return GistQuery::create()
+            ->filterByUser($this)
+            ->orderByCreatedAt(Criteria::DESC)
+            ->paginate($page, $maxPerPage);
+    }
 }

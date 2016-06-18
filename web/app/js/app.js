@@ -77,6 +77,13 @@ var editorEvents = function() {
     }
 }
 
+var myEvents = function() {
+    $('.btn-delete').click(function() {
+        $('#form_id').val($(this).data('id'));
+        $('#form-deletion form').submit();
+    });
+}
+
 var mainEditorEvents = function() {
     $('.cipher-input').change(function() {
         if ($('.cipher-input:checked').val() === 'yes') {
@@ -142,6 +149,7 @@ var viewerEvents = function() {
 var bootstrap = function() {
     editorEvents();
     viewerEvents();
+    myEvents();
     mainEditorEvents();
 }
 

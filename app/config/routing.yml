@@ -45,8 +45,13 @@ logout:
     path: /my/logout
 
 my:
-    path: /my
-    defaults: {_controller: Gist\Controller\MyController::myAction, _locale: en}
+    path: /my/{page}
+    defaults:
+        _controller: Gist\Controller\MyController::myAction
+        _locale: en
+        page: 1
+    requirements:
+        page: \d+
 
 revisions:
     path: /revs/{gist}

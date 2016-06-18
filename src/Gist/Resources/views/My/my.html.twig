@@ -4,19 +4,85 @@
 
 {% block body %}
     <div class="row">
+        {% if deleted %}
+            <div class="col-md-12">
+                <div class="alert alert-success">
+                    <p>{{ 'form.success.gist'|trans }}</p>
+                </div>
+            </div>
+        {% endif %}
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
 					{{ 'my.title'|trans }}
+                    <div class="pull-right actions">
+                        <a href="{{ path('home', app.request.attributes.get('_route_params')) }}" class="btn btn-success btn-sm">
+                            <span class="glyphicon glyphicon-copy"></span>
+                            {{ 'gist.action.add'|trans }}
+                        </a>
+                    </div>
 				</div>
                 <div class="panel-body">
                     <div class="tab-content">
-						{% set gists = user.gists %}
+                        <div id="form-deletion">
+                            {{ form(form) }}
+                        </div>
 
-						{% if gists|length == 0 %}
+						{% if gists.nbResults == 0 %}
 							{{ 'my.nothing'|trans }}
 						{% else %}
-							{% for gist in user.gists %}
+                            {% set pager %}
+                                {% if gists.haveToPaginate %}
+                                    <ul class="pagination">
+                                        <li>
+                                            {% set params = app.request.attributes.get('_route_params')|merge({page: 1}) %}
+                                            <a href="{{ path('my', params) }}" aria-label="Previous">
+                                                <span aria-hidden="true">
+                                                    <span class="glyphicon glyphicon-step-backward"></span>
+                                                </span>
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            {% set params = app.request.attributes.get('_route_params')|merge({page: previousPage}) %}
+                                            <a href="{{ path('my', params) }}" aria-label="Previous">
+                                                <span aria-hidden="true">
+                                                    <span class="glyphicon glyphicon glyphicon-chevron-left"></span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        
+                                        {% for p in gists.links(10) %}
+                                            <li {% if p == page %}class="active"{% endif %}>
+                                                {% set params = app.request.attributes.get('_route_params')|merge({page: p}) %}
+                                                <a href="{{ path('my', params) }}">{{ p }}</a>
+                                            </li>
+                                        {% endfor %}
+                                        
+                                        <li>
+                                            {% set params = app.request.attributes.get('_route_params')|merge({page: nextPage}) %}
+                                            <a href="{{ path('my', params) }}" aria-label="Previous">
+                                                <span aria-hidden="true">
+                                                    <span class="glyphicon glyphicon glyphicon-chevron-right"></span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        
+                                        <li>
+                                            {% set params = app.request.attributes.get('_route_params')|merge({page: 1}) %}
+                                            <a href="{{ path('my', params) }}" aria-label="Previous">
+                                                <span aria-hidden="true">
+                                                    <span class="glyphicon glyphicon-step-forward"></span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                {% endif %}
+                            {% endset %}
+                                
+                            {{ pager }}
+
+							{% for gist in gists %}
 								<div class="commit">
 									<p>
 										<strong>{{ gist.title ? gist.title : 'gist.untitled'|trans }}</strong>, 							
@@ -37,9 +103,15 @@
 												<span class="glyphicon glyphicon-lock"></span>
 											</button>
 										{% endif %}
+                                        
+                                        <button class="btn btn-delete btn-sm" data-id="{{ gist.id }}">
+                                            <span class="glyphicon btn-delete glyphicon-remove" data-id="{{ gist.id }}"></span>
+                                        </button>
 									</p>
 								</div>
 							{% endfor %}
+                                
+                            {{ pager }}
 						{% endif %}
 					</div>
 				</div>
