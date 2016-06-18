@@ -82,3 +82,7 @@ div.diff {
     background: #DE3336;
     color: #fff;
 }
+
+.btn-error:active, .btn-error:hover, .btn-error:focus {
+    color: #000;
+}

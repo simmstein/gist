@@ -72,14 +72,17 @@ form:
         alert: 'En activant le chiffrement, le fork deviendra impossible.'
         label: 'Chiffrer : %value%'
         choice:
+            anyway: 'Peu importe'
             yes: 'Oui'
             no: 'Non'
     submit: 'Envoyer'
+    filter: 'Filtrer'
     success:
         gist: 'Votre Gist a bien a été supprimé.'
     type:
         label: 'Langage : %value%'
         choice:
+            all: 'Tous'
             html: 'HTML'
             xml: 'XML'
             css: 'CSS'

@@ -25,8 +25,69 @@
                 <div class="panel-body">
                     <div class="tab-content">
                         <div id="form-deletion">
-                            {{ form(form) }}
+                            {{ form(deleteForm) }}
                         </div>
+
+                        <form action="" method="GET">
+                            <div class="btn-toolbar">
+                                <div class="btn-group" id="options">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                            <span id="type-label" data-tpl="{{ 'form.type.label'|trans }}">
+                                            </span>
+                                            <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            {% for item in filterForm.type.vars.choices %}
+                                                <li>
+                                                    <input 
+                                                        {% if item.value == filterForm.type.vars.value %}checked{% endif %} 
+                                                        data-id="#type-label" type="radio"  class="hide" 
+                                                        data-title="{{ item.label }}"  
+                                                        value="{{ item.value }}" 
+                                                        name="filter[type]" 
+                                                        id="type-{{ loop.index }}" />
+
+                                                    <a href="#">    
+                                                        <label for="type-{{ loop.index }}">
+                                                            {{ item.label }}
+                                                        </label>
+                                                    </a>
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                            <span id="cipher-label" data-tpl="{{ 'form.cipher.label'|trans }}">
+                                            </span>
+                                            <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu">
+                                            {% for item in filterForm.cipher.vars.choices %}
+                                                <li>
+                                                    <input 
+                                                        {% if item.value == filterForm.cipher.vars.value %}checked{% endif %} 
+                                                        data-id="#cipher-label" type="radio" class="hide cipher-input" 
+                                                        data-title="{{ item.label }}" 
+                                                        value="{{ item.value }}" 
+                                                        name="filter[cipher]"
+                                                        id="cipher-{{ loop.index }}" />
+
+                                                    <a href="#">    
+                                                        <label for="cipher-{{ loop.index }}">
+                                                            {{ item.label }}
+                                                        </label>
+                                                    </a>
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <input type="submit" class="btn btn-success" value="{{ 'form.filter'|trans }}" />
+                            </div>
+                        </form>
 
 						{% if gists.nbResults == 0 %}
 							{{ 'my.nothing'|trans }}
@@ -45,7 +106,7 @@
 
                                         <li>
                                             {% set params = app.request.attributes.get('_route_params')|merge({page: previousPage}) %}
-                                            <a href="{{ path('my', params) }}" aria-label="Previous">
+                                            <a href="{{ path('my', params) }}">
                                                 <span aria-hidden="true">
                                                     <span class="glyphicon glyphicon glyphicon-chevron-left"></span>
                                                 </span>
@@ -70,7 +131,7 @@
                                         
                                         <li>
                                             {% set params = app.request.attributes.get('_route_params')|merge({page: 1}) %}
-                                            <a href="{{ path('my', params) }}" aria-label="Previous">
+                                            <a href="{{ path('my', params) }}">
                                                 <span aria-hidden="true">
                                                     <span class="glyphicon glyphicon-step-forward"></span>
                                                 </span>

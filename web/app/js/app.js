@@ -79,7 +79,7 @@ var editorEvents = function() {
 
 var myEvents = function() {
     $('.btn-delete').click(function() {
-        $('#form_id').val($(this).data('id'));
+        $('#delete_id').val($(this).data('id'));
         $('#form-deletion form').submit();
     });
 }

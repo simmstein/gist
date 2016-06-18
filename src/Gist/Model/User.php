@@ -28,11 +28,25 @@ class User extends BaseUser implements UserInterface
         return parent::getGists($criteria, $con);
     }
 
-    public function getGistsPager($page, $maxPerPage = 10) 
+    public function getGistsPager($page, $options = array(), $maxPerPage = 10) 
     {
-        return GistQuery::create()
+        $query = GistQuery::create()
             ->filterByUser($this)
-            ->orderByCreatedAt(Criteria::DESC)
-            ->paginate($page, $maxPerPage);
+            ->orderByCreatedAt(Criteria::DESC);
+
+        if (!empty($options['type']) && $options['type'] !== 'all') {
+            $query->filterByType($options['type']);
+        }
+        
+        if (!empty($options['cipher']) && $options['cipher'] !== 'anyway') {
+            $bools = array(
+                'yes' => true,
+                'no' => false,
+            );
+
+            $query->filterByCipher($bools[$options['cipher']]);
+        }
+
+        return $query->paginate($page, $maxPerPage);
     }
 }

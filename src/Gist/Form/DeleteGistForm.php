@@ -23,6 +23,13 @@ class DeleteGistForm extends AbstractForm
             )
         );
         
+        $this->builder->setMethod('POST');
+        
         return $this->builder;
+    }
+
+    public function getName()
+    {
+        return 'delete';
     }
 }
