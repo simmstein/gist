@@ -97,7 +97,7 @@
                                     <ul class="pagination">
                                         <li>
                                             {% set params = app.request.attributes.get('_route_params')|merge({page: 1}) %}
-                                            <a href="{{ path('my', params) }}" aria-label="Previous">
+                                            <a href="{{ path('my', params) }}">
                                                 <span aria-hidden="true">
                                                     <span class="glyphicon glyphicon-step-backward"></span>
                                                 </span>
@@ -105,7 +105,7 @@
                                         </li>
 
                                         <li>
-                                            {% set params = app.request.attributes.get('_route_params')|merge({page: previousPage}) %}
+                                            {% set params = app.request.attributes.get('_route_params')|merge({page: gists.previousPage}) %}
                                             <a href="{{ path('my', params) }}">
                                                 <span aria-hidden="true">
                                                     <span class="glyphicon glyphicon glyphicon-chevron-left"></span>
@@ -121,8 +121,8 @@
                                         {% endfor %}
                                         
                                         <li>
-                                            {% set params = app.request.attributes.get('_route_params')|merge({page: nextPage}) %}
-                                            <a href="{{ path('my', params) }}" aria-label="Previous">
+                                            {% set params = app.request.attributes.get('_route_params')|merge({page: gists.nextPage}) %}
+                                            <a href="{{ path('my', params) }}">
                                                 <span aria-hidden="true">
                                                     <span class="glyphicon glyphicon glyphicon-chevron-right"></span>
                                                 </span>
@@ -130,7 +130,7 @@
                                         </li>
                                         
                                         <li>
-                                            {% set params = app.request.attributes.get('_route_params')|merge({page: 1}) %}
+                                            {% set params = app.request.attributes.get('_route_params')|merge({page: gists.lastPage}) %}
                                             <a href="{{ path('my', params) }}">
                                                 <span aria-hidden="true">
                                                     <span class="glyphicon glyphicon-step-forward"></span>

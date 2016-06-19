@@ -81,7 +81,7 @@ form:
     type:
         label: 'Language: %value%'
         choice:
-            all: 'Tous'
+            all: 'All'
             html: 'HTML'
             xml: 'XML'
             css: 'CSS'

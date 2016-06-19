@@ -69,9 +69,6 @@ class MyController extends Controller
             }
         }
 
-        $nextPage = min($page + 1, $gists->getLastPage());
-        $previousPage = max($page - 1, 1);
-        
         return $this->render(
             'My/my.html.twig',
             array(
@@ -80,8 +77,6 @@ class MyController extends Controller
                 'deleteForm'   => $deleteForm->createView(),
                 'filterForm'   => $filterForm->createView(),
                 'deleted'      => !empty($deleted),
-                'nextPage'     => $nextPage,
-                'previousPage' => $previousPage,
             )
         );
     }
