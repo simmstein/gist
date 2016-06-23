@@ -28,7 +28,9 @@
                             {{ form(deleteForm) }}
                         </div>
 
-                        <form action="" method="GET">
+                        {% set params = app.request.attributes.get('_route_params')|merge({page: 1}) %}
+
+                        <form action="{{ path('my', params) }}" method="GET">
                             <div class="btn-toolbar">
                                 <div class="btn-group" id="options">
                                     <div class="btn-group">
@@ -94,9 +96,12 @@
 						{% else %}
                             {% set pager %}
                                 {% if gists.haveToPaginate %}
+                                    {% set params = app.request.attributes.get('_route_params')|merge({filter: app.request.query.get('filter', [])}) %}
+
                                     <ul class="pagination">
                                         <li>
-                                            {% set params = app.request.attributes.get('_route_params')|merge({page: 1}) %}
+                                            {% set params = params|merge({page: 1}) %}
+
                                             <a href="{{ path('my', params) }}">
                                                 <span aria-hidden="true">
                                                     <span class="glyphicon glyphicon-step-backward"></span>
@@ -105,7 +110,8 @@
                                         </li>
 
                                         <li>
-                                            {% set params = app.request.attributes.get('_route_params')|merge({page: gists.previousPage}) %}
+                                            {% set params = params|merge({page: gists.previousPage}) %}
+
                                             <a href="{{ path('my', params) }}">
                                                 <span aria-hidden="true">
                                                     <span class="glyphicon glyphicon glyphicon-chevron-left"></span>
@@ -115,13 +121,15 @@
                                         
                                         {% for p in gists.links(10) %}
                                             <li {% if p == page %}class="active"{% endif %}>
-                                                {% set params = app.request.attributes.get('_route_params')|merge({page: p}) %}
+                                                {% set params = params|merge({page: p}) %}
+
                                                 <a href="{{ path('my', params) }}">{{ p }}</a>
                                             </li>
                                         {% endfor %}
                                         
                                         <li>
-                                            {% set params = app.request.attributes.get('_route_params')|merge({page: gists.nextPage}) %}
+                                            {% set params = params|merge({page: gists.nextPage}) %}
+
                                             <a href="{{ path('my', params) }}">
                                                 <span aria-hidden="true">
                                                     <span class="glyphicon glyphicon glyphicon-chevron-right"></span>
@@ -130,7 +138,8 @@
                                         </li>
                                         
                                         <li>
-                                            {% set params = app.request.attributes.get('_route_params')|merge({page: gists.lastPage}) %}
+                                            {% set params = params|merge({page: gists.lastPage}) %}
+
                                             <a href="{{ path('my', params) }}">
                                                 <span aria-hidden="true">
                                                     <span class="glyphicon glyphicon-step-forward"></span>
