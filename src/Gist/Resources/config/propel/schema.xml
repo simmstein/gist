@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <database defaultIdMethod="native" name="default" namespace="Gist\Model">
    <table name="gist" isCrossRef="true">
-		<column name="id" type="INTEGER" primaryKey="true" required="true" autoIncrement="true"/>
-		<column name="title" type="VARCHAR" size="255" required="false" />
-		<column name="cipher" type="BOOLEAN" required="true" defaultValue="false" />
-		<column name="type" type="VARCHAR" size="30" required="true" />
-		<column name="file" type="VARCHAR" size="30" required="true" />
+        <column name="id" type="INTEGER" primaryKey="true" required="true" autoIncrement="true"/>
+        <column name="title" type="VARCHAR" size="255" required="false" />
+        <column name="cipher" type="BOOLEAN" required="true" defaultValue="false" />
+        <column name="type" type="VARCHAR" size="30" required="true" />
+        <column name="file" type="VARCHAR" size="30" required="true" />
         <column name="user_id" type="INTEGER" required="false" />
         
         <foreign-key foreignTable="user" onDelete="setnull" onUpdate="cascade">
             <reference local="user_id" foreign="id"/>
         </foreign-key>
 
-		<behavior name="timestampable"/>
-	</table>
+        <behavior name="timestampable"/>
+    </table>
 
     <table name="user" isCrossRef="true">
         <column name="id" type="INTEGER" primaryKey="true" required="true" autoIncrement="true"/>
