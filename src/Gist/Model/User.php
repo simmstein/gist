@@ -11,7 +11,6 @@ class User extends BaseUser implements UserInterface
 {
     public function eraseCredentials()
     {
-        $this->setPassword(null);
     }
 
     public function getRoles()
