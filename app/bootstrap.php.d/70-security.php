@@ -13,6 +13,10 @@ use Symfony\Component\Security\Http\HttpUtils;
 
 $app['enable_registration'] = true;
 $app['enable_login'] = true;
+$app['login_required_to_edit_gist'] = false;
+$app['login_required_to_view_gist'] = false;
+$app['login_required_to_view_embeded_gist'] = false;
+
 $app['token'] = 'ThisTokenIsNotSoSecretChangeIt';
 
 $app['salt_generator'] = $app->share(function($app) {
@@ -45,39 +49,60 @@ $app['security.authentication_listener.factory.form'] = $app->protect(function (
         'pre_auth'
     ];
 });
-     
-$app->register(
-    new SecurityServiceProvider(),
-    [
-        'security.firewalls' => [
-            'default' => [
-                'pattern' => '^/',
-                'anonymous' => true,
-                'form' => [
-                    'login_path' => '_login',
-                    'check_path' => '/login_check',
-                    'always_use_default_target_path' => false,
-                    'default_target_path' => '/',
-                ],
-                'logout' => [
-                    'path' => '/logout',
-                ],
-                'users' => $app->share(function () use ($app) {
-                    return $app['user.provider'];
-                }),
-                'remember_me' => [
-                    'key' => $app['token'],
-                    'path' => '/',
-                    'always_remember_me' => false,
-                ],
+
+$firewall = [
+    'security.firewalls' => [
+        'default' => [
+            'pattern' => '^/',
+            'anonymous' => true,
+            'form' => [
+                'login_path' => '_login',
+                'check_path' => '/login_check',
+                'always_use_default_target_path' => false,
+                'default_target_path' => '/',
+            ],
+            'logout' => [
+                'path' => '/logout',
+            ],
+            'users' => $app->share(function () use ($app) {
+                return $app['user.provider'];
+            }),
+            'remember_me' => [
+                'key' => $app['token'],
+                'path' => '/',
+                'always_remember_me' => false,
             ],
         ],
-        'security.access_rules' => [
-            ['^/[a-z]{2}/my.*$', 'ROLE_USER'],
-        ]
+    ],
+    'security.access_rules' => [
+        ['^/[a-z]{2}/my.*$', 'ROLE_USER'],
     ]
-);
+];
 
+if ($app['login_required_to_edit_gist'] || $app['login_required_to_view_gist'] || $app['login_required_to_view_embeded_gist']) {
+    $securityRegexp = '^/[a-z]{2}';
+    $exceptedUriPattern = ['login', 'register'];
+    
+    if ($app['login_required_to_view_gist'] === true) {
+        $firewall['security.access_rules'][] = ['^/[a-z]{2}/view.*$', 'ROLE_USER'];
+        $firewall['security.access_rules'][] = ['^/[a-z]{2}/revs.*$', 'ROLE_USER'];
+    } else {
+        $exceptedUriPattern[] = 'view';
+        $exceptedUriPattern[] = 'revs';
+    }
+    
+    if ($app['login_required_to_view_embeded_gist'] === true) {
+        $firewall['security.access_rules'][] = ['^/[a-z]{2}/embed.*$', 'ROLE_USER'];
+    } else {
+        $exceptedUriPattern[] = 'embed';
+    }
+
+    if ($app['login_required_to_edit_gist'] === true) {
+         $firewall['security.access_rules'][] = ['^/[a-z]{2}/(?!('.implode('|', $exceptedUriPattern).')).*$', 'ROLE_USER'];
+    }
+}
+ 
+$app->register(new SecurityServiceProvider(), $firewall);
 $app->register(new SessionServiceProvider());
 $app->register(new RememberMeServiceProvider());
 

@@ -225,6 +225,20 @@ Edit `app/bootstrap.php.d/70-security.php` and modify the value of `$app['enable
 
 Edit `app/bootstrap.php.d/70-security.php` and modify the value of `$app['enable_registration']` with `false`.
 
+#### Force registration/login
+
+##### Login required to edit a gist
+
+Edit `app/bootstrap.php.d/70-security.php` and modify the value of `$app['login_required_to_edit_gist']` with `true`.
+
+##### Login required to view a gist
+
+Edit `app/bootstrap.php.d/70-security.php` and modify the value of `$app['login_required_to_view_gist']` with `true`.
+
+##### Login required to view an embeded gist
+
+Edit `app/bootstrap.php.d/70-security.php` and modify the value of `$app['login_required_to_view_embeded_gist']` with `true`.
+
 ### Debug
 
 `app_dev.php` is the development router. Access is granted for an IP range defined in the same file.
