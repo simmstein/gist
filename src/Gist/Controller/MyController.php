@@ -46,14 +46,6 @@ class MyController extends Controller
         $gists = $this->getUser()->getGistsPager($page, $options);
 
         if ($request->isMethod('post')) {
-            $form->submit($request);
-
-            if ($form->isValid()) {
-                $gist = $app['gist']->create(new Gist(), $form->getData(), $this->getUser());
-            }
-        }
-
-        if ($request->isMethod('post')) {
             $deleteForm->submit($request);
 
             if ($deleteForm->isValid()) {
