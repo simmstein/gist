@@ -17,7 +17,14 @@
                         </p>
                         <p>
                             {{ form_errors(form.content) }}
-                            {{ form_widget(form.content) }}
+
+                            {% set class = 'form-control' %}
+
+                            {% if gist.cipher %}
+                                {% set class = class ~ ' cipher-editor' %}
+                            {% endif %}
+
+                            {{ form_widget(form.content, {attr: {class: class}}) }}
                         </p>
                         <p>
                             <input type="submit" class="btn btn-primary" value="{{ 'form.submit'|trans }}">
@@ -28,4 +35,14 @@
             {{ form_widget(form._token) }}
         </form>
     </div>
+{% endblock %}
+
+{% block js %}
+    {% if gist.cipher %}
+        <script>
+            var cipherGistClone = true;
+        </script>
+    {% endif %}
+
+    {{ parent() }}
 {% endblock %}

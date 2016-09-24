@@ -94,8 +94,15 @@ var mainEditorEvents = function() {
     });
 
     $('#main-form').submit(function(e) {
-        if ($('.cipher-input:checked').val() === 'yes') {
-            var passphrase = randomString(256, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
+        if ($('.cipher-input:checked').val() === 'yes' || typeof cipherGistClone !== 'undefined') {
+            var key = getKey();
+
+            if (key) {
+                var passphrase = key;
+            } else {
+                var passphrase = randomString(256, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
+            }
+
             var content = $('#form_content').val();
             var encrypted = CryptoJS.AES.encrypt(content, passphrase, {
                 format: JsonFormatter
@@ -123,25 +130,43 @@ var viewerEvents = function() {
 
     $(document).ready(function() {
         var key = getKey();
+        
+        var $cipherEditor = $('.cipher-editor');
         var $embedInput = $('#embed-input');
-        var to = ' ';
 
-        if (0 !== $render.length && key) {
-            var decrypted = CryptoJS.AES.decrypt($render.html(), key, {
-                format: JsonFormatter
+        if (key) {
+            $('.cipher-link').each(function() {
+                var href = $(this).attr('href');
+                href = href + '#key=' + key;
+
+                $(this).attr('href', href);
             });
-            $render.text(decrypted.toString(CryptoJS.enc.Utf8));
-            SyntaxHighlighter.all();
 
-            to = ' data-key="#key=' + key + '" ';
+            var to = ' ';
 
-            $('.lang').each(function() {
-                $(this).attr('href', $(this).attr('href') + '#key=' + key);
-            });
-        }
+            if (0 !== $render.length || $cipherEditor.length !== 0) {
 
-        if ($embedInput.length) {
-            $embedInput.val($embedInput.val().replace('%key%', to));
+                if ($render.length !== 0) {
+                    var decrypted = CryptoJS.AES.decrypt($render.html(), key, {
+                        format: JsonFormatter
+                    });
+
+                    $render.text(decrypted.toString(CryptoJS.enc.Utf8));
+                    SyntaxHighlighter.all();
+
+                    to = ' data-key="#key=' + key + '" ';
+                } else {
+                    var decrypted = CryptoJS.AES.decrypt($cipherEditor.val(), key, {
+                        format: JsonFormatter
+                    });
+
+                    $cipherEditor.val(decrypted.toString(CryptoJS.enc.Utf8));
+                }
+            }
+
+            if ($embedInput.length) {
+                $embedInput.val($embedInput.val().replace('%key%', to));
+            }
         }
     });
 }

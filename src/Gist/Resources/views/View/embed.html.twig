@@ -50,14 +50,14 @@
         <div class="col-md-12" id="embed">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    {% if not gist.cipher %}
-                        <div class="pull-right actions">
-                            <a target="_blank" href="{{ path('view', app.request.attributes.get('_route_params')) }}" class="btn btn-default btn-sm">
-                                <span class="btn btn-warning btn-xs">
-                                    {{ commit|slice(0, 10) }}
-                                </span>
-                            </a>
+                    <div class="pull-right actions">
+                        <a target="_blank" href="{{ path('view', app.request.attributes.get('_route_params')) }}" class="btn btn-default btn-sm">
+                            <span class="btn btn-warning btn-xs">
+                                {{ commit|slice(0, 10) }}
+                            </span>
+                        </a>
 
+                        {% if not gist.cipher %}
                             <a target="_blank" href="{{ path('raw', app.request.attributes.get('_route_params')) }}" class="btn btn-default btn-sm">
                                 <span class="glyphicon glyphicon-eye-open"></span>
                                 {{ 'gist.action.raw'|trans }}
@@ -66,12 +66,13 @@
                                 <span class="glyphicon glyphicon-save-file"></span>
                                 {{ 'gist.action.download'|trans }}
                             </a>
-                            <a target="_blank" href="{{ path('clone', app.request.attributes.get('_route_params')) }}" class="btn btn-success btn-sm">
-                                <span class="glyphicon glyphicon-copy"></span>
-                                {{ 'gist.action.clone'|trans }}
-                            </a>
-                        </div>
-                    {% endif %}
+                        {% endif %}
+
+                        <a target="_blank" href="{{ path('clone', app.request.attributes.get('_route_params')) }}" class="btn btn-success btn-sm">
+                            <span class="glyphicon glyphicon-copy"></span>
+                            {{ 'gist.action.clone'|trans }}
+                        </a>
+                    </div>
 
                     {{ gist.title ? gist.title : 'gist.untitled'|trans }}
                 </div>
