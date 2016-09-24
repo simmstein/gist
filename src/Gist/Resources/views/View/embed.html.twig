@@ -51,7 +51,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <div class="pull-right actions">
-                        <a target="_blank" href="{{ path('view', app.request.attributes.get('_route_params')) }}" class="btn btn-default btn-sm">
+                        <a target="_blank" href="{{ path('view', app.request.attributes.get('_route_params')) }}" class="btn btn-default btn-sm cipher-link">
                             <span class="btn btn-warning btn-xs">
                                 {{ commit|slice(0, 10) }}
                             </span>
@@ -68,7 +68,7 @@
                             </a>
                         {% endif %}
 
-                        <a target="_blank" href="{{ path('clone', app.request.attributes.get('_route_params')) }}" class="btn btn-success btn-sm">
+                        <a target="_blank" href="{{ path('clone', app.request.attributes.get('_route_params')) }}" class="btn btn-success btn-sm cipher-link">
                             <span class="glyphicon glyphicon-copy"></span>
                             {{ 'gist.action.clone'|trans }}
                         </a>
