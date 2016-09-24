@@ -11,11 +11,12 @@
     "GIT"
   ],
   "license": "LGPL",
-  "homepage": "https://gitlab.deblan.org/deblan/gist.deblan.org",
+  "homepage": "https://gitnet.fr/deblan/gist",
   "dependencies": {
     "bootstrap": "3.3.4",
     "flag-icon-css": "0.7.1",
     "SyntaxHighlighter": "3.0.83",
-    "iframe-resizer": "2.8.6"
+    "iframe-resizer": "2.8.6",
+    "jsdiff": "~2.2.2"
   }
 }

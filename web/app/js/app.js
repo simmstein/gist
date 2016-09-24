@@ -66,14 +66,28 @@ var editorEvents = function() {
         $(this).trigger('change');
     });
 
+    var key = getKey();
+
+    if (key) {
+        $('.show-diff').each(function() {
+            var href = $(this).attr('href');
+            href = href.replace('#', '#key=' + key + '&');
+
+            $(this).attr('href', href);
+        });
+    }
+
     $('.show-diff').click(function() {
         $($(this).data('target')).toggle();
     });
 
-    if ((document.location.href).indexOf('#diff-') !== -1) {
+    var diffLinkTest1 = (document.location.href).indexOf('#diff-') !== -1;
+    var diffLinkTest2 = (document.location.href).indexOf('&diff-') !== -1;
+
+    if (diffLinkTest1 || diffLinkTest2) {
         var anchor = '#' + (document.location.href).toString().split('#')[1];
+
         $('.show-diff[href="' + anchor + '"]').click();
-        document.location.href = anchor;
     }
 }
 
@@ -119,7 +133,7 @@ var getKey = function() {
     var parts = url.split('#key=');
 
     if (parts.length === 2) {
-        return parts[1];
+        return parts[1].split('&')[0];
     }
 
     return null;

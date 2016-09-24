@@ -52,9 +52,10 @@
                                     </p>
                                     <div>
                                         {% if not loop.first %}
-
                                             <div class="diff" id="diff-{{ loop.index }}">
-                                                {{ commit.diff|raw }}
+                                                {% if not gist.cipher %}
+                                                    {{ commit.diff|raw }}
+                                                {% endif %}
                                             </div>
                                         {% endif %}
                                     </div>
@@ -74,4 +75,61 @@
 
 {% block js %}
     {{ parent() }}
+
+    {% if gist.cipher %}
+        {{ include('View/cipherJs.html.twig') }}
+
+        <script src="{{ web_path }}components/jsdiff/diff.min.js"></script>
+
+        <script>
+            var key = getKey();
+
+            var decrypt = function(content) {
+                var decrypted = CryptoJS.AES.decrypt(content, key, {
+                    format: JsonFormatter
+                });
+
+                return decrypted.toString(CryptoJS.enc.Utf8);
+            }
+
+            var commits = [];
+
+            {% for commit in history %}
+                try {
+                    var content = decrypt('{{ commit.content|raw }}');
+                    commits[{{ loop.index - 1 }}] = content;
+                } catch(e) {
+                }
+            {% endfor %}
+
+            for (var u = commits.length - 1; u > 0; u--) {
+                if (commits.hasOwnProperty(u) && commits.hasOwnProperty(u - 1)) {
+                    var previous = commits[u - 1];
+                    var current = commits[u];
+                    var diff = JsDiff.diffLines(previous, current);
+                    var diffContent = [];
+
+                    for (var v = 0, c = diff.length; v < c; v++) {
+                        var value = diff[v].value;
+                        var sign = diff[v].added ? '+' : '-';
+                        var lines = value.split("\n");
+
+                        for (var i = 0, l = lines.length; i < l; i++) {
+                            diffContent.push(sign + lines[i]);
+                        }
+                    }
+
+                    diffContent = diffContent.join("\n");
+                    
+                    var $pre = $('<pre>')
+                        .attr('class', 'brush: diff; syntaxhighlighter')
+                        .html(diffContent);
+                                    
+                    $('#diff-' + (u + 1).toString()).append($pre);
+                }
+            }
+
+            SyntaxHighlighter.all();
+        </script>
+    {% endif %}
 {% endblock %}

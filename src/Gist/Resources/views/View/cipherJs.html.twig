@@ -1,0 +1,30 @@
+<script type="text/javascript" src="{{ web_path }}components/SyntaxHighlighter/scripts/XRegExp.js"></script> <!-- XRegExp is bundled with the final shCore.js during build -->
+<script type="text/javascript" src="{{ web_path }}components/SyntaxHighlighter/scripts/shCore.js"></script>
+<script type="text/javascript" src="{{ web_path }}components/SyntaxHighlighter/scripts/shAutoloader.js"></script>
+<script type="text/javascript">
+    SyntaxHighlighter.autoloader(
+        ['applescript',                    '{{ web_path }}components/SyntaxHighlighter/scripts/shBrushAppleScript.js' ],
+        ['actionscript3', 'as3',           '{{ web_path }}components/SyntaxHighlighter/scripts/shBrushAS3.js' ],
+        ['bash', 'shell',                  '{{ web_path }}components/SyntaxHighlighter/scripts/shBrushBash.js' ],
+        ['coldfusion', 'cf',               '{{ web_path }}components/SyntaxHighlighter/scripts/shBrushColdFusion.js' ],
+        ['cpp', 'c',                       '{{ web_path }}components/SyntaxHighlighter/scripts/shBrushCpp.js' ],
+        ['c#', 'c-sharp', 'csharp',        '{{ web_path }}components/SyntaxHighlighter/scripts/shBrushCSharp.js' ],
+        ['css',                            '{{ web_path }}components/SyntaxHighlighter/scripts/shBrushCss.js' ],
+        ['delphi', 'pascal',               '{{ web_path }}components/SyntaxHighlighter/scripts/shBrushDelphi.js' ],
+        ['diff', 'patch', 'pas',           '{{ web_path }}components/SyntaxHighlighter/scripts/shBrushDiff.js' ],
+        ['erl', 'erlang',                  '{{ web_path }}components/SyntaxHighlighter/scripts/shBrushErlang.js' ],
+        ['groovy',                         '{{ web_path }}components/SyntaxHighlighter/scripts/shBrushGroovy.js' ],
+        ['java',                           '{{ web_path }}components/SyntaxHighlighter/scripts/shBrushJava.js' ],
+        ['jfx', 'javafx',                  '{{ web_path }}components/SyntaxHighlighter/scripts/shBrushJavaFX.js' ],
+        ['js', 'jscript', 'javascript',    '{{ web_path }}components/SyntaxHighlighter/scripts/shBrushJScript.js' ],
+        ['perl', 'pl',                     '{{ web_path }}components/SyntaxHighlighter/scripts/shBrushPerl.js' ],
+        ['php',                            '{{ web_path }}components/SyntaxHighlighter/scripts/shBrushPhp.js' ],
+        ['text', 'plain',                  '{{ web_path }}components/SyntaxHighlighter/scripts/shBrushPlain.js' ],
+        ['py', 'python',                   '{{ web_path }}components/SyntaxHighlighter/scripts/shBrushPython.js' ],
+        ['ruby', 'rails', 'ror', 'rb',     '{{ web_path }}components/SyntaxHighlighter/scripts/shBrushRuby.js' ],
+        ['scala',                          '{{ web_path }}components/SyntaxHighlighter/scripts/shBrushScala.js' ],
+        ['sql',                            '{{ web_path }}components/SyntaxHighlighter/scripts/shBrushSql.js' ],
+        ['vb', 'vbnet',                    '{{ web_path }}components/SyntaxHighlighter/scripts/shBrushVb.js' ],
+        ['xml', 'xhtml', 'xslt', 'html',   '{{ web_path }}components/SyntaxHighlighter/scripts/shBrushXml.js' ]
+    );
+</script>

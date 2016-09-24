@@ -39,7 +39,7 @@ class Gist extends BaseGist
     {
         $data = array(
             'javascript' => 'js',
-            'yaml'=> 'yml',
+            'yaml' => 'yml',
             'perl' => 'pl',
             'python' => 'py',
             'bash' => 'sh',

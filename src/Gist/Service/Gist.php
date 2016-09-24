@@ -65,6 +65,10 @@ class Gist
                 'diff' => $this->highlight('diff', $diff),
             );
 
+            if ($gist->isCipher()) {
+                $data['content'] = $this->getContent($gist, $commit);
+            }
+
             $history[] = $data;
         }
 
