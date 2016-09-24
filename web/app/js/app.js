@@ -99,14 +99,6 @@ var myEvents = function() {
 }
 
 var mainEditorEvents = function() {
-    $('.cipher-input').change(function() {
-        if ($('.cipher-input:checked').val() === 'yes') {
-            $('#cipher-alert').removeClass('hide');
-        } else {
-            $('#cipher-alert').addClass('hide');
-        }
-    });
-
     $('#main-form').submit(function(e) {
         if ($('.cipher-input:checked').val() === 'yes' || typeof cipherGistClone !== 'undefined') {
             var key = getKey();
