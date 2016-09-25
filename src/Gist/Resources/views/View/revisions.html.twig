@@ -123,7 +123,7 @@
                     
                     var $pre = $('<pre>')
                         .attr('class', 'brush: diff; syntaxhighlighter')
-                        .html(diffContent);
+                        .text(diffContent);
                                     
                     $('#diff-' + (u + 1).toString()).append($pre);
                 }
