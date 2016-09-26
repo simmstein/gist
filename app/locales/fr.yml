@@ -62,7 +62,6 @@ login:
             password:
                 placeholder: 'Mot de passe'
 
-
 form:
     error:
         not_blank: 'Vous devez saisir cette donnée.'
