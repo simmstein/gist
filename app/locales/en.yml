@@ -68,7 +68,6 @@ form:
     title:
         placeholder: 'Title'
     cipher:
-        alert: 'By enabling cipher, fork will be not possible.'
         label: 'Cipher: %value%'
         choice:
             anyway: 'Anyway'

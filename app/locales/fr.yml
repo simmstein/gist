@@ -69,7 +69,6 @@ form:
     title:
         placeholder: 'Titre'
     cipher:
-        alert: 'En activant le chiffrement, le fork deviendra impossible.'
         label: 'Chiffrer : %value%'
         choice:
             anyway: 'Peu importe'
