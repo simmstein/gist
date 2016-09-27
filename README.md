@@ -13,22 +13,14 @@ Table of Contents
       * [Create a new gist](#create-a-new-gist)
       * [Update an existing Gist](#update-an-existing-gist)
     * [Console](#console)
-      * [Create and update gists:](#create-and-update-gists)
+      * [Create and update gists](#create-and-update-gists)
       * [Create user](#create-user)
       * [Show stats](#show-stats)
     * [Configuration](#configuration)
       * [API](#api-1)
-        * [Personal instance](#personal-instance)
       * [Authentication](#authentication)
-        * [Disabling login](#disabling-login)
-        * [Disabling registration](#disabling-registration)
-        * [Force registration/login](#force-registrationlogin)
-          * [Login required to edit a gist](#login-required-to-edit-a-gist)
-          * [Login required to view a gist](#login-required-to-view-a-gist)
-          * [Login required to view an embeded gist](#login-required-to-view-an-embeded-gist)
       * [Debug](#debug)
     * [Deployment](#deployment)
-
 
 GIST
 ====
@@ -109,9 +101,6 @@ Edit `propel.yaml`. **Use spaces instead of tabulations**.
                             utf8: "SET NAMES utf8 COLLATE utf8_unicode_ci, COLLATION_CONNECTION = utf8_unicode_ci, COLLATION_DATABASE = utf8_unicode_ci, COLLATION_SERVER = utf8_unicode_ci"
     
     [...]
-
-Then `$ make propel`.
-
 
 **SQLITE**
 
@@ -212,7 +201,7 @@ Params:
 Console
 -------
 
-### Create and update gists:
+### Create and update gists
 
 ```
 $ app/console --help create
@@ -236,32 +225,30 @@ Configuration
 
 ### API
 
-#### Personal instance
+**Personal instance**
 
-If you install Gist on your server, you have to modify the ```base_uri``` of the API.
-Edit ```app/bootstrap.php.d/60-api.php``` and replace ```https://gist.deblan.org/```.
+If you install Gist on your server, you have to modify the `base_uri` of the API.
+Edit `app/bootstrap.php.d/60-api.php` and replace `https://gist.deblan.org/`.
 
 ### Authentication
 
-#### Disabling login
+**Disabling login**
 
 Edit `app/bootstrap.php.d/70-security.php` and modify the value of `$app['enable_login']` with `false`.
 
-#### Disabling registration
+**Disabling registration**
 
 Edit `app/bootstrap.php.d/70-security.php` and modify the value of `$app['enable_registration']` with `false`.
 
-#### Force registration/login
-
-##### Login required to edit a gist
+**Login required to edit a gist**
 
 Edit `app/bootstrap.php.d/70-security.php` and modify the value of `$app['login_required_to_edit_gist']` with `true`.
 
-##### Login required to view a gist
+**Login required to view a gist**
 
 Edit `app/bootstrap.php.d/70-security.php` and modify the value of `$app['login_required_to_view_gist']` with `true`.
 
-##### Login required to view an embeded gist
+**Login required to view an embeded gist**
 
 Edit `app/bootstrap.php.d/70-security.php` and modify the value of `$app['login_required_to_view_embeded_gist']` with `true`.
 
@@ -269,19 +256,18 @@ Edit `app/bootstrap.php.d/70-security.php` and modify the value of `$app['login_
 
 `app_dev.php` is the development router. Access is granted for an IP range defined in the same file.
 
-
 Deployment
 ----------
 
 Gist uses [Magallanes](http://magephp.com/) to manage deployment. 
 
-### Global installation
+**Global installation**
 
 	$ composer global require andres-montanez/magallanes
 	# if the envvar PATH contains "$HOME/bin/"
 	$ ln -s ~/.composer/vendor/bin/mage ~/bin/mage
 
-### Local installation
+**Local installation**
 	
 	$ composer require andres-montanez/magallanes
 
