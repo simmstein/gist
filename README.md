@@ -3,16 +3,32 @@ Table of Contents
 
   * [GIST](#gist)
     * [Requirements](#requirements)
-    * [Installation](#installation)
       * [Git](#git)
       * [Composer](#composer)
       * [Bower](#bower)
-      * [Upgrade](#upgrade)
+    * [Installation](#installation)
+    * [Upgrade](#upgrade)
     * [Makefile](#makefile)
     * [API](#api)
+      * [Create a new gist](#create-a-new-gist)
+      * [Update an existing Gist](#update-an-existing-gist)
     * [Console](#console)
+      * [Create and update gists:](#create-and-update-gists)
+      * [Create user](#create-user)
+      * [Show stats](#show-stats)
     * [Configuration](#configuration)
+      * [API](#api-1)
+        * [Personal instance](#personal-instance)
+      * [Authentication](#authentication)
+        * [Disabling login](#disabling-login)
+        * [Disabling registration](#disabling-registration)
+        * [Force registration/login](#force-registrationlogin)
+          * [Login required to edit a gist](#login-required-to-edit-a-gist)
+          * [Login required to view a gist](#login-required-to-view-a-gist)
+          * [Login required to view an embeded gist](#login-required-to-view-an-embeded-gist)
+      * [Debug](#debug)
     * [Deployment](#deployment)
+
 
 GIST
 ====
@@ -24,7 +40,6 @@ https://www.deblan.io/post/517/gist-est-dans-la-place
 
 ![Gist](https://upload.deblan.org/u/2016-06/57655dec.png "Gist")
 
-
 Requirements
 ------------
 
@@ -34,15 +49,45 @@ Requirements
 * Composer (php)
 * Bower (node)
 
+### Git
+
+Git can maybe be downloaded from your system's repositories.
+
+	$ git config --global user.email "you@example.com"
+	$ git config --global user.name "Your Name"
+
+### Composer
+
+Composer can maybe be downloaded from your system's repositories.
+Else, follow the next instructions:
+
+    # With cURL
+    curl -sS https://getcomposer.org/installer | php
+    # With Wget
+    wget -O - -q https://getcomposer.org/installer | php
+
+Assuming `~/bin` exists ans is in `$PATH`.
+
+    chmod +x composer.phar
+    mv composer.phar ~/bin/composer
+    
+	# Automatically did with `make` (@see Installation)
+	composer install
+	composer update
+
+### Bower
+
+	npm install -g bower
+
+	# Automatically did with `make` (@see Installation)
+    bower install
+
 Installation
 ------------
 
 	$ git clone https://gitnet.fr/deblan/gist
 	$ cd gist
 	$ make
-
-### Database
-
 	$ mv propel-dist.yaml propel.yaml
 	
 Edit `propel.yaml`. **Use spaces instead of tabulations**.
@@ -85,68 +130,9 @@ Then `$ make propel`.
 Then `$ make propel`.
 
 Edit `app/bootstrap.php.d/70-security.php` and modify the value of `$app['token']` with a strong secret phrase.
-	
-Screencast: https://asciinema.org/a/19814
 
-### Git
-
-Git can maybe be downloaded from your system's repositories.
-
-	$ git config --global user.email "you@example.com"
-	$ git config --global user.name "Your Name"
-
-### Composer
-
-Composer can maybe be downloaded from your system's repositories.
-Else, follow the next instructions:
-
-#### Download
-
-    # With cURL
-    curl -sS https://getcomposer.org/installer | php
-
-    # With Wget
-    wget -O - -q https://getcomposer.org/installer | php
-
-You can now use it with `php composer.phar [arguments]`.
-
-#### Executable
-
-    mv composer.phar composer
-    chmod +x composer
-
-Use it with `./composer [arguments]`.
-
-#### Install
-
-Assuming `~/bin` exists ans is in `$PATH`.
-
-    mv composer ~/bin
-
-#### Dependencies Installation (from `composer.lock`)
-
-    composer install
-
-#### Dependencies Update (will change `composer.lock`)
-
-    composer update
-
-### Bower
-
-
-#### Install
-
-	npm install -g bower
-
-#### Dependencies Installation (from `bower.json`)
-
-    bower install
-
-#### Dependencies Update
-
-    bower install
-
-### Upgrade
+Upgrade
+-------
 	
 	$ make update
 	$ make propel
@@ -170,14 +156,14 @@ API
 **POST** /{locale}/api/create
 Params:
 
-* ```form[title]```: String (required, can be empty)
-* ```form[type]```: String (required)
+* `form[title]`: String (required, can be empty)
+* `form[type]`: String (required)
   Values: html, css, javascript, php, sql, xml, yaml, perl, c, asp, python, bash, actionscript3, text
-* ```form[content]```: String (required)
+* `form[content]`: String (required)
 
-#### Responses:
+**Responses:**
 
-* Code ```200```: A json which contains gist's information. Example:
+* Code `200`: A json which contains gist's information. Example:
   ```javascript
 {
     "url": "https:\/\/gist.deblan.org\/en\/view\/55abcfa7771e0\/f4afbf72967dd95e3461490dcaa310d728d6a97d",
@@ -192,20 +178,20 @@ Params:
     }
 }
   ```
-* Code ```405```: Method Not Allowed
-* Code ```400```: Bad Request
+* Code `405`: Method Not Allowed
+* Code `400`: Bad Request
 
 ### Update an existing Gist
 
 **POST** /{locale}/api/update/{id}
 Params:
 
-* ```{id}```: Gist Id (required)
-* ```form[content]```: String (required)
+* `{id}`: Gist Id (required)
+* `form[content]`: String (required)
 
-#### Responses:
+**Responses:**
 
-* Code ```200```: A json which contains gist's information. Example:
+* Code `200`: A json which contains gist's information. Example:
   ```javascript
 {
     "url": "https:\/\/gist.deblan.org\/en\/view\/55abcfa7771e0\/abcgi72967dd95e3461490dcaa310d728d6adef",
@@ -220,8 +206,8 @@ Params:
     }
 }
   ```
-* Code ```405```: Method Not Allowed
-* Code ```400```: Bad Request
+* Code `405`: Method Not Allowed
+* Code `400`: Bad Request
 
 Console
 -------
