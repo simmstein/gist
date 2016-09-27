@@ -40,9 +40,49 @@ Installation
 	$ git clone https://gitnet.fr/deblan/gist
 	$ cd gist
 	$ make
+
+### Database
+
 	$ mv propel-dist.yaml propel.yaml
-	$ # EDIT propel.yaml (dsn)
-	$ make propel
+	
+Edit `propel.yaml`. **Use spaces instead of tabulations**.
+
+**MySQL**
+
+    propel:
+        database:
+            connections:
+                default:
+                    adapter: mysql
+                    # http://www.php.net/manual/en/ref.pdo-mysql.connection.php
+                    dsn: "mysql:host=DATABASE_SERVER;dbname=DATABASE_NAME"
+                    user: DATEBASE_USER
+                    password: DATEBASE_PASSWORD
+                    settings:
+                        charset: utf8
+                        queries:
+                            utf8: "SET NAMES utf8 COLLATE utf8_unicode_ci, COLLATION_CONNECTION = utf8_unicode_ci, COLLATION_DATABASE = utf8_unicode_ci, COLLATION_SERVER = utf8_unicode_ci"
+    
+    [...]
+
+Then `$ make propel`.
+
+
+**SQLITE**
+
+    propel:
+        database:
+            connections:
+                default:
+                    adapter: sqlite
+                    # http://www.php.net/manual/en/ref.pdo-sqlite.connection.php
+                    dsn: "sqlite:/PATH/TO/gist.sqlite"
+                    user: ~
+                    password: ~
+    
+    [...]
+	
+Then `$ make propel`.
 
 Edit `app/bootstrap.php.d/70-security.php` and modify the value of `$app['token']` with a strong secret phrase.
 	

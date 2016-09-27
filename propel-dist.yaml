@@ -7,7 +7,6 @@ propel:
                 dsn: "mysql:host=localhost;dbname=gist"
                 user: root
                 password: root
-                attributes:
                 settings:
                     charset: utf8
                     queries:
