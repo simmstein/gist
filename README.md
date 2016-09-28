@@ -58,7 +58,7 @@ Else, follow the next instructions:
     # With Wget
     wget -O - -q https://getcomposer.org/installer | php
 
-Assuming `~/bin` exists ans is in `$PATH`.
+Assuming `~/bin` exists in `$PATH`.
 
     chmod +x composer.phar
     mv composer.phar ~/bin/composer
