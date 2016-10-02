@@ -53,30 +53,29 @@ Git can maybe be downloaded from your system's repositories.
 Composer can maybe be downloaded from your system's repositories.
 Else, follow the next instructions:
 
-    # With cURL
-    curl -sS https://getcomposer.org/installer | php
-    # With Wget
-    wget -O - -q https://getcomposer.org/installer | php
+	# With cURL
+	$ curl -sS https://getcomposer.org/installer | php
 
-Assuming `~/bin` exists in `$PATH`.
+	# With Wget
+	$ wget -O - -q https://getcomposer.org/installer | php
 
-    chmod +x composer.phar
-    mv composer.phar ~/bin/composer
-    
-	# Automatically did with `make` (@see Installation)
-	composer install
-	composer update
+	$ chmod +x composer.phar
+
+	# For a local installation and if the envvar PATH contains "$HOME/bin/"
+	$ mv composer.phar ~/bin/composer
+
+	# For a global installation
+	$ sudo mv composer.phar /usr/local/bin/composer
 
 ### Bower
 
-	npm install -g bower
-
-	# Automatically did with `make` (@see Installation)
-    bower install
+	$ sudo apt-get install npm
+	$ sudo npm install -g bower
 
 Installation
 ------------
 
+	$ cd /path/to/www/
 	$ git clone https://gitnet.fr/deblan/gist
 	$ cd gist
 	$ make
@@ -119,6 +118,10 @@ Edit `propel.yaml`. **Use spaces instead of tabulations**.
 Then `$ make propel`.
 
 Edit `app/bootstrap.php.d/70-security.php` and modify the value of `$app['token']` with a strong secret phrase.
+
+The web server must have permission to write into `data`.
+
+	$ sudo chown -R www-data:www-data data
 
 Upgrade
 -------
