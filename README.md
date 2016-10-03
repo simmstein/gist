@@ -293,10 +293,10 @@ Contributors
 
 **Developers**
 
-	* Simon Vieille <contact@deblan.fr>
+* Simon Vieille <contact@deblan.fr>
 
 **Translators**
 
-	* Simon Vieille <contact@deblan.fr>
-	* Marion Sanchez
-	* Marjorie Da Silva
+* Simon Vieille <contact@deblan.fr>
+* Marion Sanchez
+* Marjorie Da Silva
