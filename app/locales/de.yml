@@ -1,0 +1,97 @@
+app:
+    title: '#!GIST'
+    title_prefix: '#!GIST - '
+
+    menu:
+        home:
+            title: 'Accueil'
+        about:
+            title: 'À propos'
+        my:
+            login:
+                title: 'Connexion'
+            logout:
+                title: 'Déconnexion'
+            register:
+                title: 'S''inscrire'
+            my:
+                title: 'Mon compte'
+
+my:
+    title: 'Mes Gists'
+    nothing: 'Rien pour le moment !'
+
+gist:
+    untitled: 'Sans titre'
+    404:
+        title: 'Arf...'
+        message: "Ce gist n'existe pas."
+    action:
+        view: 'Afficher'
+        history: 'Révision(s)'
+        raw: 'RAW'
+        download: 'Télécharger'
+        clone: 'Clôner'
+        embed: 'Insérer : '
+        add: 'Ajouter'
+
+date:
+    format: 'd/m/Y H\hi s\s'
+
+footer:
+    text: '<p>Propulsé par <a href="https://gitnet.fr/deblan/gist">GIST</a>, c''est libre :) - <a href="https://gitnet.fr/deblan/gist#api">API</a></p>'
+
+login:
+    login:
+        title: 'Identification'
+        invalid: 'Nom d''utilisateur ou mot de passe incorrect.'
+        form:
+            username:
+                placeholder: 'Nom d''utilisateur'
+            password:
+                placeholder: 'Mot de passe'
+            remember_me:
+                label: 'Se souvenir de moi'
+    register:
+        title: 'Nouveau compte'
+        already_exists: 'Ce nom d''utilisateur est déjà enregistré'
+        registred: 'Félicitation, votre compte a bien été créé !'
+        form:
+            username:
+                placeholder: 'Nom d''utilisateur'
+            password:
+                placeholder: 'Mot de passe'
+
+form:
+    error:
+        not_blank: 'Vous devez saisir cette donnée.'
+    title:
+        placeholder: 'Titre'
+    cipher:
+        label: 'Chiffrer : %value%'
+        choice:
+            anyway: 'Peu importe'
+            yes: 'Oui'
+            no: 'Non'
+    submit: 'Envoyer'
+    filter: 'Filtrer'
+    success:
+        gist: 'Votre Gist a bien a été supprimé.'
+    type:
+        label: 'Langage : %value%'
+        choice:
+            all: 'Tous'
+            html: 'HTML'
+            xml: 'XML'
+            css: 'CSS'
+            javascript: 'JAVASCRIPT'
+            php: 'PHP'
+            sql: 'SQL'
+            yaml: 'YAML'
+            perl: 'PERL'
+            c: 'C/C++'
+            asp: 'ASP'
+            python: 'PYTHON'
+            bash: 'BASH'
+            actionscript3: 'ACTION SCRIPT'
+            text: 'TEXTE'
