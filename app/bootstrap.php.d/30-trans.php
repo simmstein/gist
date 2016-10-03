@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Cookie;
 $app->register(new TranslationServiceProvider(), array(
     'locale' => 'en',
     'locale_fallback' => 'en',
-    'locales' => array('en', 'fr'), 
+    'locales' => array('en', 'fr', 'es', 'de'), 
 ));
 
 $app['translator'] = $app->extend('translator', function ($translator, $app) {

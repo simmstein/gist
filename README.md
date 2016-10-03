@@ -290,6 +290,8 @@ Contributors
 
 	* Simon Vieille <contact@deblan.fr>
 
-**Translations**
+**Translators**
 
 	* Simon Vieille <contact@deblan.fr>
+	* Marion Sanchez
+	* Marjorie Da Silva

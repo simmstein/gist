@@ -1,0 +1,97 @@
+app:
+    title: '#!GIST'
+    title_prefix: '#!GIST - '
+
+    menu:
+        home:
+            title: 'Inicio'
+        about:
+            title: 'A propósito'
+        my:
+            login:
+                title: 'Conexión'
+            logout:
+                title: 'Desconexión'
+            register:
+                title: 'Apuntarse'
+            my:
+                title: 'Mi cuenta'
+
+my:
+    title: 'Mis Gists'
+    nothing: 'Nada por ahora.'
+
+gist:
+    untitled: 'Sin título'
+    404:
+        title: '¡Uy!'
+        message: "Este gist no existe."
+    action:
+        view: 'Visualizar'
+        history: 'Confirmacion(es)'
+        raw: 'RAW'
+        download: 'Descargar'
+        clone: 'Clonar'
+        embed: 'Insertar : '
+        add: 'Añadir'
+
+date:
+    format: 'd/m/Y H\hi s\s'
+
+footer:
+    text: '<p>Impulsado por <a href="https://gitnet.fr/deblan/gist">GIST</a>, es libre :) - <a href="https://gitnet.fr/deblan/gist#api">API</a></p>'
+
+login:
+    login:
+        title: 'Identificación'
+        invalid: 'Nombre de usuario o contraseña incorrecta'
+        form:
+            username:
+                placeholder: 'Nombre de usuario'
+            password:
+                placeholder: 'Contraseña'
+            remember_me:
+                label: 'Recordar mis datos'
+    register:
+        title: 'Nueva cuenta'
+        already_exists: 'Este nombre de usuario ya está en uso'
+        registred: '¡ Enhorabuena, su cuenta fue creada !'
+        form:
+            username:
+                placeholder: 'Nombre de usuario'
+            password:
+                placeholder: 'Contraseña'
+
+form:
+    error:
+        not_blank: 'Se necesita introducir este dato.'
+    title:
+        placeholder: 'Título'
+    cipher:
+        label: 'Cifrar : %value%'
+        choice:
+            anyway: 'Da igual'
+            yes: 'Sí'
+            no: 'No'
+    submit: 'Enviar'
+    filter: 'Filtrar'
+    success:
+        gist: 'Su Gist ha sido eliminado.'
+    type:
+        label: 'Lenguaje : %value%'
+        choice:
+            all: 'Todos'
+            html: 'HTML'
+            xml: 'XML'
+            css: 'CSS'
+            javascript: 'JAVASCRIPT'
+            php: 'PHP'
+            sql: 'SQL'
+            yaml: 'YAML'
+            perl: 'PERL'
+            c: 'C/C++'
+            asp: 'ASP'
+            python: 'PYTHON'
+            bash: 'BASH'
+            actionscript3: 'ACTION SCRIPT'
+            text: 'TEXTE'

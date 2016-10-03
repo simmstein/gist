@@ -71,12 +71,11 @@
                         </ul>
                         {% block langs %}
                             <p class="navbar-text navbar-right">
-                                <a class="lang btn btn-xs cipher-link" href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({_locale: 'en'})) }}">
-                                    <span class="flag-icon flag-icon-gb"></span>
-                                </a>
-                                <a class="lang btn btn-xs cipher-link" href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({_locale: 'fr'})) }}">
-                                    <span class="flag-icon flag-icon-fr"></span>
-                                </a>
+                                {% for locale, flag in {'en': 'gb', 'fr': 'fr', 'es': 'es', 'de': 'de'} %}
+                                    <a class="lang btn btn-xs cipher-link" href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({_locale: locale})) }}">
+                                        <span class="flag-icon flag-icon-{{ flag }}"></span>
+                                    </a>
+                                {% endfor %}
                             </p>
                         {% endblock %}
                     </div>
