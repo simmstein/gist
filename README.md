@@ -21,6 +21,7 @@ Table of Contents
       * [Authentication](#authentication)
       * [Debug](#debug)
     * [Deployment](#deployment)
+    * [Contributors](#contributors)
 
 GIST
 ====
@@ -281,3 +282,14 @@ There is an example of the configuration of an environment in `.mage/config/envi
 
 	# local installation
 	$ ./vendor/andres-montanez/magallanes/bin/mage deploy to:prod
+
+Contributors
+------------
+
+**Developers**
+
+	* Simon Vieille <contact@deblan.fr>
+
+**Translations**
+
+	* Simon Vieille <contact@deblan.fr>
