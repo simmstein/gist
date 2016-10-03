@@ -124,7 +124,10 @@ The web server must have permission to write into `data`.
 
 	$ sudo chown -R www-data:www-data data
 
-Your webserver must be configured to serve `web/` as document root. If you use nginx, all virtual paths must be rooted with `web/index.php` or `web/app_dev.php` ([documentation](https://www.nginx.com/resources/wiki/start/topics/recipes/symfony/)).
+Your webserver must be configured to serve `web/` as document root. If you use nginx, all virtual paths must be rooted with `web/index.php` or `web/app_dev.php` ([documentation](https://www.nginx.com/resources/wiki/start/topics/recipes/symfony/)). If you use apache, you must enable the `rewrite` module and restart:
+
+	$ sudo a2enmod rewrite
+	$ sudo service apache2 restart
 
 Upgrade
 -------
