@@ -140,6 +140,8 @@ var viewerEvents = function() {
         var $cipherEditor = $('.cipher-editor');
         var $embedInput = $('#embed-input');
 
+        var to = ' ';
+
         if (key) {
             $('.cipher-link').each(function() {
                 var href = $(this).attr('href');
@@ -148,10 +150,7 @@ var viewerEvents = function() {
                 $(this).attr('href', href);
             });
 
-            var to = ' ';
-
             if (0 !== $render.length || $cipherEditor.length !== 0) {
-
                 if ($render.length !== 0) {
                     var decrypted = CryptoJS.AES.decrypt($render.html(), key, {
                         format: JsonFormatter
@@ -169,10 +168,10 @@ var viewerEvents = function() {
                     $cipherEditor.val(decrypted.toString(CryptoJS.enc.Utf8));
                 }
             }
+        }
 
-            if ($embedInput.length) {
-                $embedInput.val($embedInput.val().replace('%key%', to));
-            }
+        if ($embedInput.length) {
+            $embedInput.val($embedInput.val().replace('%key%', to));
         }
     });
 }
