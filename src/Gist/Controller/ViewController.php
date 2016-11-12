@@ -9,11 +9,21 @@ use Gist\Model\Gist;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Class ViewController
+ * Class ViewController.
+ *
  * @author Simon Vieille <simon@deblan.fr>
  */
 class ViewController extends Controller
 {
+    /**
+     * View action.
+     *
+     * @param Request $request
+     * @param string  $gist    Gist's ID
+     * @param string  $commit  The commit
+     *
+     * @return string|Response
+     */
     public function viewAction(Request $request, $gist, $commit)
     {
         $app = $this->getApp();
@@ -27,6 +37,15 @@ class ViewController extends Controller
         }
     }
 
+    /**
+     * Embed action.
+     *
+     * @param Request $request
+     * @param string  $gist    Gist's ID
+     * @param string  $commit  The commit
+     *
+     * @return string|Response
+     */
     public function embedAction(Request $request, $gist, $commit)
     {
         $app = $this->getApp();
@@ -40,6 +59,15 @@ class ViewController extends Controller
         }
     }
 
+    /**
+     * JS embed action.
+     *
+     * @param Request $request
+     * @param string  $gist    Gist's ID
+     * @param string  $commit  The commit
+     *
+     * @return string|Response
+     */
     public function embedJsAction(Request $request, $gist, $commit)
     {
         $viewOptions = $this->getViewOptions($request, $gist, $commit);
@@ -53,6 +81,15 @@ class ViewController extends Controller
         );
     }
 
+    /**
+     * Raw action.
+     *
+     * @param Request $request
+     * @param string  $gist    Gist's ID
+     * @param string  $commit  The commit
+     *
+     * @return string|Response
+     */
     public function rawAction(Request $request, $gist, $commit)
     {
         $viewOptions = $this->getViewOptions($request, $gist, $commit);
@@ -70,6 +107,15 @@ class ViewController extends Controller
         }
     }
 
+    /**
+     * Download action.
+     *
+     * @param Request $request
+     * @param string  $gist    Gist's ID
+     * @param string  $commit  The commit
+     *
+     * @return string|Response
+     */
     public function downloadAction(Request $request, $gist, $commit)
     {
         $app = $this->getApp();
@@ -94,6 +140,14 @@ class ViewController extends Controller
         }
     }
 
+    /**
+     * Revisions action.
+     *
+     * @param Request $request
+     * @param string  $gist    Gist's ID
+     *
+     * @return string|Response
+     */
     public function revisionsAction(Request $request, $gist)
     {
         $app = $this->getApp();

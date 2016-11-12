@@ -4,8 +4,20 @@ namespace Gist\Model;
 
 use Gist\Model\Base\Gist as BaseGist;
 
+/**
+ * Class Gist.
+ *
+ * @author Simon Vieille <simon@deblan.fr>
+ */
 class Gist extends BaseGist
 {
+    /**
+     * Hydrates the gist with array data.
+     *
+     * @param array $data
+     *
+     * @return Gist
+     */
     public function hydrateWith(array $data)
     {
         if (isset($data['title'])) {
@@ -21,11 +33,21 @@ class Gist extends BaseGist
         return $this;
     }
 
+    /**
+     * Generates a unique filename.
+     *
+     * @return string
+     */
     public function generateFilename()
     {
         $this->setFile(uniqid());
     }
 
+    /**
+     * Returns the type for Geshi.
+     *
+     * @return string
+     */
     public function getGeshiType()
     {
         $data = array(
@@ -35,6 +57,11 @@ class Gist extends BaseGist
         return str_replace(array_keys($data), array_values($data), $this->getType());
     }
 
+    /**
+     * Returns the extension depending of the type.
+     *
+     * @return string
+     */
     public function getTypeAsExtension()
     {
         $data = array(

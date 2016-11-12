@@ -7,11 +7,17 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class LogoutSuccessHandler
+ * Class LogoutSuccessHandler.
+ *
  * @author Simon Vieille <simon@deblan.fr>
  */
 class LogoutSuccessHandler implements LogoutSuccessHandlerInterface
 {
+    /**
+     * @param Request $request
+     *
+     * @return RedirectResponse
+     */
     public function onLogoutSuccess(Request $request)
     {
         $targetUrl = $request->query->get('target_url') ? $request->query->get('target_url') : '/';
@@ -19,4 +25,3 @@ class LogoutSuccessHandler implements LogoutSuccessHandlerInterface
         return new RedirectResponse($targetUrl);
     }
 }
-

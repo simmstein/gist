@@ -3,11 +3,15 @@
 namespace Gist\Form;
 
 /**
- * Class CreateGistForm
+ * Class CreateGistForm.
+ *
  * @author Simon Vieille <simon@deblan.fr>
  */
 class CloneGistForm extends CreateGistForm
 {
+    /**
+     * {@inheritdoc}
+     */
     public function build(array $options = array())
     {
         parent::build($options);

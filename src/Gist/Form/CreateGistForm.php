@@ -5,11 +5,15 @@ namespace Gist\Form;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
- * Class CreateGistForm
+ * Class CreateGistForm.
+ *
  * @author Simon Vieille <simon@deblan.fr>
  */
 class CreateGistForm extends AbstractForm
 {
+    /**
+     * {@inheritdoc}
+     */
     public function build(array $options = array())
     {
         $this->builder->add(
@@ -69,6 +73,11 @@ class CreateGistForm extends AbstractForm
         return $this->builder;
     }
 
+    /**
+     * Returns the types for generating the form.
+     *
+     * @return array
+     */
     protected function getTypes()
     {
         $types = array(
@@ -78,7 +87,7 @@ class CreateGistForm extends AbstractForm
             'php' => '',
             'sql' => '',
             'xml' => '',
-            'yaml'=> '',
+            'yaml' => '',
             'perl' => '',
             'c' => '',
             'asp' => '',

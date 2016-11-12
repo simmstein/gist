@@ -10,11 +10,19 @@ use GitWrapper\GitException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
- * Class EditController
+ * Class EditController.
+ *
  * @author Simon Vieille <simon@deblan.fr>
  */
 class EditController extends Controller
 {
+    /**
+     * Creation page.
+     *
+     * @param Request $request
+     *
+     * @return string
+     */
     public function createAction(Request $request)
     {
         $app = $this->getApp();
@@ -44,6 +52,13 @@ class EditController extends Controller
         );
     }
 
+    /**
+     * Cloning page.
+     *
+     * @param Request $request
+     *
+     * @return string
+     */
     public function cloneAction(Request $request, $gist, $commit)
     {
         $app = $this->getApp();

@@ -5,11 +5,15 @@ namespace Gist\Form;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
- * Class UserRegisterForm
+ * Class UserRegisterForm.
+ *
  * @author Simon Vieille <simon@deblan.fr>
  */
 class UserRegisterForm extends AbstractForm
 {
+    /**
+     * {@inheritdoc}
+     */
     public function build(array $options = array())
     {
         $this->builder->add(

@@ -10,8 +10,16 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Helper\Table;
 use GitWrapper\GitException;
 
+/**
+ * class StatsCommand;
+ * 
+ * @author Simon Vieille <simon@deblan.fr> 
+ */
 class StatsCommand extends Command
 {
+    /**
+     * {@inheritdoc}
+     */
     protected function configure()
     {
         $this
@@ -22,7 +30,10 @@ Show stats about GIST
 EOF
             );
     }
-
+    
+    /**
+     * {@inheritdoc}
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $gistService = $this->getSilexApplication()['gist'];

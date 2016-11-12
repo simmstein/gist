@@ -6,18 +6,36 @@ use Gist\Model\Base\User as BaseUser;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Propel\Runtime\ActiveQuery\Criteria;
 use Propel\Runtime\Connection\ConnectionInterface;
-
+.
+/**
+ * Class User.
+ *
+ * @author Simon Vieille <simon@deblan.fr>
+ */
 class User extends BaseUser implements UserInterface
 {
+    /**
+     * Erases credentials.
+     *
+     * @return void
+     */
     public function eraseCredentials()
     {
     }
 
+    /**
+     * Returns roles.
+     *
+     * @return array
+     */
     public function getRoles()
     {
         return explode(',', parent::getRoles());
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getGists(Criteria $criteria = null, ConnectionInterface $con = null)
     {
         if ($criteria === null) {
@@ -27,6 +45,15 @@ class User extends BaseUser implements UserInterface
         return parent::getGists($criteria, $con);
     }
 
+    /**
+     * Generates a pager of the user's gists.
+     *
+     * @param int $page
+     * @param array $options
+     * @param int $maxPerPage
+     *
+     * @return Propel\Runtime\Util\PropelModelPager
+     */
     public function getGistsPager($page, $options = array(), $maxPerPage = 10) 
     {
         $query = GistQuery::create()

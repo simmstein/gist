@@ -3,26 +3,34 @@
 namespace Gist\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
-use Gist\Model\GistQuery;
 use Gist\Form\DeleteGistForm;
 use Gist\Form\FilterGistForm;
 
 /**
- * Class MyController
+ * Class MyController.
+ *
  * @author Simon Vieille <simon@deblan.fr>
  */
 class MyController extends Controller
 {
+    /**
+     * "My" page.
+     *
+     * @param Request $request
+     * @param int     $page
+     *
+     * @return string
+     */
     public function myAction(Request $request, $page)
     {
-        $page = (int) $page; 
+        $page = (int) $page;
         $app = $this->getApp();
 
         $deleteForm = new DeleteGistForm($app['form.factory'], $app['translator']);
         $deleteForm = $deleteForm->build()->getForm();
-        
+
         $options = array(
-            'type' => 'all', 
+            'type' => 'all',
             'cipher' => 'anyway',
         );
 
@@ -42,7 +50,7 @@ class MyController extends Controller
                 $options = $filterForm->getData();
             }
         }
-        
+
         $gists = $this->getUser()->getGistsPager($page, $options);
 
         if ($request->isMethod('post')) {
@@ -64,11 +72,11 @@ class MyController extends Controller
         return $this->render(
             'My/my.html.twig',
             array(
-                'gists'        => $gists,
-                'page'         => $page,
-                'deleteForm'   => $deleteForm->createView(),
-                'filterForm'   => $filterForm->createView(),
-                'deleted'      => !empty($deleted),
+                'gists' => $gists,
+                'page' => $page,
+                'deleteForm' => $deleteForm->createView(),
+                'filterForm' => $filterForm->createView(),
+                'deleted' => !empty($deleted),
             )
         );
     }

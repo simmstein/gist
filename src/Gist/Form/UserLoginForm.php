@@ -5,11 +5,15 @@ namespace Gist\Form;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
- * Class UserLoginForm
+ * Class UserLoginForm.
+ *
  * @author Simon Vieille <simon@deblan.fr>
  */
 class UserLoginForm extends AbstractForm
 {
+    /**
+     * {@inheritdoc}
+     */
     public function build(array $options = array())
     {
         $this->builder->add(
@@ -45,7 +49,7 @@ class UserLoginForm extends AbstractForm
                 ),
             )
         );
-        
+
         $this->builder->add(
             '_remember_me',
             'checkbox',
@@ -63,6 +67,9 @@ class UserLoginForm extends AbstractForm
         return $this->builder;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return '';

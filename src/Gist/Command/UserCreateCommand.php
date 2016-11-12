@@ -7,16 +7,27 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Knp\Command\Command;
 use Symfony\Component\Console\Question\Question;
 
+/**
+ * Class UserCreateCommand.
+ *
+ * @author Simon Vieille <simon@deblan.fr>
+ */
 class UserCreateCommand extends Command
 {
+    /**
+     * {@inheritdoc}
+     */
     protected function configure()
     {
         $this
             ->setName('user:create')
             ->setDescription('Create a user')
-            ->setHelp("");
+            ->setHelp('');
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $helper = $this->getHelper('question');
@@ -28,7 +39,7 @@ class UserCreateCommand extends Command
         while (trim($username) === '') {
             $question = new Question('Username: ', '');
             $username = $helper->ask($input, $output, $question);
-        
+
             if ($userProvider->userExists($username)) {
                 $output->writeln('<error>This username is already used.</error>');
                 $username = '';

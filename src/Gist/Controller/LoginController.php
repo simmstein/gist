@@ -7,15 +7,21 @@ use Gist\Model\User;
 use Gist\Form\UserRegisterForm;
 use Gist\Form\UserLoginForm;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Security\Core\SecurityContext;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
- * Class LoginController
+ * Class LoginController.
+ *
  * @author Simon Vieille <simon@deblan.fr>
  */
 class LoginController extends Controller
 {
+    /**
+     * Registration page.
+     *
+     * @param Request $request
+     *
+     * @return string
+     */
     public function registerAction(Request $request)
     {
         $app = $this->getApp();
@@ -54,13 +60,20 @@ class LoginController extends Controller
         return $this->render(
             'Login/register.html.twig',
             [
-                'form'    => $form->createView(),
-                'error'   => isset($error) ? $error : '',
+                'form' => $form->createView(),
+                'error' => isset($error) ? $error : '',
                 'success' => isset($success) ? $success : '',
             ]
         );
     }
 
+    /**
+     * Login page.
+     *
+     * @param Request $request
+     *
+     * @return string
+     */
     public function loginAction(Request $request)
     {
         $app = $this->getApp();
@@ -87,7 +100,7 @@ class LoginController extends Controller
         return $this->render(
             'Login/login.html.twig',
             [
-                'form'  => $form->createView(),
+                'form' => $form->createView(),
                 'error' => isset($error) ? $error : '',
             ]
         );

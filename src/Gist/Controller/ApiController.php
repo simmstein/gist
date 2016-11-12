@@ -10,7 +10,8 @@ use Gist\Model\GistQuery;
 use Gist\Form\ApiUpdateGistForm;
 
 /**
- * Class ApiController
+ * Class ApiController.
+ *
  * @author Simon Vieille <simon@deblan.fr>
  */
 class ApiController extends Controller

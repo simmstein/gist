@@ -3,11 +3,15 @@
 namespace Gist\Form;
 
 /**
- * Class ApiUpdateGistForm
+ * Class ApiUpdateGistForm.
+ *
  * @author Simon Vieille <simon@deblan.fr>
  */
 class ApiUpdateGistForm extends ApiCreateGistForm
 {
+    /**
+     * {@inheritdoc}
+     */
     public function build(array $options = array())
     {
         parent::build($options);

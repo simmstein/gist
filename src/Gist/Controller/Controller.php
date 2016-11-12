@@ -9,23 +9,42 @@ use Gist\Model\GistQuery;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Class Controller
+ * Class Controller.
+ *
  * @author Simon Vieille <simon@deblan.fr>
  */
 class Controller
 {
+    /**
+     * @var Application
+     */
     protected $app;
 
+    /**
+     * __construct.
+     *
+     * @param Application $app
+     */
     public function __construct(Application $app)
     {
         $this->app = $app;
     }
 
+    /**
+     * Returns the application.
+     *
+     * @return Application
+     */
     public function getApp()
     {
         return $this->app;
     }
 
+    /**
+     * Returns a 404 response.
+     *
+     * @return Response
+     */
     protected function notFoundResponse()
     {
         $app = $this->getApp();
@@ -38,7 +57,16 @@ class Controller
             404
         );
     }
-    
+
+    /**
+     * Returns the default options of a gist view.
+     *
+     * @param Request $request
+     * @param string  $gist    Gist's ID
+     * @param string  $commit  The commit ID
+     *
+     * @return array
+     */
     protected function getViewOptions(Request $request, $gist, $commit)
     {
         $app = $this->getApp();
@@ -67,6 +95,13 @@ class Controller
         );
     }
 
+    /**
+     * Returns the content of the gist depending of the commit and its history.
+     *
+     * @param Gist  $gist
+     * @param mixed $commit
+     * @param mixed $history
+     */
     protected function getContentByCommit(Gist $gist, &$commit, $history)
     {
         $app = $this->getApp();
@@ -90,6 +125,11 @@ class Controller
         return $app['gist']->getContent($gist, $commit);
     }
 
+    /**
+     * Returns the connected user.
+     *
+     * @return mixed
+     */
     public function getUser()
     {
         $app = $this->getApp();
@@ -110,6 +150,14 @@ class Controller
         return $user;
     }
 
+    /**
+     * Renders a view.
+     *
+     * @param string $template
+     * @param array  $params
+     *
+     * @return string
+     */
     public function render($template, array $params = null)
     {
         $app = $this->getApp();

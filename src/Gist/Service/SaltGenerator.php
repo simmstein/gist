@@ -5,11 +5,19 @@ namespace Gist\Service;
 use InvalidArgumentException;
 
 /**
- * Class SaltGenerator
+ * Class SaltGenerator.
+ *
  * @author Simon Vieille <simon@deblan.fr>
  */
 class SaltGenerator
 {
+    /**
+     * Generates a random salt.
+     *
+     * @param int $length
+     *
+     * @return string
+     */
     public function generate($length = 32)
     {
         if (!is_numeric($length)) {

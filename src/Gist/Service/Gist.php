@@ -11,19 +11,40 @@ use Gist\Model\GistQuery;
 use Gist\Model\User;
 
 /**
- * Class Gist
+ * Class Gist.
+ *
  * @author Simon Vieille <simon@deblan.fr>
  */
 class Gist
 {
+    /**
+     * @var string
+     */
     protected $gistPath;
 
+    /**
+     * @var GitWrapper
+     */
     protected $gitWrapper;
 
+    /**
+     * @var GitWorkingCopy
+     */
     protected $gitWorkingCopy;
 
+    /**
+     * @var GeSHi
+     */
     protected $geshi;
 
+    /**
+     * __construct.
+     *
+     * @param mixed          $gistPath
+     * @param GitWrapper     $gitWrapper
+     * @param GitWorkingCopy $gitWorkingCopy
+     * @param GeSHi          $geshi
+     */
     public function __construct($gistPath, GitWrapper $gitWrapper, GitWorkingCopy $gitWorkingCopy, GeSHi $geshi)
     {
         $this->gistPath = $gistPath;
@@ -32,11 +53,23 @@ class Gist
         $this->geshi = $geshi;
     }
 
+    /**
+     * Returns a collection of gists.
+     *
+     * @return Propel\Runtime\Collection\ObjectCollection
+     */
     public function getGists()
     {
         return GistQuery::create()->find();
     }
 
+    /**
+     * Returns the history of a Gist.
+     *
+     * @param GistModel $gist
+     *
+     * @return array
+     */
     public function getHistory(GistModel $gist)
     {
         $command = GitCommand::getInstance('log', '--format=medium', $gist->getFile());
@@ -49,7 +82,7 @@ class Gist
 
         $history = [];
 
-        for ($i = count($commits) - 1; $i >= 0; $i--) {
+        for ($i = count($commits) - 1; $i >= 0; --$i) {
             $commit = trim($commits[$i][1]);
 
             $command = GitCommand::getInstance('show', '--no-color', $commit);
@@ -75,6 +108,14 @@ class Gist
         return $history;
     }
 
+    /**
+     * Returns the content of a gist.
+     *
+     * @param GistModel $gist
+     * @param string    $commit
+     *
+     * @return string
+     */
     public function getContent(GistModel $gist, $commit)
     {
         $command = GitCommand::getInstance('cat-file', '-p', $commit.':'.$gist->getFile());
@@ -84,6 +125,15 @@ class Gist
         return str_replace("\r\n", "\n", $this->gitWrapper->run($command));
     }
 
+    /**
+     * Creates a gist.
+     *
+     * @param GistModel $gist
+     * @param array     $data
+     * @param mixed     $user
+     *
+     * @return GistModel
+     */
     public function create(GistModel $gist, array $data, $user = null)
     {
         $gist->hydrateWith($data);
@@ -104,6 +154,14 @@ class Gist
         return $gist;
     }
 
+    /**
+     * Makes a commit.
+     *
+     * @param GistModel $gist
+     * @param array     $data
+     *
+     * @return GistModel
+     */
     public function commit(GistModel $gist, array $data)
     {
         file_put_contents($this->gistPath.'/'.$gist->getFile(), $data['content']);
@@ -115,6 +173,14 @@ class Gist
         return $gist;
     }
 
+    /**
+     * Highlight the content.
+     *
+     * @param string $type
+     * @param string $content
+     *
+     * @return string
+     */
     public function highlight($type, $content)
     {
         $this->geshi->set_source($content);

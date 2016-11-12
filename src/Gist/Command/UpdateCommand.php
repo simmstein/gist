@@ -8,8 +8,16 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
+/**
+ * class UpdateCommand.
+ *
+ * @author Simon Vieille <simon@deblan.fr>
+ */
 class UpdateCommand extends Command
 {
+    /**
+     * {@inheritdoc}
+     */
     protected function configure()
     {
         $types = implode(', ', $this->getTypes());
@@ -44,6 +52,9 @@ EOF
             );
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         //$output->writeln(sprintf('<comment>%s</comment> bar.', 'test'));
@@ -80,7 +91,7 @@ EOF
 
             return true;
         }
-        
+
         if ($input->getOption('show-id')) {
             $output->writeln($gist['gist']['Id']);
 
@@ -90,6 +101,11 @@ EOF
         $output->writeln(json_encode($gist));
     }
 
+    /**
+     * Returns the list of types.
+     *
+     * @return array
+     */
     protected function getTypes()
     {
         $types = array(
