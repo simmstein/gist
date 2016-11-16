@@ -64,6 +64,7 @@ class Client extends BaseClient
      * @return array
      */
     public function update($gist, $content)
+    {
         $response = $this->post(
             str_replace('{gist}', $gist, self::UPDATE),
             array(
