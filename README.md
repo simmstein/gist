@@ -300,3 +300,4 @@ Contributors
 * Simon Vieille <contact@deblan.fr>
 * Marion Sanchez
 * Marjorie Da Silva
+* Mélanie Chanat
