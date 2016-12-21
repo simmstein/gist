@@ -6,7 +6,7 @@ use Gist\Model\Base\User as BaseUser;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Propel\Runtime\ActiveQuery\Criteria;
 use Propel\Runtime\Connection\ConnectionInterface;
-.
+
 /**
  * Class User.
  *

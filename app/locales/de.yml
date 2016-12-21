@@ -4,83 +4,83 @@ app:
 
     menu:
         home:
-            title: 'Accueil'
+            title: 'Home'
         about:
-            title: 'À propos'
+            title: 'Über uns'
         my:
             login:
-                title: 'Connexion'
+                title: 'Anmelden'
             logout:
-                title: 'Déconnexion'
+                title: 'Abmelden'
             register:
-                title: 'S''inscrire'
+                title: 'Konto öffnen'
             my:
-                title: 'Mon compte'
+                title: 'Mein Konto'
 
 my:
-    title: 'Mes Gists'
-    nothing: 'Rien pour le moment !'
+    title: 'Meine Gists'
+    nothing: 'Nichts zu finden (momentan)!'
 
 gist:
-    untitled: 'Sans titre'
+    untitled: 'Ohne Titel'
     404:
-        title: 'Arf...'
-        message: "Ce gist n'existe pas."
+        title: 'Tja...'
+        message: 'Dieser Gist existiert nicht.'
     action:
-        view: 'Afficher'
-        history: 'Révision(s)'
+        view: 'Anzeigen'
+        history: 'Commit(s)'
         raw: 'RAW'
-        download: 'Télécharger'
-        clone: 'Clôner'
-        embed: 'Insérer : '
-        add: 'Ajouter'
+        download: 'Herunterladen'
+        clone: 'Klonen'
+        embed: 'Einfügen:'
+        add: 'Hinzufügen'
 
 date:
-    format: 'd/m/Y H\hi s\s'
+    format: 'Y-m-d h:i:s'
 
 footer:
-    text: '<p>Propulsé par <a href="https://gitnet.fr/deblan/gist">GIST</a>, c''est libre :) - <a href="https://gitnet.fr/deblan/gist#api">API</a></p>'
+    text: '<p>Powered by <a href="https://gitnet.fr/deblan/gist">GIST</a>, it''s open source :) - <a href="https://gitnet.fr/deblan/gist#api">API</a></p>'
 
 login:
     login:
-        title: 'Identification'
-        invalid: 'Nom d''utilisateur ou mot de passe incorrect.'
+        title: 'Login'
+        invalid: 'Anmeldung festgeschlagen.'
         form:
             username:
-                placeholder: 'Nom d''utilisateur'
+                placeholder: 'Benutzername'
             password:
-                placeholder: 'Mot de passe'
+                placeholder: 'Passwort'
             remember_me:
-                label: 'Se souvenir de moi'
+                label: 'Remember me'
     register:
-        title: 'Nouveau compte'
-        already_exists: 'Ce nom d''utilisateur est déjà enregistré'
-        registred: 'Félicitation, votre compte a bien été créé !'
+        title: 'New account'
+        already_exists: 'This username is already registred!'
+        registred: 'Congratulations, your account is created!'
         form:
             username:
-                placeholder: 'Nom d''utilisateur'
+                placeholder: 'Username'
             password:
-                placeholder: 'Mot de passe'
+                placeholder: 'Password'
 
 form:
     error:
-        not_blank: 'Vous devez saisir cette donnée.'
+        not_blank: 'This value should not be blank bro!'
     title:
-        placeholder: 'Titre'
+        placeholder: 'Titel'
     cipher:
-        label: 'Chiffrer : %value%'
+        label: 'Cipher: %value%'
         choice:
-            anyway: 'Peu importe'
-            yes: 'Oui'
-            no: 'Non'
-    submit: 'Envoyer'
-    filter: 'Filtrer'
+            anyway: 'Anyway'
+            yes: 'Yes'
+            no: 'No'
+    submit: 'Senden'
+    filter: 'Filter'
     success:
-        gist: 'Votre Gist a bien a été supprimé.'
+        gist: 'Gist removed.'
     type:
-        label: 'Langage : %value%'
+        label: 'Language: %value%'
         choice:
-            all: 'Tous'
+            all: 'All'
             html: 'HTML'
             xml: 'XML'
             css: 'CSS'
@@ -94,4 +94,4 @@ form:
             python: 'PYTHON'
             bash: 'BASH'
             actionscript3: 'ACTION SCRIPT'
-            text: 'TEXTE'
+            text: 'TEXT'
