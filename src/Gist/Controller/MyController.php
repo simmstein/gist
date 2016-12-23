@@ -5,6 +5,8 @@ namespace Gist\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Gist\Form\DeleteGistForm;
 use Gist\Form\FilterGistForm;
+use Gist\Form\UserPasswordForm;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
  * Class MyController.
@@ -43,6 +45,9 @@ class MyController extends Controller
 
         $filterForm = $filterForm->build()->getForm();
 
+        $passwordForm = new UserPasswordForm($app['form.factory'], $app['translator']);
+        $passwordForm = $passwordForm->build()->getForm();
+
         if ($request->query->has('filter')) {
             $filterForm->submit($request);
 
@@ -54,9 +59,10 @@ class MyController extends Controller
         $gists = $this->getUser()->getGistsPager($page, $options);
 
         if ($request->isMethod('post')) {
-            $deleteForm->submit($request);
+            $deleteForm->handleRequest($request);
+            $passwordForm->handleRequest($request);
 
-            if ($deleteForm->isValid()) {
+            if ($deleteForm->isSubmitted() && $deleteForm->isValid()) {
                 $id = (int) $deleteForm->getData()['id'];
 
                 foreach ($gists as $gist) {
@@ -67,6 +73,30 @@ class MyController extends Controller
                     }
                 }
             }
+
+            if ($passwordForm->isSubmitted() && $passwordForm->isValid()) {
+                $currentPassword = $passwordForm->getData()['currentPassword'];
+                $newPassword = $passwordForm->getData()['newPassword'];
+                $passwordUpdated = 0;
+
+                if ($app['user.provider']->isCurrentUserPassword($this->getUser(), $currentPassword)) {
+                    $app['user.provider']->updateUserPassword(
+                        $this->getUser(),
+                        $newPassword
+                    );
+
+                    $passwordUpdated = 1;
+                }
+
+                return new RedirectResponse(
+                    $app['url_generator']->generate(
+                        'my',
+                        [
+                            'passwordUpdated' => $passwordUpdated,
+                        ]
+                    )
+                );
+            }
         }
 
         return $this->render(
@@ -76,6 +106,7 @@ class MyController extends Controller
                 'page' => $page,
                 'deleteForm' => $deleteForm->createView(),
                 'filterForm' => $filterForm->createView(),
+                'passwordForm' => $passwordForm->createView(),
                 'deleted' => !empty($deleted),
             )
         );

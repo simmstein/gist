@@ -59,11 +59,14 @@ login:
         form:
             username:
                 placeholder: 'Nom d''utilisateur'
+            current_password:
+                placeholder: 'Mot de passe courrant'
             password:
                 placeholder: 'Mot de passe'
 
 form:
     error:
+        password: 'Mot de passe invalide.'
         not_blank: 'Vous devez saisir cette donnée.'
     title:
         placeholder: 'Titre'
@@ -75,7 +78,9 @@ form:
             no: 'Non'
     submit: 'Envoyer'
     filter: 'Filtrer'
+    confirm: 'Confirmez-vous ?'
     success:
+        password: 'Mot de passe modifié.'
         gist: 'Votre Gist a bien a été supprimé.'
     type:
         label: 'Langage : %value%'

@@ -166,6 +166,19 @@ class UserProvider implements UserProviderInterface
         return $user;
     }
 
+    /*
+     * Checks if the given password is the current user password.
+     *
+     * @param User $user
+     * @param string $password
+     *
+     * @return bool
+     */
+    public function isCurrentUserPassword(User $user, $password)
+    {
+        return $this->encoder->encodePassword($password, $user->getSalt()) === $user->getPassword();
+    }
+
     /**
      * Refresh an user.
      *

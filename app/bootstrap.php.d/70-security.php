@@ -6,10 +6,8 @@ use Silex\Provider\RememberMeServiceProvider;
 use Gist\Service\SaltGenerator;
 use Gist\Security\AuthenticationProvider;
 use Gist\Security\AuthenticationListener;
-use Gist\Security\AuthenticationEntryPoint;
 use Gist\Security\LogoutSuccessHandler;
 use Silex\Provider\SessionServiceProvider;
-use Symfony\Component\Security\Http\HttpUtils;
 
 $app['enable_registration'] = true;
 $app['enable_login'] = true;
@@ -19,7 +17,7 @@ $app['login_required_to_view_embeded_gist'] = false;
 
 $app['token'] = 'ThisTokenIsNotSoSecretChangeIt';
 
-$app['salt_generator'] = $app->share(function($app) {
+$app['salt_generator'] = $app->share(function ($app) {
     return new SaltGenerator();
 });
 
@@ -34,10 +32,10 @@ $app['security.authentication_listener.factory.form'] = $app->protect(function (
     $app['security.authentication_provider.'.$name.'.form'] = $app->share(function ($app) {
         return new AuthenticationProvider($app['user.provider']);
     });
-    
+
     $app['security.authentication_listener.'.$name.'.form'] = $app->share(function ($app) use ($name) {
         return new AuthenticationListener(
-            $app['security.token_storage'], 
+            $app['security.token_storage'],
             $app['security.authentication_provider.'.$name.'.form']
         );
     });
@@ -46,7 +44,7 @@ $app['security.authentication_listener.factory.form'] = $app->protect(function (
         'security.authentication_provider.'.$name.'.form',
         'security.authentication_listener.'.$name.'.form',
         null,
-        'pre_auth'
+        'pre_auth',
     ];
 });
 
@@ -76,13 +74,12 @@ $firewall = [
     ],
     'security.access_rules' => [
         ['^/[a-z]{2}/my.*$', 'ROLE_USER'],
-    ]
+    ],
 ];
 
 if ($app['login_required_to_edit_gist'] || $app['login_required_to_view_gist'] || $app['login_required_to_view_embeded_gist']) {
-    $securityRegexp = '^/[a-z]{2}';
     $exceptedUriPattern = ['login', 'register'];
-    
+
     if ($app['login_required_to_view_gist'] === true) {
         $firewall['security.access_rules'][] = ['^/[a-z]{2}/view.*$', 'ROLE_USER'];
         $firewall['security.access_rules'][] = ['^/[a-z]{2}/revs.*$', 'ROLE_USER'];
@@ -90,7 +87,7 @@ if ($app['login_required_to_edit_gist'] || $app['login_required_to_view_gist'] |
         $exceptedUriPattern[] = 'view';
         $exceptedUriPattern[] = 'revs';
     }
-    
+
     if ($app['login_required_to_view_embeded_gist'] === true) {
         $firewall['security.access_rules'][] = ['^/[a-z]{2}/embed.*$', 'ROLE_USER'];
     } else {
@@ -98,10 +95,10 @@ if ($app['login_required_to_edit_gist'] || $app['login_required_to_view_gist'] |
     }
 
     if ($app['login_required_to_edit_gist'] === true) {
-         $firewall['security.access_rules'][] = ['^/[a-z]{2}/(?!('.implode('|', $exceptedUriPattern).')).*$', 'ROLE_USER'];
+        $firewall['security.access_rules'][] = ['^/[a-z]{2}/(?!('.implode('|', $exceptedUriPattern).')).*$', 'ROLE_USER'];
     }
 }
- 
+
 $app->register(new SecurityServiceProvider(), $firewall);
 $app->register(new SessionServiceProvider());
 $app->register(new RememberMeServiceProvider());

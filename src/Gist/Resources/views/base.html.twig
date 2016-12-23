@@ -94,6 +94,19 @@
             {% endblock %}
         </div>
         {% block js %}
+            <script>
+                var trans = function(key) {
+                    var translations = {
+                        'form.confirm': '{{ 'form.confirm'|trans }}',
+                    };
+
+                    if (translations.hasOwnProperty(key)) {
+                        return translations[key];
+                    }
+
+                    return key;
+                }
+            </script>
             <script src="{{ web_path }}components/jquery/dist/jquery.min.js"></script>
             <script src="{{ web_path }}components/bootstrap/dist/js/bootstrap.min.js"></script>
             <script src="{{ web_path }}app/js/cipher.js"></script>

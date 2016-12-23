@@ -59,11 +59,14 @@ login:
         form:
             username:
                 placeholder: 'Username'
+            current_password:
+                placeholder: 'Current password'
             password:
                 placeholder: 'Password'
 
 form:
     error:
+        password: 'Invalid password.'
         not_blank: 'This value should not be blank bro!'
     title:
         placeholder: 'Title'
@@ -75,7 +78,9 @@ form:
             no: 'No'
     submit: 'Send'
     filter: 'Filter'
+    confirm: 'Do you confirm?'
     success:
+        password: 'Password updated.'
         gist: 'Gist removed.'
     type:
         label: 'Language: %value%'

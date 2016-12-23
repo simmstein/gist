@@ -4,6 +4,20 @@
 
 {% block body %}
     <div class="row">
+        {% if app.request.query.has('passwordUpdated') %}
+            <div class="col-md-12">
+                {% if app.request.query.get('passwordUpdated') %}
+                    <div class="alert alert-success">
+                        <p>{{ 'form.success.password'|trans }}</p>
+                    </div>
+                {% else %}
+                    <div class="alert alert-warning">
+                        <p>{{ 'form.error.password'|trans }}</p>
+                    </div>
+                {% endif %}
+            </div>
+        {% endif %}
+
         {% if deleted %}
             <div class="col-md-12">
                 <div class="alert alert-success">
@@ -11,6 +25,7 @@
                 </div>
             </div>
         {% endif %}
+
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -42,15 +57,15 @@
                                         <ul class="dropdown-menu">
                                             {% for item in filterForm.type.vars.choices %}
                                                 <li>
-                                                    <input 
-                                                        {% if item.value == filterForm.type.vars.value %}checked{% endif %} 
-                                                        data-id="#type-label" type="radio"  class="hide" 
-                                                        data-title="{{ item.label }}"  
-                                                        value="{{ item.value }}" 
-                                                        name="filter[type]" 
+                                                    <input
+                                                        {% if item.value == filterForm.type.vars.value %}checked{% endif %}
+                                                        data-id="#type-label" type="radio"  class="hide"
+                                                        data-title="{{ item.label }}"
+                                                        value="{{ item.value }}"
+                                                        name="filter[type]"
                                                         id="type-{{ loop.index }}" />
 
-                                                    <a href="#">    
+                                                    <a href="#">
                                                         <label for="type-{{ loop.index }}">
                                                             {{ item.label }}
                                                         </label>
@@ -68,15 +83,15 @@
                                         <ul class="dropdown-menu" role="menu">
                                             {% for item in filterForm.cipher.vars.choices %}
                                                 <li>
-                                                    <input 
-                                                        {% if item.value == filterForm.cipher.vars.value %}checked{% endif %} 
-                                                        data-id="#cipher-label" type="radio" class="hide cipher-input" 
-                                                        data-title="{{ item.label }}" 
-                                                        value="{{ item.value }}" 
+                                                    <input
+                                                        {% if item.value == filterForm.cipher.vars.value %}checked{% endif %}
+                                                        data-id="#cipher-label" type="radio" class="hide cipher-input"
+                                                        data-title="{{ item.label }}"
+                                                        value="{{ item.value }}"
                                                         name="filter[cipher]"
                                                         id="cipher-{{ loop.index }}" />
 
-                                                    <a href="#">    
+                                                    <a href="#">
                                                         <label for="cipher-{{ loop.index }}">
                                                             {{ item.label }}
                                                         </label>
@@ -118,7 +133,7 @@
                                                 </span>
                                             </a>
                                         </li>
-                                        
+
                                         {% for p in gists.links(10) %}
                                             <li {% if p == page %}class="active"{% endif %}>
                                                 {% set params = params|merge({page: p}) %}
@@ -126,7 +141,7 @@
                                                 <a href="{{ path('my', params) }}">{{ p }}</a>
                                             </li>
                                         {% endfor %}
-                                        
+
                                         <li>
                                             {% set params = params|merge({page: gists.nextPage}) %}
 
@@ -136,7 +151,7 @@
                                                 </span>
                                             </a>
                                         </li>
-                                        
+
                                         <li>
                                             {% set params = params|merge({page: gists.lastPage}) %}
 
@@ -149,19 +164,19 @@
                                     </ul>
                                 {% endif %}
                             {% endset %}
-                                
+
                             {{ pager }}
 
 							{% for gist in gists %}
 								<div class="commit">
 									<p>
-										<strong>{{ gist.title ? gist.title : 'gist.untitled'|trans }}</strong>, 							
+										<strong>{{ gist.title ? gist.title : 'gist.untitled'|trans }}</strong>,
 										{{ gist.createdAt|date('date.format'|trans) }}
 									</p>
-										
+
 									<p>
 										<button class="btn btn-info btn-sm">
-											{{ gist.type }}	
+											{{ gist.type }}
 										</button>
 
 										{% if not gist.cipher %}
@@ -173,19 +188,45 @@
 												<span class="glyphicon glyphicon-lock"></span>
 											</button>
 										{% endif %}
-                                        
+
                                         <button class="btn btn-delete btn-sm" data-id="{{ gist.id }}">
                                             <span class="glyphicon btn-delete glyphicon-remove" data-id="{{ gist.id }}"></span>
                                         </button>
 									</p>
 								</div>
 							{% endfor %}
-                                
+
                             {{ pager }}
 						{% endif %}
 					</div>
 				</div>
 			</div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+					{{ 'login.login.form.password.placeholder'|trans }}
+				</div>
+                <div class="panel-body">
+                    <div class="tab-content">
+                        <form action="{{ path('my', params) }}" method="post">
+                            <p>
+                                {{ form_errors(passwordForm.currentPassword) }}
+                                {{ form_widget(passwordForm.currentPassword) }}
+                            </p>
+
+                            <p>
+                                {{ form_errors(passwordForm.newPassword) }}
+                                {{ form_widget(passwordForm.newPassword) }}
+                            </p>
+
+                            <p>
+                                {{ form_rest(passwordForm) }}
+                                <input type="submit" class="btn btn-primary" value="{{ 'form.submit'|trans }}">
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
 		</div>
 	</div>
 {% endblock %}

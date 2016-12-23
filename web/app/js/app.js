@@ -93,8 +93,10 @@ var editorEvents = function() {
 
 var myEvents = function() {
     $('.btn-delete').click(function() {
-        $('#delete_id').val($(this).data('id'));
-        $('#form-deletion form').submit();
+        if (confirm(trans('form.confirm'))) {
+            $('#delete_id').val($(this).data('id'));
+            $('#form-deletion form').submit();
+        }
     });
 }
 
@@ -136,7 +138,7 @@ var viewerEvents = function() {
 
     $(document).ready(function() {
         var key = getKey();
-        
+
         var $cipherEditor = $('.cipher-editor');
         var $embedInput = $('#embed-input');
 
