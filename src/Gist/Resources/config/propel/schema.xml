@@ -7,7 +7,8 @@
         <column name="type" type="VARCHAR" size="30" required="true" />
         <column name="file" type="VARCHAR" size="30" required="true" />
         <column name="user_id" type="INTEGER" required="false" />
-        
+        <column name="commits" type="INTEGER" required="true" defaultValue="0" />
+
         <foreign-key foreignTable="user" onDelete="setnull" onUpdate="cascade">
             <reference local="user_id" foreign="id"/>
         </foreign-key>

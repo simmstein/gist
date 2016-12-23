@@ -76,4 +76,14 @@ class Gist extends BaseGist
 
         return str_replace(array_keys($data), array_values($data), $this->getType());
     }
+
+    /*
+     * Increments the number of commits.
+     */
+    public function commit()
+    {
+        $this->setCommits($this->getCommits() + 1);
+
+        return $this;
+    }
 }

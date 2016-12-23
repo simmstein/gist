@@ -12,8 +12,8 @@ use GitWrapper\GitException;
 
 /**
  * class StatsCommand;
- * 
- * @author Simon Vieille <simon@deblan.fr> 
+ *
+ * @author Simon Vieille <simon@deblan.fr>
  */
 class StatsCommand extends Command
 {
@@ -30,7 +30,7 @@ Show stats about GIST
 EOF
             );
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -52,18 +52,13 @@ EOF
                 $withEncryption[$gist->getType()] = 0;
                 $commits[$gist->getType()] = 0;
             }
-            
+
             if ($gist->getCipher()) {
                 $withEncryption[$gist->getType()]++;
             }
-                
+
             $languages[$gist->getType()]++;
-            try {
-                $count = count($gistService->getHistory($gist));
-                $commits[$gist->getType()] += $count;
-            } catch(GitException $e) {
-            
-            }
+            $commits[$gist->getType()] += $gist->getCommits();
         }
 
         $output->writeln(['<comment>Gists statistics</comment>', '']);
@@ -73,9 +68,9 @@ EOF
             ->setHeaders(array('Without encryption', 'With encryption', 'Commits', 'Total'))
             ->setRows(array(
                 array(
-                    $total - $v = array_sum($withEncryption), 
-                    $v, 
-                    array_sum($commits), 
+                    $total - $v = array_sum($withEncryption),
+                    $v,
+                    array_sum($commits),
                     $total
                 ),
             ))
@@ -90,9 +85,9 @@ EOF
 
         $table->setHeaders(array(
             'Type',
-            'Without encryption', 
-            'With encryption', 
-            'Commits', 
+            'Without encryption',
+            'With encryption',
+            'Commits',
             'Total',
         ));
 

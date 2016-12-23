@@ -149,7 +149,7 @@ class Gist
             $gist->setUser($user);
         }
 
-        $gist->save();
+        $gist->commit()->save();
 
         return $gist;
     }
@@ -170,7 +170,28 @@ class Gist
             ->add($gist->getFile())
             ->commit('Update');
 
+        $gist->commit()->save();
+
         return $gist;
+    }
+
+    /*
+     * Returns the number of commits.
+     *
+     * @param GistModel $gist
+     *
+     * @return int
+     */
+    public function getNumberOfCommits(GistModel $gist)
+    {
+        $command = GitCommand::getInstance('log', '--oneline', '--', $gist->getFile());
+        $command->setDirectory($this->gistPath);
+        $command->bypass(false);
+
+        $content = trim($this->gitWrapper->run($command));
+        $content = str_replace("\r\n", "\n", $content);
+
+        return count(explode("\n", $content));
     }
 
     /**
