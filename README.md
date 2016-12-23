@@ -81,7 +81,7 @@ Installation
 	$ cd gist
 	$ make
 	$ mv propel-dist.yaml propel.yaml
-	
+
 Edit `propel.yaml`. **Use spaces instead of tabulations**.
 
 **MySQL**
@@ -99,7 +99,7 @@ Edit `propel.yaml`. **Use spaces instead of tabulations**.
                         charset: utf8
                         queries:
                             utf8: "SET NAMES utf8 COLLATE utf8_unicode_ci, COLLATION_CONNECTION = utf8_unicode_ci, COLLATION_DATABASE = utf8_unicode_ci, COLLATION_SERVER = utf8_unicode_ci"
-    
+
     [...]
 
 **SQLITE**
@@ -113,9 +113,9 @@ Edit `propel.yaml`. **Use spaces instead of tabulations**.
                     dsn: "sqlite:/PATH/TO/gist.sqlite"
                     user: ~
                     password: ~
-    
+
     [...]
-	
+
 Then `$ make propel`.
 
 Edit `app/bootstrap.php.d/70-security.php` and modify the value of `$app['token']` with a strong secret phrase.
@@ -131,9 +131,11 @@ Your webserver must be configured to serve `web/` as document root. If you use n
 
 Upgrade
 -------
-	
+
 	$ make update
 	$ make propel
+
+If you upgrade to v1.4.1, run: `app/console migrate:to:v1.4.1`
 
 Makefile
 --------
@@ -268,7 +270,7 @@ Edit `app/bootstrap.php.d/70-security.php` and modify the value of `$app['login_
 Deployment
 ----------
 
-Gist uses [Magallanes](http://magephp.com/) to manage deployment. 
+Gist uses [Magallanes](http://magephp.com/) to manage deployment.
 
 **Global installation**
 
@@ -277,7 +279,7 @@ Gist uses [Magallanes](http://magephp.com/) to manage deployment.
 	$ ln -s ~/.composer/vendor/bin/mage ~/bin/mage
 
 **Local installation**
-	
+
 	$ composer require andres-montanez/magallanes
 
 There is an example of the configuration of an environment in `.mage/config/environment/prod.yml-dist`.
