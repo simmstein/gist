@@ -135,7 +135,8 @@ Upgrade
 	$ make update
 	$ make propel
 
-If you upgrade to v1.4.1, run: `app/console migrate:to:v1.4.1`
+If your version is less than v1.4.2, run: `test -d app && git add app && git commit -m "Configuration"`.
+If you upgrade to v1.4.1, run: `app/console migrate:to:v1.4.1`.
 
 Makefile
 --------
