@@ -64,6 +64,10 @@ class User extends BaseUser implements UserInterface
             $query->filterByType($options['type']);
         }
         
+        if (!empty($options['title'])) {
+            $query->filterByTitle('%'.$options['title'].'%', Criteria::LIKE);
+        }
+        
         if (!empty($options['cipher']) && $options['cipher'] !== 'anyway') {
             $bools = array(
                 'yes' => true,
