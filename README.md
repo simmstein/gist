@@ -270,7 +270,7 @@ Gist uses [Magallanes](http://magephp.com/) to manage deployment.
 
 	$ composer require andres-montanez/magallanes
 
-There is an example of the configuration of an environment in `.mage/config/environment/prod.yml-dist`.
+There is an example of the configuration of an environment in `.mage/config/environment/prod.yml.dist`.
 
 	# global installation
 	$ mage deploy to:prod
