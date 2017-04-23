@@ -171,7 +171,7 @@ Edit `app/config/config.yml`.
 * `api.base_uri`: The url of your instance.
 * `data.path`: the path where the files are saved.
 * `git.path`: The path of `git`.
-* `theme.name`: the name of the theme (`default` or `light`)
+* `theme.name`: the name of the theme (`dark` or `light`)
 
 Makefile
 --------
