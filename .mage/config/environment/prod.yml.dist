@@ -8,6 +8,7 @@ deployment:
         - "*.svn"
         - "*.git"
         - "*.swp"
+        - "app/config/config.yml"
         - "app/config/propel/"
         - "app/propel/"
         - "data/git"

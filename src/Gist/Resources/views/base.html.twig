@@ -1,11 +1,19 @@
 <!DOCTYPE html>
+{% set theme_settings = app.settings.theme %}
+{% set security_dettings = app.settings.security %}
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         {% block css %}
             <link rel="stylesheet" href="{{ web_path }}components/bootstrap/dist/css/bootstrap.min.css" />
             <link rel="stylesheet" href="{{ web_path }}components/flag-icon-css/css/flag-icon.min.css" />
-            <link rel="stylesheet" href="{{ web_path }}app/css/bootstrap/bootstrap.min.css" />
-            <link rel="stylesheet" href="{{ web_path }}app/css/app.css" />
+
+            {% if theme_settings.name == 'dark' %}
+                <link rel="stylesheet" href="{{ web_path }}app/css/bootstrap/bootstrap.min.css" />
+            {% else %}
+                <link rel="stylesheet" href="{{ web_path }}components/bootstrap/dist/css/bootstrap-theme.min.css" />
+            {% endif %}
+
+            <link rel="stylesheet" href="{{ web_path }}app/css/themes/{{ theme_settings.name }}.css" />
         {% endblock %}
 
         {% block metas %}
@@ -17,7 +25,7 @@
     </head>
     <body>
         {% block nav %}
-            <nav class="navbar navbar-inverse">
+            <nav class="navbar navbar-{{ theme_settings.name == 'dark' ? 'inverse' : 'default' }}">
                 <div class="container-fluid">
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-menu">
@@ -48,14 +56,14 @@
                                         {{ 'app.menu.my.logout.title'|trans }}
                                     </a>
                                 </li>
-                            {% elseif app.enable_login %}
+                            {% elseif security_dettings.enable_login %}
                                 <li>
                                     <a href="{{ path('login') }}">
                                         {{ 'app.menu.my.login.title'|trans }}
                                     </a>
                                 </li>
 
-                                {% if app.enable_registration %}
+                                {% if security_dettings.enable_registration %}
                                     <li>
                                         <a href="{{ path('register') }}">
                                             {{ 'app.menu.my.register.title'|trans }}

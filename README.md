@@ -8,20 +8,13 @@ Table of Contents
       * [Bower](#bower)
     * [Installation](#installation)
     * [Upgrade](#upgrade)
+    * [Configuration](#configuration)
     * [Makefile](#makefile)
     * [API](#api)
-      * [Create a new gist](#create-a-new-gist)
-      * [Update an existing Gist](#update-an-existing-gist)
     * [Console](#console)
-      * [Create and update gists](#create-and-update-gists)
-      * [Create user](#create-user)
-      * [Show stats](#show-stats)
-    * [Configuration](#configuration)
-      * [API](#api-1)
-      * [Authentication](#authentication)
-      * [Debug](#debug)
     * [Deployment](#deployment)
     * [Contributors](#contributors)
+
 
 GIST
 ====
@@ -32,6 +25,7 @@ https://www.deblan.io/post/517/gist-est-dans-la-place
 ![Gist](https://upload.deblan.org/u/2015-11/565b93a5.png "Gist")
 
 ![Gist](https://upload.deblan.org/u/2016-06/57655dec.png "Gist")
+
 
 Requirements
 ------------
@@ -80,7 +74,7 @@ Installation
 	$ git clone https://gitnet.fr/deblan/gist
 	$ cd gist
 	$ make
-	$ mv propel-dist.yaml propel.yaml
+	$ cp propel-dist.yaml propel.yaml
 
 Edit `propel.yaml`. **Use spaces instead of tabulations**.
 
@@ -118,7 +112,11 @@ Edit `propel.yaml`. **Use spaces instead of tabulations**.
 
 Then `$ make propel`.
 
-Edit `app/bootstrap.php.d/70-security.php` and modify the value of `$app['token']` with a strong secret phrase.
+**Versions >= 1.4.4 only**: `$ cp app/config/config.yml.dist app/config/config.yml`
+
+See the [configuration section](#configuration) for more information about configuration.
+
+---
 
 The web server must have permission to write into `data`.
 
@@ -129,6 +127,8 @@ Your webserver must be configured to serve `web/` as document root. If you use n
 	$ sudo a2enmod rewrite
 	$ sudo service apache2 restart
 
+`app_dev.php` is the development router. Access is granted for an IP range defined in the same file.
+
 Upgrade
 -------
 
@@ -138,6 +138,40 @@ If your version is less than v1.4.2, run: `test -d app && git add app && git com
 	$ make propel
 
 If you upgrade to v1.4.1, run: `app/console migrate:to:v1.4.1`.
+
+If you upgrade to v1.4.4 or more, the configuration is moved to a `app/config/config.yml`: `$ cp app/config/config.yml.dist app/config/config.yml` and see the [configuration section](#configuration) for more information.
+
+Configuration
+-------------
+
+### Version < 1.4.4
+
+Edit `app/bootstrap.php.d/70-security.php`.
+
+* `$app['token']`: the securty token (a strong passphrase).
+* `$app['enable_registration']`: defines if the registration is allowed (`true` or `false`)
+* `$app['enable_login']`: defines if the login is allowed (`true` or `false`)
+* `$app['login_required_to_edit_gist']`: defines if the user must be logged to create or clone a Gist (`true` or `false`)
+* `$app['login_required_to_view_gist']`: defines if the user must be logged to view a Gist (`true` or `false`)
+* `$app['login_required_to_view_gist']`: defines if the user must be logged to view an embeded Gist (`true` or `false`)
+
+If you install Gist on your server, you have to modify the `base_uri` of the API.
+Edit `app/bootstrap.php.d/60-api.php` and replace `https://gist.deblan.org/`.
+
+### Version >= 1.4.4
+
+Edit `app/config/config.yml`.
+
+* `security.token`: the securty token (a strong passphrase)
+* `security.enable_registration`: defines if the registration is allowed (`true` or `false`)
+* `security.enable_login`: defines if the login is allowed (`true` or `false`)
+* `security.login_required_to_edit_gist`: defines if the user must be logged to create or clone a Gist (`true` or `false`)
+* `security.login_required_to_view_gist`: defines if the user must be logged to view a Gist (`true` or `false`)
+* `security.login_required_to_view_gist`: defines if the user must be logged to view an embeded Gist (`true` or `false`)
+* `api.base_uri`: The url of your instance.
+* `data.path`: the path where the files are saved.
+* `git.path`: The path of `git`.
+* `theme.name`: the name of the theme (`dark` or `light`)
 
 Makefile
 --------
@@ -165,8 +199,11 @@ Params:
 
 **Responses:**
 
+* Code `405`: Method Not Allowed
+* Code `400`: Bad Request
 * Code `200`: A json which contains gist's information. Example:
-  ```javascript
+
+```javascript
 {
     "url": "https:\/\/gist.deblan.org\/en\/view\/55abcfa7771e0\/f4afbf72967dd95e3461490dcaa310d728d6a97d",
     "gist": {
@@ -179,11 +216,9 @@ Params:
         "UpdatedAt": "2015-07-19T16:26:15Z"
     }
 }
-  ```
-* Code `405`: Method Not Allowed
-* Code `400`: Bad Request
+```
 
-### Update an existing Gist
+### Update an existing gist
 
 **POST** /{locale}/api/update/{id}
 Params:
@@ -193,8 +228,11 @@ Params:
 
 **Responses:**
 
+* Code `405`: Method Not Allowed
+* Code `400`: Bad Request
 * Code `200`: A json which contains gist's information. Example:
-  ```javascript
+
+```javascript
 {
     "url": "https:\/\/gist.deblan.org\/en\/view\/55abcfa7771e0\/abcgi72967dd95e3461490dcaa310d728d6adef",
     "gist": {
@@ -207,67 +245,15 @@ Params:
         "UpdatedAt": "2015-07-19T16:30:15Z"
     }
 }
-  ```
-* Code `405`: Method Not Allowed
-* Code `400`: Bad Request
+```
 
 Console
 -------
 
-### Create and update gists
-
-```
-$ app/console --help create
-$ app/console --help update
-```
-
-### Create user
-
-```
-$ app/console --help user:create
-```
-
-### Show stats
-
-```
-$ app/console --help stats
-```
-
-Configuration
--------------
-
-### API
-
-**Personal instance**
-
-If you install Gist on your server, you have to modify the `base_uri` of the API.
-Edit `app/bootstrap.php.d/60-api.php` and replace `https://gist.deblan.org/`.
-
-### Authentication
-
-**Disabling login**
-
-Edit `app/bootstrap.php.d/70-security.php` and modify the value of `$app['enable_login']` with `false`.
-
-**Disabling registration**
-
-Edit `app/bootstrap.php.d/70-security.php` and modify the value of `$app['enable_registration']` with `false`.
-
-**Login required to edit a gist**
-
-Edit `app/bootstrap.php.d/70-security.php` and modify the value of `$app['login_required_to_edit_gist']` with `true`.
-
-**Login required to view a gist**
-
-Edit `app/bootstrap.php.d/70-security.php` and modify the value of `$app['login_required_to_view_gist']` with `true`.
-
-**Login required to view an embeded gist**
-
-Edit `app/bootstrap.php.d/70-security.php` and modify the value of `$app['login_required_to_view_embeded_gist']` with `true`.
-
-### Debug
-
-`app_dev.php` is the development router. Access is granted for an IP range defined in the same file.
+* **Create a gist**: `$ app/console --help create`
+* **Update a gist**: `$ app/console --help update`
+* **Create user**: `app/console --help user:create`
+* **Show stats**: `$ app/console --help stats`
 
 Deployment
 ----------
@@ -284,7 +270,7 @@ Gist uses [Magallanes](http://magephp.com/) to manage deployment.
 
 	$ composer require andres-montanez/magallanes
 
-There is an example of the configuration of an environment in `.mage/config/environment/prod.yml-dist`.
+There is an example of the configuration of an environment in `.mage/config/environment/prod.yml.dist`.
 
 	# global installation
 	$ mage deploy to:prod

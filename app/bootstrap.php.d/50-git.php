@@ -3,10 +3,16 @@
 use GitWrapper\GitWrapper;
 use Gist\Service\Gist;
 
-$app['gist_path'] = $app['root_path'].'/data/git';
+$dataPath = $app['settings']['data']['path'];
+
+if ($dataPath[0] !== '/') {
+    $app['gist_path'] = $app['root_path'].$dataPath;
+} else {
+    $app['gist_path'] = $dataPath;
+}
 
 $app['git_wrapper'] = $app->share(function ($app) {
-    return new GitWrapper('/usr/bin/git');
+    return new GitWrapper($app['settings']['git']['path']);
 });
 
 $app['git_working_copy'] = $app->share(function ($app) {

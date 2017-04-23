@@ -1,0 +1,15 @@
+security:
+    token: ThisTokenIsNotSoSecretChangeIt
+    enable_registration: true
+    enable_login: true
+    login_required_to_edit_gist: true
+    login_required_to_view_gist: true
+    login_required_to_view_embeded_gist: true
+api:
+    base_url: 'https://gist.deblan.org/'
+data:
+    path: data/git
+git:
+    path: /usr/bin/git
+theme:
+    name: dark
