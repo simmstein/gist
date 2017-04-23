@@ -7,6 +7,7 @@
 /src/Gist/Model/Map/
 /web/components/
 /app/propel/
+/app/config/config.yml
 /app/config/propel/
 /data/
 /trans/
