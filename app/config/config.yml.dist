@@ -2,9 +2,9 @@ security:
     token: ThisTokenIsNotSoSecretChangeIt
     enable_registration: true
     enable_login: true
-    login_required_to_edit_gist: true
-    login_required_to_view_gist: true
-    login_required_to_view_embeded_gist: true
+    login_required_to_edit_gist: false
+    login_required_to_view_gist: false
+    login_required_to_view_embeded_gist: false
 api:
     base_url: 'https://gist.deblan.org/'
 data:
