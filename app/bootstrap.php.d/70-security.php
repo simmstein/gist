@@ -9,13 +9,9 @@ use Gist\Security\AuthenticationListener;
 use Gist\Security\LogoutSuccessHandler;
 use Silex\Provider\SessionServiceProvider;
 
-$app['enable_registration'] = true;
-$app['enable_login'] = true;
-$app['login_required_to_edit_gist'] = false;
-$app['login_required_to_view_gist'] = false;
-$app['login_required_to_view_embeded_gist'] = false;
+$securitySettings = $app['settings']['security'];
 
-$app['token'] = 'ThisTokenIsNotSoSecretChangeIt';
+$app['token'] = $securitySettings['token'];
 
 $app['salt_generator'] = $app->share(function ($app) {
     return new SaltGenerator();
@@ -77,10 +73,10 @@ $firewall = [
     ],
 ];
 
-if ($app['login_required_to_edit_gist'] || $app['login_required_to_view_gist'] || $app['login_required_to_view_embeded_gist']) {
+if ($securitySettings['login_required_to_edit_gist'] || $securitySettings['login_required_to_view_gist'] || $securitySettings['login_required_to_view_embeded_gist']) {
     $exceptedUriPattern = ['login', 'register'];
 
-    if ($app['login_required_to_view_gist'] === true) {
+    if ($securitySettings['login_required_to_view_gist'] === true) {
         $firewall['security.access_rules'][] = ['^/[a-z]{2}/view.*$', 'ROLE_USER'];
         $firewall['security.access_rules'][] = ['^/[a-z]{2}/revs.*$', 'ROLE_USER'];
     } else {
@@ -88,13 +84,13 @@ if ($app['login_required_to_edit_gist'] || $app['login_required_to_view_gist'] |
         $exceptedUriPattern[] = 'revs';
     }
 
-    if ($app['login_required_to_view_embeded_gist'] === true) {
+    if ($securitySettings['login_required_to_view_embeded_gist'] === true) {
         $firewall['security.access_rules'][] = ['^/[a-z]{2}/embed.*$', 'ROLE_USER'];
     } else {
         $exceptedUriPattern[] = 'embed';
     }
 
-    if ($app['login_required_to_edit_gist'] === true) {
+    if ($securitySettings['login_required_to_edit_gist'] === true) {
         $firewall['security.access_rules'][] = ['^/[a-z]{2}/(?!('.implode('|', $exceptedUriPattern).')).*$', 'ROLE_USER'];
     }
 }
