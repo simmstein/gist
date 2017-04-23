@@ -44,6 +44,18 @@ class FilterGistForm extends AbstractForm
             )
         );
 
+        $this->builder->add(
+            'title',
+            'text',
+            array(
+                'required' => false,
+                'attr' => array(
+                    'placeholder' => $this->translator->trans('form.title.placeholder'),
+                    'class' => 'form-control',
+                )
+            )
+        );
+
         $this->builder->setMethod('GET');
 
         return $this->builder;

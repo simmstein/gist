@@ -45,7 +45,10 @@
 
                         {% set params = app.request.attributes.get('_route_params')|merge({page: 1}) %}
 
-                        <form action="{{ path('my', params) }}" method="GET">
+                        <form action="{{ path('my', params) }}" method="GET" class="form-inline">
+                            <div class="form-group pull-left">
+                                {{ form_widget(filterForm.title) }}
+                            </div>
                             <div class="btn-toolbar">
                                 <div class="btn-group" id="options">
                                     <div class="btn-group">
