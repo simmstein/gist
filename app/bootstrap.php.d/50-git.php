@@ -6,7 +6,7 @@ use Gist\Service\Gist;
 $dataPath = $app['settings']['data']['path'];
 
 if ($dataPath[0] !== '/') {
-    $app['gist_path'] = $app['root_path'].$dataPath;
+    $app['gist_path'] = $app['root_path'].'/'.$dataPath;
 } else {
     $app['gist_path'] = $dataPath;
 }
