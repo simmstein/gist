@@ -1,0 +1,102 @@
+app:
+    title: '#!GIST'
+    title_prefix: '#!GIST - '
+
+    menu:
+        home:
+            title: '首页'
+        about:
+            title: '关于'
+        my:
+            login:
+                title: '登陆'
+            logout:
+                title: '注销'
+            register:
+                title: '注册'
+            my:
+                title: '账号'
+
+my:
+    title: '我的 Gist'
+    nothing: '这家伙很懒，暂时没有内容'
+
+gist:
+    untitled: '未命名'
+    404:
+        title: '哇！'
+        message: '这个 gist 未找到...'
+    action:
+        view: '查看'
+        history: '历史版本'
+        raw: '源文件'
+        download: '下载'
+        clone: '克隆'
+        embed: '引用:'
+        add: '新建'
+
+date:
+    format: 'Y-m-d h:i:s'
+
+footer:
+    text: '<p>Powered by <a href="https://gitnet.fr/deblan/gist">GIST</a>, it''s open source :) - <a href="https://gitnet.fr/deblan/gist#api">API</a></p>'
+
+login:
+    login:
+        title: '登陆'
+        invalid: '用户名或密码错误'
+        form:
+            username:
+                placeholder: '用户名'
+            password:
+                placeholder: '密码'
+            remember_me:
+                label: '记住我'
+    register:
+        title: '注册新账号'
+        already_exists: '改用户名已被使用'
+        registred: '恭喜您，您的账号已经注册成功！'
+        form:
+            username:
+                placeholder: '用户名'
+            current_password:
+                placeholder: '当前密码'
+            password:
+                placeholder: '新密码'
+
+form:
+    error:
+        password: '密码错误'
+        not_blank: '该选项不可为空'
+    title:
+        placeholder: '标题'
+    cipher:
+        label: '加密: %value%'
+        choice:
+            anyway: '随意'
+            yes: '是'
+            no: '否'
+    submit: '提交'
+    filter: '过滤器'
+    confirm: '确认此次操作?'
+    success:
+        password: '密码已更新'
+        gist: 'Gist 已移除'
+    type:
+        label: '语言: %value%'
+        choice:
+            all: 'All'
+            html: 'HTML'
+            xml: 'XML'
+            css: 'CSS'
+            javascript: 'JAVASCRIPT'
+            php: 'PHP'
+            sql: 'SQL'
+            yaml: 'YAML'
+            perl: 'PERL'
+            c: 'C/C++'
+            asp: 'ASP'
+            python: 'PYTHON'
+            bash: 'BASH'
+            actionscript3: 'ACTION SCRIPT'
+            text: 'TEXT'
