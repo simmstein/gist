@@ -8,6 +8,7 @@ use Gist\Form\CloneGistForm;
 use Gist\Model\Gist;
 use GitWrapper\GitException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\Form\FormError;
 
 /**
  * Class EditController.
@@ -37,9 +38,19 @@ class EditController extends Controller
 
         if ($request->isMethod('post')) {
             $form->submit($request);
+            $data = $form->getData();
+
+            if (empty($form->getData()['content']) && !$request->files->has('file')) {
+                $form->get('content')->addError(new FormError($app['translator']->trans('form.error.not_blank')));
+            } elseif (empty($form->getData()['content']) && $request->files->has('file')) {
+                if (count($form->get('file')->getErrors()) === 0) {
+                    $data['content'] = file_get_contents($form->get('file')->getData()->getPathName());
+                    unset($data['file']);
+                }
+            }
 
             if ($form->isValid()) {
-                $gist = $app['gist']->create(new Gist(), $form->getData(), $this->getUser());
+                $gist = $app['gist']->create(new Gist(), $data, $this->getUser());
             }
         }
 
