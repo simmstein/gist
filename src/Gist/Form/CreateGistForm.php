@@ -32,16 +32,25 @@ class CreateGistForm extends AbstractForm
             'content',
             'textarea',
             array(
-                'required' => true,
+                'required' => false,
                 'attr' => array(
                     'class' => 'form-control',
                     'rows' => 10,
                 ),
                 'trim' => false,
                 'constraints' => array(
-                    new NotBlank(array(
-                        'message' => $this->translator->trans('form.error.not_blank'),
-                    )),
+                ),
+            )
+        );
+
+        $this->builder->add(
+            'file',
+            'file',
+            array(
+                'required' => false,
+                'attr' => array(
+                ),
+                'constraints' => array(
                 ),
             )
         );

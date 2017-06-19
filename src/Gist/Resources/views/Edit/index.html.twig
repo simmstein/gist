@@ -4,7 +4,7 @@
 
 {% block body %}
     <div class="row">
-        <form action="{{ path('home') }}" method="post" id="main-form">
+        <form action="{{ path('home') }}" method="post" id="main-form" enctype="multipart/form-data">
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -70,6 +70,10 @@
                         <p>
                             {{ form_errors(form.content) }}
                             {{ form_widget(form.content) }}
+                        </p>
+                        <p>
+                            {{ form_errors(form.file) }}
+                            {{ form_widget(form.file) }}
                         </p>
                         <p>
                             <input type="submit" class="btn btn-primary" value="{{ 'form.submit'|trans }}">

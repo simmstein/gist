@@ -37,9 +37,19 @@ class EditController extends Controller
 
         if ($request->isMethod('post')) {
             $form->submit($request);
+            $data = $form->getData();
+
+            if (empty($form->getData()['content']) && empty($request->files)) {
+                $form->get('content')->addError(new FormError('form.error.not_blank'));
+            } elseif (empty($form->getData()['content']) && !empty($request->files)) {
+                if (count($form->get('file')->getErrors()) === 0) {
+                    $data['content'] = file_get_contents($form->get('file')->getData()->getPathName());
+                    unset($data['file']);
+                }
+            }
 
             if ($form->isValid()) {
-                $gist = $app['gist']->create(new Gist(), $form->getData(), $this->getUser());
+                $gist = $app['gist']->create(new Gist(), $data, $this->getUser());
             }
         }
 
