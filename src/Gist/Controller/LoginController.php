@@ -26,7 +26,7 @@ class LoginController extends Controller
     {
         $app = $this->getApp();
 
-        if (false === $app['settings']['enable_registration']) {
+        if (false === $app['settings']['security']['enable_registration']) {
             return new Response('', 403);
         }
 
@@ -78,7 +78,7 @@ class LoginController extends Controller
     {
         $app = $this->getApp();
 
-        if (false === $app['settings']['enable_login']) {
+        if (false === $app['settings']['security']['enable_login']) {
             return new Response('', 403);
         }
 
