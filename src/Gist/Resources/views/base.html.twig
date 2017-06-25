@@ -4,22 +4,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         {% block css %}
-            <link rel="stylesheet" href="{{ web_path }}components/bootstrap/dist/css/bootstrap.min.css" />
-            <link rel="stylesheet" href="{{ web_path }}components/flag-icon-css/css/flag-icon.min.css" />
+            <link rel="stylesheet" href="{{ web_path }}components/bootstrap/dist/css/bootstrap.min.css">
+            <link rel="stylesheet" href="{{ web_path }}components/flag-icon-css/css/flag-icon.min.css">
 
             {% if theme_settings.name == 'dark' %}
-                <link rel="stylesheet" href="{{ web_path }}app/css/bootstrap/bootstrap.min.css" />
+                <link rel="stylesheet" href="{{ web_path }}app/css/bootstrap/bootstrap.min.css">
             {% else %}
-                <link rel="stylesheet" href="{{ web_path }}components/bootstrap/dist/css/bootstrap-theme.min.css" />
+                <link rel="stylesheet" href="{{ web_path }}components/bootstrap/dist/css/bootstrap-theme.min.css">
             {% endif %}
 
-            <link rel="stylesheet" href="{{ web_path }}app/css/themes/{{ theme_settings.name }}.css" />
+            <link rel="stylesheet" href="{{ web_path }}app/css/themes/{{ theme_settings.name }}.css">
         {% endblock %}
 
         {% block metas %}
             <meta name="viewport" content="width=device-width, initial-scale=1">
-            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         {% endblock %}
+
+        <link rel="shortcut icon" href="{{ web_path }}favicon.png">
 
         <title>{{ 'app.title_prefix'|trans }}{% block title %}{% endblock %}</title>
     </head>
