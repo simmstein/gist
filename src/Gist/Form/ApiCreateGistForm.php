@@ -16,7 +16,9 @@ class ApiCreateGistForm extends CreateGistForm
     {
         parent::build($options);
 
-        $this->builder->remove('cipher');
+        $this->builder
+            ->remove('cipher')
+            ->remove('file');
 
         return $this->builder;
     }

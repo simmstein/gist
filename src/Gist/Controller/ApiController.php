@@ -16,6 +16,13 @@ use Gist\Form\ApiUpdateGistForm;
  */
 class ApiController extends Controller
 {
+    /**
+     * Creates a gist.
+     *
+     * @param Request $request
+     *
+     * @return JsonResponse
+     */
     public function createAction(Request $request)
     {
         $app = $this->getApp();
@@ -56,6 +63,14 @@ class ApiController extends Controller
         return $this->invalidRequestResponse('Invalid field(s)');
     }
 
+    /**
+     * Updates a gist.
+     *
+     * @param Request $request
+     * @param string $gist
+     *
+     * @return JsonResponse
+     */
     public function updateAction(Request $request, $gist)
     {
         $app = $this->getApp();
@@ -106,6 +121,13 @@ class ApiController extends Controller
         return $this->invalidRequestResponse('Invalid field(s)');
     }
 
+    /**
+     * Builds an invalid method response.
+     *
+     * @param mixed $message
+     *
+     * @return JsonResponse
+     */
     protected function invalidMethodResponse($message = null)
     {
         $data = [
@@ -116,6 +138,13 @@ class ApiController extends Controller
         return new JsonResponse($data, 405);
     }
 
+    /**
+     * Builds an invalid request response.
+     *
+     * @param mixed $message
+     *
+     * @return JsonResponse
+     */
     protected function invalidRequestResponse($message = null)
     {
         $data = [

@@ -19,7 +19,7 @@ class Client extends BaseClient
     const CREATE = '/en/api/create';
 
     /**
-     * URI of updating
+     * URI of update
      *
      * @const string
      */
