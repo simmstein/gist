@@ -98,6 +98,10 @@ var myEvents = function() {
             $('#form-deletion form').submit();
         }
     });
+
+    $(document).on('change keyup keydown', '#form-api-key', function() {
+        $(this).val($(this).data('key'));
+    });
 }
 
 var mainEditorEvents = function() {

@@ -126,6 +126,7 @@ class UserProvider implements UserProviderInterface
         $user
             ->setRoles('ROLE_USER')
             ->setPassword($this->encoder->encodePassword($password, $user->getSalt()))
+            ->setApiKey($this->saltGenerator->generate(32, true))
             ->save();
 
         return $user;

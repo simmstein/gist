@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 {% set theme_settings = app.settings.theme %}
-{% set security_dettings = app.settings.security %}
+{% set security_settings = app.settings.security %}
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         {% block css %}
@@ -56,14 +56,14 @@
                                         {{ 'app.menu.my.logout.title'|trans }}
                                     </a>
                                 </li>
-                            {% elseif security_dettings.enable_login %}
+                            {% elseif security_settings.enable_login %}
                                 <li>
                                     <a href="{{ path('login') }}">
                                         {{ 'app.menu.my.login.title'|trans }}
                                     </a>
                                 </li>
 
-                                {% if security_dettings.enable_registration %}
+                                {% if security_settings.enable_registration %}
                                     <li>
                                         <a href="{{ path('register') }}">
                                             {{ 'app.menu.my.register.title'|trans }}

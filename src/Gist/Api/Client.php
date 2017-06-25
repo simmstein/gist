@@ -12,25 +12,26 @@ use GuzzleHttp\Client as BaseClient;
 class Client extends BaseClient
 {
     /**
-     * URI of creation
-     * 
+     * URI of creation.
+     *
      * @const string
      */
     const CREATE = '/en/api/create';
 
     /**
-     * URI of update
+     * URI of update.
      *
      * @const string
      */
     const UPDATE = '/en/api/update/{gist}';
 
     /**
-     * Creates a gist
+     * Creates a gist.
      *
      * @param string $title The title
      * @param string $type The type
      * @param string $content The content
+     *
      * @return array
      */
     public function create($title, $type, $content)

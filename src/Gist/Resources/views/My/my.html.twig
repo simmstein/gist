@@ -230,6 +230,24 @@
                     </div>
                 </div>
             </div>
+
+            {% if app.settings.api.enabled %}
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        {{ 'api.title'|trans }}
+                    </div>
+                    <div class="panel-body">
+                        <div class="tab-content">
+                            <form action="{{ path('my', params) }}" method="post">
+                                <p>
+                                    <input type="text" name="apiKey" id="form-api-key" size="32" value="{{ apiKey }}" data-key="{{ apiKey }}">
+                                    <input type="submit" name="generateApiKey" value="{{ 'api.form.generate' }}">
+                                </p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
         </div>
     </div>
 {% endblock %}

@@ -3,6 +3,7 @@
 namespace Gist\Model;
 
 use Gist\Model\Base\Gist as BaseGist;
+use Propel\Runtime\Map\TableMap;
 
 /**
  * Class Gist.
@@ -85,5 +86,26 @@ class Gist extends BaseGist
         $this->setCommits($this->getCommits() + 1);
 
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function toArray($keyType = TableMap::TYPE_PHPNAME, $includeLazyLoadColumns = true, $alreadyDumpedObjects = array(), $includeForeignObjects = false)
+    {
+        $data = parent::toArray(
+            $keyType,
+            $includeLazyLoadColumns,
+            $alreadyDumpedObjects,
+            $includeForeignObjects
+        );
+
+        foreach ($data as $key => $value) {
+            $newKey = lcfirst($key);
+            unset($data[$key]);
+            $data[$newKey] = $value;
+        }
+
+        return $data;
     }
 }

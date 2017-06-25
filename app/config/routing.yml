@@ -57,10 +57,14 @@ revisions:
     path: /revs/{gist}
     defaults: {_controller: Gist\Controller\ViewController::revisionsAction, _locale: en}
 
+api_list:
+    path: /api/list/{apiKey}
+    defaults: {_controller: Gist\Controller\ApiController::listAction, _locale: en}
+
 api_create:
-    path: /api/create
+    path: /api/create/{apiKey}
     defaults: {_controller: Gist\Controller\ApiController::createAction, _locale: en}
 
 api_update:
-    path: /api/update/{gist}
+    path: /api/update/{gist}/{apiKey}
     defaults: {_controller: Gist\Controller\ApiController::updateAction, _locale: en}
