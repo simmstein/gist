@@ -34,7 +34,7 @@ class ApiController extends Controller
             return new Response('', 403);
         }
 
-        if (false === $this->isValidApiKey($apiKey)) {
+        if (false === $this->isValidApiKey($apiKey, true)) {
             return $this->invalidApiKeyResponse();
         }
 
@@ -240,9 +240,13 @@ class ApiController extends Controller
         return new JsonResponse($data, 400);
     }
 
-    protected function isValidApiKey($apiKey)
+    protected function isValidApiKey($apiKey, $required = false)
     {
-        return !empty($apiKey) && UserQuery::create()
+        if (empty($apiKey)) {
+            return !$required;
+        }
+
+        return UserQuery::create()
             ->filterByApiKey($apiKey)
             ->count() === 1;
     }

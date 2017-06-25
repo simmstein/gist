@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
  *
  * @author Simon Vieille <simon@deblan.fr>
  */
-class Controller
+abstract class Controller
 {
     /**
      * @var Application
@@ -128,11 +128,17 @@ class Controller
     /**
      * Returns the connected user.
      *
+     * @param Request $request An API request
+     *
      * @return mixed
      */
-    public function getUser()
+    public function getUser(Request $request = null)
     {
         $app = $this->getApp();
+
+        if (!empty($request)) {
+
+        }
 
         $securityContext = $app['security.token_storage'];
         $securityToken = $securityContext->getToken();
