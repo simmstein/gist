@@ -50,7 +50,7 @@ $app->get('/', function (Request $request) use ($app) {
         $foundLocale = $app['translator']->getLocale();
 
         foreach ($app['locales'] as $locale) {
-            if ($cookie === $locale || $accept->has($locale)) {
+            if ($cookieValue === $locale || $accept->has($locale)) {
                 $foundLocale = $locale;
                 break;
             }
