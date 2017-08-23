@@ -167,6 +167,20 @@ class UserProvider implements UserProviderInterface
         return $user;
     }
 
+    /**
+     * Loads a user by his api key.
+     *
+     * @param string $apiKey
+     *
+     * @return User
+     */
+    public function loadUserByApiKey($apiKey)
+    {
+        $user = UserQuery::create()->findOneByApiKey($apiKey);
+
+        return $user;
+    }
+
     /*
      * Checks if the given password is the current user password.
      *

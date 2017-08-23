@@ -26,6 +26,13 @@ class Client extends BaseClient
     const UPDATE = '/en/api/update/{gist}';
 
     /**
+     * URI of delete.
+     *
+     * @const string
+     */
+    const DELETE = '/en/api/delete/{gist}';
+
+    /**
      * URI of list.
      *
      * @const string
@@ -33,17 +40,17 @@ class Client extends BaseClient
     const LIST = '/en/api/list';
 
     /**
-     * The API token.
+     * The API key.
      *
      * @var string|null
      */
-    protected $apiToken;
+    protected $apiKey;
 
     /**
      * Creates a gist.
      *
-     * @param string $title The title
-     * @param string $type The type
+     * @param string $title   The title
+     * @param string $type    The type
      * @param string $content The content
      *
      * @return array
@@ -51,7 +58,7 @@ class Client extends BaseClient
     public function create($title, $type, $content)
     {
         $response = $this->post(
-            $this->mergeToken(self::CREATE),
+            $this->mergeApiKey(self::CREATE),
             array(
                 'form_params' => array(
                     'form' => array(
@@ -71,9 +78,9 @@ class Client extends BaseClient
     }
 
     /**
-     * Clones and update a gist
+     * Clones and update a gist.
      *
-     * @param string $gist Gist's ID
+     * @param string $gist    Gist's ID
      * @param string $content The content
      *
      * @return array
@@ -81,7 +88,7 @@ class Client extends BaseClient
     public function update($gist, $content)
     {
         $response = $this->post(
-            str_replace('{gist}', $gist, $this->mergeToken(self::LIST)),
+            str_replace('{gist}', $gist, $this->mergeApiKey(self::LIST)),
             array(
                 'form_params' => array(
                     'form' => array(
@@ -99,16 +106,34 @@ class Client extends BaseClient
     }
 
     /**
-     * Lists the user's gists.
+     * Deletes a gist.
      *
      * @param string $gist Gist's ID
+     *
+     * @return array
+     */
+    public function delete($gist)
+    {
+        $response = $this->post(str_replace('{gist}', $gist, $this->mergeApiKey(self::DELETE)));
+
+        if ($response->getStatusCode() === 200) {
+            return json_decode($response->getBody()->getContents(), true);
+        }
+
+        return [];
+    }
+
+    /**
+     * Lists the user's gists.
+     *
+     * @param string $gist    Gist's ID
      * @param string $content The content
      *
      * @return array
      */
     public function list()
     {
-        $response = $this->get($this->mergeToken(self::LIST));
+        $response = $this->get($this->mergeApiKey(self::LIST));
 
         if ($response->getStatusCode() === 200) {
             return json_decode($response->getBody()->getContents(), true);
@@ -118,42 +143,42 @@ class Client extends BaseClient
     }
 
     /*
-     * Merges the API token with the given url..
+     * Merges the API key with the given url.
      *
      * @param string $url
      *
      * @return string
      */
-    public function mergeToken($url)
+    public function mergeApiKey($url)
     {
-        if (empty($this->apiToken)) {
+        if (empty($this->apiKey)) {
             return $url;
         }
 
-        return rtrim($url, '/').'/'.$this->apiToken;
+        return rtrim($url, '/').'/'.$this->apiKey;
     }
 
     /*
-     * Set the value of "apiToken".
+     * Set the value of "apiKey".
      *
-     * @param string|null $apiToken
+     * @param string|null $apiKey
      *
      * @return Client
      */
-    public function setApiToken($apiToken)
+    public function setApiKey($apiKey)
     {
-        $this->apiToken = $apiToken;
+        $this->apiKey = $apiKey;
 
         return $this;
     }
 
     /*
-     * Get the value of "apiToken".
+     * Get the value of "apiKey".
      *
      * @return string|null
      */
-    public function getApiToken()
+    public function getApiKey()
     {
-        return $this->apiToken;
+        return $this->apiKey;
     }
 }

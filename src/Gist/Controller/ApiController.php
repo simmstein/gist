@@ -42,7 +42,8 @@ class ApiController extends Controller
             return $this->invalidMethodResponse('GET method is required.');
         }
 
-        $gists = GistQuery::create()->find();
+        $user = $app['user.provider']->loadUserByApiKey($apiKey);
+        $gists = $user->getGists();
         $data = array();
 
         foreach ($gists as $gist) {
@@ -102,8 +103,12 @@ class ApiController extends Controller
         $form->submit($request);
 
         if ($form->isValid()) {
+            $user = !empty($apiKey) ? $app['user.provider']->loadUserByApiKey($apiKey) : null;
             $gist = $app['gist']->create(new Gist(), $form->getData());
-            $gist->setCipher(false)->save();
+            $gist
+                ->setCipher(false)
+                ->setUser($user)
+                ->save();
 
             $history = $app['gist']->getHistory($gist);
 
@@ -190,6 +195,49 @@ class ApiController extends Controller
     }
 
     /**
+     * Deletes a gist.
+     *
+     * @param Request $request
+     * @param string  $gist
+     * @param string  $apiKey
+     *
+     * @return JsonResponse
+     */
+    public function deleteAction(Request $request, $gist, $apiKey)
+    {
+        $app = $this->getApp();
+
+        if (false === $app['settings']['api']['enabled']) {
+            return new Response('', 403);
+        }
+
+        if (false === $this->isValidApiKey($apiKey, true)) {
+            return $this->invalidApiKeyResponse();
+        }
+
+        if (false === $request->isMethod('post')) {
+            // return $this->invalidMethodResponse('POST method is required.');
+        }
+
+        $user = $app['user.provider']->loadUserByApiKey($apiKey);
+
+        $gist = GistQuery::create()
+            ->filterById((int) $gist)
+            ->_or()
+            ->filterByFile($gist)
+            ->filterByUser($user)
+            ->findOne();
+
+        if (!$gist) {
+            return $this->invalidRequestResponse('Invalid Gist');
+        }
+
+        $gist->delete();
+
+        return new JsonResponse(['error' => false]);
+    }
+
+    /**
      * Builds an invalid api key response.
      *
      * @param mixed $message
@@ -240,6 +288,15 @@ class ApiController extends Controller
         return new JsonResponse($data, 400);
     }
 
+    /**
+     * Checks if the given api key is valid
+     * depending of the requirement.
+     *
+     * @param mixed $apiKey
+     * @param mixed $required
+     *
+     * @return bool
+     */
     protected function isValidApiKey($apiKey, $required = false)
     {
         if (empty($apiKey)) {

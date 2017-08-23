@@ -68,3 +68,7 @@ api_create:
 api_update:
     path: /api/update/{gist}/{apiKey}
     defaults: {_controller: Gist\Controller\ApiController::updateAction, _locale: en, apiKey: null}
+
+api_delete:
+    path: /api/delete/{gist}/{apiKey}
+    defaults: {_controller: Gist\Controller\ApiController::deleteAction, _locale: en, apiKey: null}
