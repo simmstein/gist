@@ -216,7 +216,7 @@ class ApiController extends Controller
         }
 
         if (false === $request->isMethod('post')) {
-            // return $this->invalidMethodResponse('POST method is required.');
+            return $this->invalidMethodResponse('POST method is required.');
         }
 
         $user = $app['user.provider']->loadUserByApiKey($apiKey);

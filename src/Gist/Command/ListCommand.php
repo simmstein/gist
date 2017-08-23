@@ -26,7 +26,7 @@ class ListCommand extends Command
     {
         $this
             ->setName('list')
-            ->setDescription('Listing gists using the API');
+            ->setDescription('List gists using the API');
     }
 
     /**
