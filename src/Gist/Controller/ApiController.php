@@ -82,7 +82,7 @@ class ApiController extends Controller
             return new Response('', 403);
         }
 
-        if (false === $this->isValidApiKey($apiKey)) {
+        if (false === $this->isValidApiKey($apiKey, (bool) $app['settings']['api']['api_key_required'])) {
             return $this->invalidApiKeyResponse();
         }
 
@@ -139,7 +139,7 @@ class ApiController extends Controller
             return new Response('', 403);
         }
 
-        if (false === $this->isValidApiKey($apiKey)) {
+        if (false === $this->isValidApiKey($apiKey, (bool) $app['settings']['api']['api_key_required'])) {
             return $this->invalidApiKeyResponse();
         }
 

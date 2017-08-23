@@ -59,12 +59,12 @@ revisions:
 
 api_list:
     path: /api/list/{apiKey}
-    defaults: {_controller: Gist\Controller\ApiController::listAction, _locale: en}
+    defaults: {_controller: Gist\Controller\ApiController::listAction, _locale: en, apiKey: null}
 
 api_create:
     path: /api/create/{apiKey}
-    defaults: {_controller: Gist\Controller\ApiController::createAction, _locale: en}
+    defaults: {_controller: Gist\Controller\ApiController::createAction, _locale: en, apiKey: null}
 
 api_update:
     path: /api/update/{gist}/{apiKey}
-    defaults: {_controller: Gist\Controller\ApiController::updateAction, _locale: en}
+    defaults: {_controller: Gist\Controller\ApiController::updateAction, _locale: en, apiKey: null}

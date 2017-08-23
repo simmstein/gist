@@ -2,6 +2,7 @@
 <?php
 
 use Gist\Command\CreateCommand;
+use Gist\Command\ListCommand;
 use Gist\Command\UpdateCommand;
 use Gist\Command\StatsCommand;
 use Gist\Command\UserCreateCommand;
@@ -10,6 +11,7 @@ use Gist\Command\Migration\UpgradeTo1p4p1Command;
 $app = require __DIR__.'/bootstrap.php';
 
 $app['console']->add(new CreateCommand());
+$app['console']->add(new ListCommand());
 $app['console']->add(new UpdateCommand());
 $app['console']->add(new StatsCommand());
 $app['console']->add(new UserCreateCommand());
