@@ -137,9 +137,11 @@ If your version is less than v1.4.2, run: `test -d app && git add app && git com
 	$ make update
 	$ make propel
 
-If you upgrade to v1.4.1, run: `app/console migrate:to:v1.4.1`.
+If you upgrade to v1.4.1 or more: `app/console migrate:to:v1.4.1`.
 
 If you upgrade to v1.4.4 or more, the configuration is moved to a `app/config/config.yml`: `$ cp app/config/config.yml.dist app/config/config.yml` and see the [configuration section](#configuration) for more information.
+
+If you upgrade to v1.7.0 or more, see the [configuration section](#configurationh) for more information about new options.
 
 Configuration
 -------------
@@ -173,6 +175,12 @@ Edit `app/config/config.yml`.
 * `git.path`: The path of `git`.
 * `theme.name`: the name of the theme (`dark` or `light`)
 
+### Version >= v1.7.0
+
+* `api.enabled`: defines if the API is enabled (`true` or `false`)
+* `api.api_key_required`: defines if the API key is required to access the API (`true` or `false`)
+* `api.client.api_key`: defines the client API key (`string`)
+
 Makefile
 --------
 
@@ -187,7 +195,9 @@ A Makefile is provided to automate some tasks.
 API
 ---
 
-### Create a new gist
+### Version < v1.7.0
+
+#### Create a new gist
 
 **POST** /{locale}/api/create
 Params:
@@ -218,7 +228,7 @@ Params:
 }
 ```
 
-### Update an existing gist
+#### Update an existing gist
 
 **POST** /{locale}/api/update/{id}
 Params:
@@ -247,6 +257,115 @@ Params:
 }
 ```
 
+### Version >= v1.7.0
+
+Invalid response codes:
+
+* Code `401`: Unauthorized
+* Code `403`: API not enabled
+* Code `405`: Method Not Allowed
+* Code `400`: Bad Request
+
+#### List gists
+
+**GET** /{locale}/api/list/{apiToken}
+
+Response example:
+
+```javascript
+[
+    {
+        "id": 66,
+        "title": "test prod",
+        "cipher": false,
+        "type": "javascript",
+        "file": "55abcfa7771e0",
+        "createdAt": "2015-07-19T16:26:15Z",
+        "updatedAt": "2015-07-19T16:30:15Z"
+		"url": "https:\/\/gist.deblan.org\/en\/view\/55abcfa7771e0\/abcgi72967dd95e3461490dcaa310d728d6adef",
+    },
+    {
+        "id": 67,
+        "title": "test prod 2",
+        "cipher": false,
+        "type": "javascript",
+        "file": "xyzbcfa7771e0",
+        "createdAt": "2015-08-19T16:26:15Z",
+        "updatedAt": "2015-08-19T16:30:15Z"
+		"url": "https:\/\/gist.deblan.org\/en\/view\/5byzbcfa7771e0\/def72967dd95e346koq0dcaa310d728d6artu",
+    },
+	...
+]
+```
+
+#### Create a new gist
+
+**POST** /{locale}/api/create/{apiToken}
+Params:
+
+* `form[title]`: String (required, can be empty)
+* `form[type]`: String (required)
+  Values: html, css, javascript, php, sql, xml, yaml, perl, c, asp, python, bash, actionscript3, text
+* `form[content]`: String (required)
+
+Response example:
+
+```javascript
+{
+    "url": "https:\/\/gist.deblan.org\/en\/view\/55abcfa7771e0\/f4afbf72967dd95e3461490dcaa310d728d6a97d",
+    "gist": {
+        "id": 66,
+        "title": "test prod",
+        "cipher": false,
+        "type": "javascript",
+        "file": "55abcfa7771e0",
+        "createdAt": "2015-07-19T16:26:15Z",
+        "updatedAt": "2015-07-19T16:26:15Z"
+    }
+}
+```
+
+#### Update an existing gist
+
+**POST** /{locale}/api/update/{id}/{apiToken}
+Params:
+
+* `{id}`: Gist Id (required)
+* `form[content]`: String (required)
+
+Response example:
+
+```javascript
+{
+    "url": "https:\/\/gist.deblan.org\/en\/view\/55abcfa7771e0\/abcgi72967dd95e3461490dcaa310d728d6adef",
+    "gist": {
+        "id": 66,
+        "title": "test prod",
+        "cipher": false,
+        "type": "javascript",
+        "file": "55abcfa7771e0",
+        "createdAt": "2015-07-19T16:26:15Z",
+        "updatedAt": "2015-07-19T16:30:15Z"
+    }
+}
+```
+
+#### Delete an existing gist
+
+**POST** /{locale}/api/delete/{id}/{apiToken}
+
+Response code `200`:
+
+```javascript
+{"error":false}
+```
+
+Response code `400`:
+
+```javascript
+{"message":"Invalid Gist", "error":true}
+```
+
 Console
 -------
 
@@ -254,6 +373,11 @@ Console
 * **Update a gist**: `$ app/console --help update`
 * **Create user**: `app/console --help user:create`
 * **Show stats**: `$ app/console --help stats`
+
+### Version >= v1.7.0
+
+* **List your gists**: `$ app/console --help gists`
+* **Delete a gist**: `$ app/console --help delete`
 
 Deployment
 ----------
