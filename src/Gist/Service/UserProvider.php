@@ -126,6 +126,7 @@ class UserProvider implements UserProviderInterface
         $user
             ->setRoles('ROLE_USER')
             ->setPassword($this->encoder->encodePassword($password, $user->getSalt()))
+            ->setApiKey($this->saltGenerator->generate(32, true))
             ->save();
 
         return $user;
@@ -162,6 +163,20 @@ class UserProvider implements UserProviderInterface
         if (null === $user) {
             throw new UsernameNotFoundException(sprintf('Username "%s" does not exist.', $username));
         }
+
+        return $user;
+    }
+
+    /**
+     * Loads a user by his api key.
+     *
+     * @param string $apiKey
+     *
+     * @return User
+     */
+    public function loadUserByApiKey($apiKey)
+    {
+        $user = UserQuery::create()->findOneByApiKey($apiKey);
 
         return $user;
     }

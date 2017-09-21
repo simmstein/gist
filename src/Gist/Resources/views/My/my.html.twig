@@ -205,30 +205,61 @@
                 </div>
             </div>
 
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    {{ 'login.login.form.password.placeholder'|trans }}
-                </div>
-                <div class="panel-body">
-                    <div class="tab-content">
-                        <form action="{{ path('my', params) }}" method="post">
-                            <p>
-                                {{ form_errors(passwordForm.currentPassword) }}
-                                {{ form_widget(passwordForm.currentPassword) }}
-                            </p>
+            {% set apiEnabled = app.settings.api.enabled %}
 
-                            <p>
-                                {{ form_errors(passwordForm.newPassword) }}
-                                {{ form_widget(passwordForm.newPassword) }}
-                            </p>
+            <div class="row">
+                <div class="col-md-{{ apiEnabled ? 6 : 12 }}">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            {{ 'login.login.form.password.placeholder'|trans }}
+                        </div>
+                        <div class="panel-body">
+                            <div class="tab-content">
+                                <form action="{{ path('my', params) }}" method="post">
+                                    <p>
+                                        {{ form_errors(passwordForm.currentPassword) }}
+                                        {{ form_widget(passwordForm.currentPassword) }}
+                                    </p>
 
-                            <p>
-                                {{ form_rest(passwordForm) }}
-                                <input type="submit" class="btn btn-primary" value="{{ 'form.submit'|trans }}">
-                            </p>
-                        </form>
+                                    <p>
+                                        {{ form_errors(passwordForm.newPassword) }}
+                                        {{ form_widget(passwordForm.newPassword) }}
+                                    </p>
+
+                                    <p>
+                                        {{ form_rest(passwordForm) }}
+                                        <input type="submit" class="btn btn-primary" value="{{ 'form.submit'|trans }}">
+                                    </p>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                {% if apiEnabled %}
+                    <div class="col-md-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                {{ 'my.api.title'|trans }}
+                            </div>
+                            <div class="panel-body">
+                                <div class="tab-content">
+                                    <p>{{ 'my.api.warning'|trans|raw }}</p>
+
+                                    <form action="{{ path('my', params) }}" method="post">
+                                        <div class="row">
+                                            <p class="col-md-12">
+                                                <input type="text" name="apiKey" id="form-api-key" class="form-control" value="{{ apiKey }}" data-key="{{ apiKey }}">
+                                            </p>
+                                            <p class="col-md-12">
+                                                <input type="submit" name="generateApiKey" value="{{ 'my.api.form.generate'|trans }}" class="btn btn-primary">
+                                            </p>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
             </div>
         </div>
     </div>

@@ -7,6 +7,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Yaml\Yaml;
 
 /**
  * class UpdateCommand.
@@ -26,8 +27,9 @@ class UpdateCommand extends Command
             ->setDescription('Update a gist using the API')
             ->addArgument('input', InputArgument::REQUIRED, 'Input')
             ->addOption('gist', null, InputOption::VALUE_REQUIRED, 'Id or File of the gist')
-            ->addOption('show-url', 'u', InputOption::VALUE_NONE, 'Display only the gist url')
-            ->addOption('show-id', 'i', InputOption::VALUE_NONE, 'Display only the gist Id')
+            ->addOption('all', 'a', InputOption::VALUE_NONE, 'Display all the response')
+            ->addOption('id', 'i', InputOption::VALUE_NONE, 'Display only the id of the gist')
+            ->addOption('json', 'j', InputOption::VALUE_NONE, 'Format the response to json')
             ->setHelp(<<<EOF
 Provides a client to create a gist using the API.
 
@@ -43,11 +45,14 @@ Options:
     <info>--gist</info>
         Defines the Gist to update by using its Id or its File
 
-    <info>--show-id</info>, <info>-i</info>
-        Display only the Id of the gist
+    <info>--id</info>, <info>-i</info>
+        Display only the id of the gist
 
-    <info>--show-url</info>, <info>-u</info>
-        Display only the url of the gist
+    <info>--all</info>, <info>-a</info>
+        Display all the response
+
+    <info>--json</info>, <info>-j</info>
+        Format the response to json
 EOF
             );
     }
@@ -57,10 +62,9 @@ EOF
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        //$output->writeln(sprintf('<comment>%s</comment> bar.', 'test'));
-
         $file = $input->getArgument('input');
         $gist = $input->getOption('gist');
+        $json = $input->getOption('json');
 
         if ($file === '-') {
             $content = file_get_contents('php://stdin');
@@ -86,19 +90,17 @@ EOF
 
         $gist = $this->getSilexApplication()['api_client']->update($gist, $content);
 
-        if ($input->getOption('show-url')) {
-            $output->writeln($gist['url']);
-
-            return true;
+        if ($input->getOption('id')) {
+            $id = isset($gist['gist']['id']) ? $gist['gist']['id'] : $gist['gist']['Id'];
+            $result = $json ? json_encode(array('id' => $id)) : $id;
+        } elseif ($input->getOption('all')) {
+            $result = $json ? json_encode($gist) : Yaml::dump($gist);
+        } else {
+            $url = $gist['url'];
+            $result = $json ? json_encode(array('url' => $url)) : $url;
         }
 
-        if ($input->getOption('show-id')) {
-            $output->writeln($gist['gist']['Id']);
-
-            return true;
-        }
-
-        $output->writeln(json_encode($gist));
+        $output->writeln($result);
     }
 
     /**

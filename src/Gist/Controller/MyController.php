@@ -58,6 +58,26 @@ class MyController extends Controller
 
         $gists = $this->getUser()->getGistsPager($page, $options);
 
+        $apiKey = $this->getUser()->getApiKey();
+
+        if (empty($apiKey)) {
+            $regenerateApiKey = true;
+        } 
+        // FIXME: CSRF issue!
+        elseif ($request->request->get('apiKey') === $apiKey && $request->request->has('generateApiKey')) {
+            $regenerateApiKey = true;
+        } else {
+            $regenerateApiKey = false;
+        }
+
+        if ($regenerateApiKey) {
+            $apiKey = $app['salt_generator']->generate(32, true);
+
+            $this->getUser()
+                ->setApiKey($apiKey)
+                ->save();
+        }
+
         if ($request->isMethod('post')) {
             $deleteForm->handleRequest($request);
             $passwordForm->handleRequest($request);
@@ -104,6 +124,7 @@ class MyController extends Controller
             array(
                 'gists' => $gists,
                 'page' => $page,
+                'apiKey' => $apiKey,
                 'deleteForm' => $deleteForm->createView(),
                 'filterForm' => $filterForm->createView(),
                 'passwordForm' => $passwordForm->createView(),

@@ -54,7 +54,7 @@ class User extends BaseUser implements UserInterface
      *
      * @return Propel\Runtime\Util\PropelModelPager
      */
-    public function getGistsPager($page, $options = array(), $maxPerPage = 10) 
+    public function getGistsPager($page, $options = array(), $maxPerPage = 10)
     {
         $query = GistQuery::create()
             ->filterByUser($this)
@@ -63,11 +63,11 @@ class User extends BaseUser implements UserInterface
         if (!empty($options['type']) && $options['type'] !== 'all') {
             $query->filterByType($options['type']);
         }
-        
+
         if (!empty($options['title'])) {
             $query->filterByTitle('%'.$options['title'].'%', Criteria::LIKE);
         }
-        
+
         if (!empty($options['cipher']) && $options['cipher'] !== 'anyway') {
             $bools = array(
                 'yes' => true,

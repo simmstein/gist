@@ -6,7 +6,11 @@ security:
     login_required_to_view_gist: false
     login_required_to_view_embeded_gist: false
 api:
+    enabled: true
+    api_key_required: false
     base_url: 'https://gist.deblan.org/'
+    client:
+        api_key: 
 data:
     path: data/git
 git:

@@ -22,6 +22,7 @@
         <column name="password" type="VARCHAR" size="255" required="true" />
         <column name="roles" type="VARCHAR" size="255" required="true" />
         <column name="salt" type="VARCHAR" size="64" required="true" />
+        <column name="api_key" type="VARCHAR" size="32" required="true" />
 
         <behavior name="timestampable"/>
     </table>

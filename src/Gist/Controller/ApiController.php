@@ -8,6 +8,8 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Gist\Form\ApiCreateGistForm;
 use Gist\Model\GistQuery;
 use Gist\Form\ApiUpdateGistForm;
+use GitWrapper\GitException;
+use Gist\Model\UserQuery;
 
 /**
  * Class ApiController.
@@ -16,9 +18,74 @@ use Gist\Form\ApiUpdateGistForm;
  */
 class ApiController extends Controller
 {
-    public function createAction(Request $request)
+    /**
+     * Lists gists.
+     *
+     * @param Request $request
+     * @param string  $apiKey
+     *
+     * @return JsonResponse
+     */
+    public function listAction(Request $request, $apiKey)
     {
         $app = $this->getApp();
+
+        if (false === $app['settings']['api']['enabled']) {
+            return new Response('', 403);
+        }
+
+        if (false === $this->isValidApiKey($apiKey, true)) {
+            return $this->invalidApiKeyResponse();
+        }
+
+        if (false === $request->isMethod('get')) {
+            return $this->invalidMethodResponse('GET method is required.');
+        }
+
+        $user = $app['user.provider']->loadUserByApiKey($apiKey);
+        $gists = $user->getGists();
+        $data = array();
+
+        foreach ($gists as $gist) {
+            try {
+                $history = $app['gist']->getHistory($gist);
+
+                $value = $gist->toArray();
+                $value['url'] = $request->getSchemeAndHttpHost().$app['url_generator']->generate(
+                    'view',
+                    array(
+                        'gist' => $gist->getFile(),
+                        'commit' => array_pop($history)['commit'],
+                    )
+                );
+
+                $data[] = $value;
+            } catch (GitException $e) {
+            }
+        }
+
+        return new JsonResponse($data);
+    }
+
+    /**
+     * Creates a gist.
+     *
+     * @param Request $request
+     * @param string  $apiKey
+     *
+     * @return JsonResponse
+     */
+    public function createAction(Request $request, $apiKey)
+    {
+        $app = $this->getApp();
+
+        if (false === $app['settings']['api']['enabled']) {
+            return new Response('', 403);
+        }
+
+        if (false === $this->isValidApiKey($apiKey, (bool) $app['settings']['api']['api_key_required'])) {
+            return $this->invalidApiKeyResponse();
+        }
 
         if (false === $request->isMethod('post')) {
             return $this->invalidMethodResponse('POST method is required.');
@@ -36,29 +103,50 @@ class ApiController extends Controller
         $form->submit($request);
 
         if ($form->isValid()) {
+            $user = !empty($apiKey) ? $app['user.provider']->loadUserByApiKey($apiKey) : null;
             $gist = $app['gist']->create(new Gist(), $form->getData());
-            $gist->setCipher(false)->save();
+            $gist
+                ->setCipher(false)
+                ->setUser($user)
+                ->save();
 
             $history = $app['gist']->getHistory($gist);
 
-            return new JsonResponse(array(
-                'url' => $request->getSchemeAndHttpHost().$app['url_generator']->generate(
-                    'view',
-                    array(
-                        'gist' => $gist->getFile(),
-                        'commit' => array_pop($history)['commit'],
-                    )
-                ),
-                'gist' => $gist->toArray(),
-            ));
+            $data = $gist->toArray();
+            $data['url'] = $request->getSchemeAndHttpHost().$app['url_generator']->generate(
+                'view',
+                array(
+                    'gist' => $gist->getFile(),
+                    'commit' => array_pop($history)['commit'],
+                )
+            );
+
+            return new JsonResponse($data);
         }
 
         return $this->invalidRequestResponse('Invalid field(s)');
     }
 
-    public function updateAction(Request $request, $gist)
+    /**
+     * Updates a gist.
+     *
+     * @param Request $request
+     * @param string  $gist
+     * @param string  $apiKey
+     *
+     * @return JsonResponse
+     */
+    public function updateAction(Request $request, $gist, $apiKey)
     {
         $app = $this->getApp();
+
+        if (false === $app['settings']['api']['enabled']) {
+            return new Response('', 403);
+        }
+
+        if (false === $this->isValidApiKey($apiKey, (bool) $app['settings']['api']['api_key_required'])) {
+            return $this->invalidApiKeyResponse();
+        }
 
         if (false === $request->isMethod('post')) {
             return $this->invalidMethodResponse('POST method is required.');
@@ -91,21 +179,88 @@ class ApiController extends Controller
 
             $history = $app['gist']->getHistory($gist);
 
-            return new JsonResponse(array(
-                'url' => $request->getSchemeAndHttpHost().$app['url_generator']->generate(
-                    'view',
-                    array(
-                        'gist' => $gist->getFile(),
-                        'commit' => array_pop($history)['commit'],
-                    )
-                ),
-                'gist' => $gist->toArray(),
-            ));
+            $data = $gist->toArray();
+            $data['url'] = $request->getSchemeAndHttpHost().$app['url_generator']->generate(
+                'view',
+                array(
+                    'gist' => $gist->getFile(),
+                    'commit' => array_pop($history)['commit'],
+                )
+            );
+
+            return new JsonResponse($data);
         }
 
         return $this->invalidRequestResponse('Invalid field(s)');
     }
 
+    /**
+     * Deletes a gist.
+     *
+     * @param Request $request
+     * @param string  $gist
+     * @param string  $apiKey
+     *
+     * @return JsonResponse
+     */
+    public function deleteAction(Request $request, $gist, $apiKey)
+    {
+        $app = $this->getApp();
+
+        if (false === $app['settings']['api']['enabled']) {
+            return new Response('', 403);
+        }
+
+        if (false === $this->isValidApiKey($apiKey, true)) {
+            return $this->invalidApiKeyResponse();
+        }
+
+        if (false === $request->isMethod('post')) {
+            return $this->invalidMethodResponse('POST method is required.');
+        }
+
+        $user = $app['user.provider']->loadUserByApiKey($apiKey);
+
+        $gist = GistQuery::create()
+            ->filterById((int) $gist)
+            ->_or()
+            ->filterByFile($gist)
+            ->filterByUser($user)
+            ->findOne();
+
+        if (!$gist) {
+            return $this->invalidRequestResponse('Invalid Gist');
+        }
+
+        $gist->delete();
+
+        return new JsonResponse(['error' => false]);
+    }
+
+    /**
+     * Builds an invalid api key response.
+     *
+     * @param mixed $message
+     *
+     * @return JsonResponse
+     */
+    protected function invalidApiKeyResponse()
+    {
+        $data = [
+            'error' => ' Unauthorized',
+            'message' => 'Invalid API KEY',
+        ];
+
+        return new JsonResponse($data, 401);
+    }
+
+    /**
+     * Builds an invalid method response.
+     *
+     * @param mixed $message
+     *
+     * @return JsonResponse
+     */
     protected function invalidMethodResponse($message = null)
     {
         $data = [
@@ -116,6 +271,13 @@ class ApiController extends Controller
         return new JsonResponse($data, 405);
     }
 
+    /**
+     * Builds an invalid request response.
+     *
+     * @param mixed $message
+     *
+     * @return JsonResponse
+     */
     protected function invalidRequestResponse($message = null)
     {
         $data = [
@@ -124,5 +286,25 @@ class ApiController extends Controller
         ];
 
         return new JsonResponse($data, 400);
+    }
+
+    /**
+     * Checks if the given api key is valid
+     * depending of the requirement.
+     *
+     * @param mixed $apiKey
+     * @param mixed $required
+     *
+     * @return bool
+     */
+    protected function isValidApiKey($apiKey, $required = false)
+    {
+        if (empty($apiKey)) {
+            return !$required;
+        }
+
+        return UserQuery::create()
+            ->filterByApiKey($apiKey)
+            ->count() === 1;
     }
 }

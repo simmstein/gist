@@ -18,6 +18,7 @@ class ApiUpdateGistForm extends ApiCreateGistForm
 
         $this->builder
             ->remove('title')
+            ->remove('file')
             ->remove('type');
 
         return $this->builder;

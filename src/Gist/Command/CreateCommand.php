@@ -7,6 +7,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
+use Propel\Runtime\Parser\YamlParser;
+use Symfony\Component\Yaml\Yaml;
 
 /**
  * class CreateCommand.
@@ -27,8 +29,9 @@ class CreateCommand extends Command
             ->addArgument('input', InputArgument::REQUIRED, 'Input')
             ->addArgument('type', InputArgument::OPTIONAL, 'Type', 'text')
             ->addOption('title', 't', InputOption::VALUE_REQUIRED, 'Title of the gist')
-            ->addOption('show-url', 'u', InputOption::VALUE_NONE, 'Display only the gist url')
-            ->addOption('show-id', 'i', InputOption::VALUE_NONE, 'Display only the gist Id')
+            ->addOption('all', 'a', InputOption::VALUE_NONE, 'Display all the response')
+            ->addOption('id', 'i', InputOption::VALUE_NONE, 'Display only the id of the gist')
+            ->addOption('json', 'j', InputOption::VALUE_NONE, 'Format the response to json')
             ->setHelp(<<<EOF
 Provides a client to create a gist using the API.
 
@@ -43,12 +46,15 @@ Arguments:
 Options:
     <info>--title</info>, <info>-t</info>
         Defines a title
-    
-    <info>--show-id</info>, <info>-i</info>
-        Display only the Id of the gist
 
-    <info>--show-url</info>, <info>-u</info>
-        Display only the url of the gist
+    <info>--id</info>, <info>-i</info>
+        Display only the id of the gist
+
+    <info>--all</info>, <info>-a</info>
+        Display all the response
+
+    <info>--json</info>, <info>-j</info>
+        Format the response to json
 EOF
             );
     }
@@ -58,11 +64,10 @@ EOF
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        //$output->writeln(sprintf('<comment>%s</comment> bar.', 'test'));
-
         $file = $input->getArgument('input');
         $type = $input->getArgument('type');
         $title = $input->getOption('title');
+        $json = $input->getOption('json');
 
         if ($file === '-') {
             $content = file_get_contents('php://stdin');
@@ -94,19 +99,17 @@ EOF
 
         $gist = $this->getSilexApplication()['api_client']->create($title, $type, $content);
 
-        if ($input->getOption('show-url')) {
-            $output->writeln($gist['url']);
-
-            return true;
+        if ($input->getOption('id')) {
+            $id = isset($gist['gist']['id']) ? $gist['gist']['id'] : $gist['gist']['Id'];
+            $result = $json ? json_encode(array('id' => $id)) : $id;
+        } elseif ($input->getOption('all')) {
+            $result = $json ? json_encode($gist) : Yaml::dump($gist);
+        } else {
+            $url = $gist['url'];
+            $result = $json ? json_encode(array('url' => $url)) : $url;
         }
 
-        if ($input->getOption('show-id')) {
-            $output->writeln($gist['gist']['Id']);
-
-            return true;
-        }
-
-        $output->writeln(json_encode($gist));
+        $output->writeln($result);
     }
 
     /**
