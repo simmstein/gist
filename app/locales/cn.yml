@@ -20,6 +20,11 @@ app:
 my:
     title: '我的 Gist'
     nothing: '这家伙很懒，暂时没有内容'
+    api:
+        title: 'API'
+        warning: 'Keep it <strong>secret!</strong>'
+        form:
+            generate: 'Regenerate'
 
 gist:
     untitled: '未命名'

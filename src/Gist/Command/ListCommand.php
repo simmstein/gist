@@ -25,7 +25,7 @@ class ListCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('list')
+            ->setName('gists')
             ->setDescription('List gists using the API');
     }
 

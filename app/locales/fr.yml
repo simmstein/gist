@@ -20,6 +20,11 @@ app:
 my:
     title: 'Mes Gists'
     nothing: 'Rien pour le moment !'
+    api:
+        title: 'API'
+        warning: 'Gardez-la <strong>secrète !</strong>'
+        form:
+            generate: 'Regénérer'
 
 gist:
     untitled: 'Sans titre'
