@@ -10,6 +10,7 @@ use Gist\Model\GistQuery;
 use Gist\Form\ApiUpdateGistForm;
 use GitWrapper\GitException;
 use Gist\Model\UserQuery;
+use Propel\Runtime\ActiveQuery\Criteria;
 
 /**
  * Class ApiController.
@@ -43,7 +44,12 @@ class ApiController extends Controller
         }
 
         $user = $app['user.provider']->loadUserByApiKey($apiKey);
-        $gists = $user->getGists();
+
+        $criteria = GistQuery::create()
+            ->limit(15)
+            ->orderById(Criteria::DESC);
+
+        $gists = $user->getGists($criteria);
         $data = array();
 
         foreach ($gists as $gist) {
