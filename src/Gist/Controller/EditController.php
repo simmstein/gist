@@ -43,7 +43,9 @@ class EditController extends Controller
             if (empty($form->getData()['content']) && $form->get('file')->getData()) {
                 $data['content'] = file_get_contents($form->get('file')->getData()->getPathName());
                 unset($data['file']);
-            } elseif (empty($form->getData()['content'])) {
+            }
+
+            if (empty($data['content'])) {
                 $form->get('content')->addError(new FormError($app['translator']->trans('form.error.not_blank')));
             }
 
