@@ -144,7 +144,7 @@ var viewerEvents = function() {
         var key = getKey();
 
         var $cipherEditor = $('.cipher-editor');
-        var $embedInput = $('#embed-input');
+        var $embedCode = $('#embed code');
 
         var to = ' ';
 
@@ -177,8 +177,8 @@ var viewerEvents = function() {
             }
         }
 
-        if ($embedInput.length) {
-            $embedInput.val($embedInput.val().replace('%key%', to));
+        if ($embedCode.length) {
+            $embedCode.html($embedCode.html().replace('%key%', to));
         }
     });
 }

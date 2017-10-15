@@ -64,11 +64,19 @@
                             <div id="viewer">
                                 <pre><code {% if gist.cipher %}data-cipher{% endif %} class="language-{{ gist.type }}" data-dependencies="{{ gist.type }}">{{ raw_content }}</code></pre>
                             </div>
-
-                            <p id="embed" class="pull-right">
-                                {{ 'gist.action.embed'|trans }}
-                                <input type="text" class="form-control" id="embed-input" value="{{ '<div%key%id="gist-' ~ gist.file ~ '-' ~ commit ~ '" class="gist-container"></div><script src="' ~ app.request.getSchemeAndHttpHost() ~ path('embedjs', app.request.attributes.get('_route_params')) ~ '" async></script>' }}" />
-                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    {{ 'gist.action.embed'|trans }}
+                </div>
+                <div class="panel-body" id="embed">
+                    <div class="tab-content">
+                        <div class="tab-pane active in">
+                            <pre><code class="language-html">{{ '<div%key%id="gist-' ~ gist.file ~ '-' ~ commit ~ '" class="gist-container"></div>
+<script src="' ~ app.request.getSchemeAndHttpHost() ~ path('embedjs', app.request.attributes.get('_route_params')) ~ '" async></script>' }}</code></pre>
                         </div>
                     </div>
                 </div>

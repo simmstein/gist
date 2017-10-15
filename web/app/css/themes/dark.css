@@ -26,7 +26,7 @@ body {
 	margin-right: 4px;
 }
 
-#viewer pre, #viewer code, #revisions pre, #revisions code {
+#viewer pre, #viewer code, #revisions pre, #revisions code, #embed pre, #embed code {
     background: none !important;
 	white-space: pre-wrap;
 	white-space: -moz-pre-wrap;
