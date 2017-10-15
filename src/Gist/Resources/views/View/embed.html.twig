@@ -65,7 +65,7 @@
                     <div class="tab-content">
                         <div id="view" class="tab-pane active in">
                             <div id="viewer">
-                                <pre><code {% if gist.cipher %}data-cipher{% endif %} class="language-{{ gist.type }}">{{ raw_content }}</code></pre>
+                                <pre><code {% if gist.cipher %}data-cipher{% endif %} class="language-{{ gist.highlightType }}">{{ raw_content }}</code></pre>
                             </div>
                         </div>
                     </div>
