@@ -33,30 +33,69 @@
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <div class="pull-right actions">
-                        <span class="btn btn-warning btn-xs">
-                            {{ commit|slice(0, 10) }}
-                        </span>
+                    <div class="row">
+                        <div class="col-md-6 col-xs-9">
+                            {{ gist.title ? gist.title : 'gist.untitled'|trans }}
+                        </div>
+                        <div class="col-md-6 col-xs-3">
+                            <div class="visible-sm visible-xs pull-right">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span class="glyphicon glyphicon-menu-hamburger"></span>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-right">
+                                        <li>
+                                            <a target="_blank" href="{{ path('view', app.request.attributes.get('_route_params')) }}" class="cipher-link">
+                                                <span class="btn btn-warning btn-xs">
+                                                    {{ commit|slice(0, 10) }}
+                                                </span>
+                                            </a>
+                                        </li>
+                                        {% if not gist.cipher %}
+                                            <li>
+                                                <a href="{{ path('raw', app.request.attributes.get('_route_params')) }}">
+                                                    {{ 'gist.action.raw'|trans }}
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ path('download', app.request.attributes.get('_route_params')) }}" class="btn-sm">
+                                                    {{ 'gist.action.download'|trans }}
+                                                </a>
+                                            </li>
+                                        {% endif %}
+                                        <li>
+                                            <a href="{{ path('clone', app.request.attributes.get('_route_params')) }}" class="cipher-link">
+                                                {{ 'gist.action.clone'|trans }}
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="visible-md visible-lg">
+                                <div class="text-right actions">
+                                    <span class="btn btn-warning btn-xs">
+                                        {{ commit|slice(0, 10) }}
+                                    </span>
 
-                        {% if not gist.cipher %}
-                            <a href="{{ path('raw', app.request.attributes.get('_route_params')) }}" class="btn btn-default btn-sm">
-                                <span class="glyphicon glyphicon-eye-open"></span>
-                                {{ 'gist.action.raw'|trans }}
-                            </a>
-                            <a href="{{ path('download', app.request.attributes.get('_route_params')) }}" class="btn btn-default btn-sm">
-                                <span class="glyphicon glyphicon-save-file"></span>
-                                {{ 'gist.action.download'|trans }}
-                            </a>
-                        {% endif %}
+                                    {% if not gist.cipher %}
+                                        <a href="{{ path('raw', app.request.attributes.get('_route_params')) }}" class="btn btn-default btn-sm">
+                                            <span class="glyphicon glyphicon-eye-open"></span>
+                                            {{ 'gist.action.raw'|trans }}
+                                        </a>
+                                        <a href="{{ path('download', app.request.attributes.get('_route_params')) }}" class="btn btn-default btn-sm">
+                                            <span class="glyphicon glyphicon-save-file"></span>
+                                            {{ 'gist.action.download'|trans }}
+                                        </a>
+                                    {% endif %}
 
-                        <a href="{{ path('clone', app.request.attributes.get('_route_params')) }}" class="btn btn-success btn-sm cipher-link">
-                            <span class="glyphicon glyphicon-copy"></span>
-                            {{ 'gist.action.clone'|trans }}
-                        </a>
+                                    <a href="{{ path('clone', app.request.attributes.get('_route_params')) }}" class="btn btn-success btn-sm cipher-link">
+                                        <span class="glyphicon glyphicon-copy"></span>
+                                        {{ 'gist.action.clone'|trans }}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-
-                    {{ gist.title ? gist.title : 'gist.untitled'|trans }}
-
                 </div>
                 <div class="panel-body">
                     <div class="tab-content">
