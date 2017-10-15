@@ -179,6 +179,7 @@ var viewerEvents = function() {
 
         if ($embedCode.length) {
             $embedCode.html($embedCode.html().replace('%key%', to));
+            Prism.highlightAll();
         }
     });
 }
