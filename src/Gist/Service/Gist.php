@@ -33,24 +33,17 @@ class Gist
     protected $gitWorkingCopy;
 
     /**
-     * @var GeSHi
-     */
-    protected $geshi;
-
-    /**
      * __construct.
      *
      * @param mixed          $gistPath
      * @param GitWrapper     $gitWrapper
      * @param GitWorkingCopy $gitWorkingCopy
-     * @param GeSHi          $geshi
      */
-    public function __construct($gistPath, GitWrapper $gitWrapper, GitWorkingCopy $gitWorkingCopy, GeSHi $geshi)
+    public function __construct($gistPath, GitWrapper $gitWrapper, GitWorkingCopy $gitWorkingCopy)
     {
         $this->gistPath = $gistPath;
         $this->gitWrapper = $gitWrapper;
         $this->gitWorkingCopy = $gitWorkingCopy;
-        $this->geshi = $geshi;
     }
 
     /**
@@ -95,7 +88,7 @@ class Gist
             $data = array(
                 'commit' => trim($commits[$i][1]),
                 'date' => new \DateTime(trim($dates[$i][1])),
-                'diff' => $this->highlight('diff', $diff),
+                'diff' => str_replace('\ No newline at end of file', '', $diff),
             );
 
             if ($gist->isCipher()) {
@@ -192,21 +185,5 @@ class Gist
         $content = str_replace("\r\n", "\n", $content);
 
         return count(explode("\n", $content));
-    }
-
-    /**
-     * Highlight the content.
-     *
-     * @param string $type
-     * @param string $content
-     *
-     * @return string
-     */
-    public function highlight($type, $content)
-    {
-        $this->geshi->set_source($content);
-        $this->geshi->set_language($type);
-
-        return $this->geshi->parse_code();
     }
 }

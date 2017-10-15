@@ -1,14 +1,15 @@
 {% extends 'base.html.twig' %}
 
 {% block css %}
-    {% if gist.cipher %}
-        <link type="text/css" rel="Stylesheet" href="{{ web_path }}components/SyntaxHighlighter/styles/shCoreRDark.css" />
-        <link type="text/css" rel="Stylesheet" href="{{ web_path }}components/SyntaxHighlighter/styles/shThemeRDark.css" />
-    {% else %}
-        <link rel="stylesheet" href="{{ web_path }}app/css/geshi/vibrant-ink.css" />
-    {% endif %}
-
     {{ parent() }}
+
+    <link rel="stylesheet" href="{{ web_path }}app/css/prism.css">
+
+    {% if theme_settings.name == 'dark' %}
+        <link rel="stylesheet" href="{{ web_path }}app/css/prism-okaidia.css">
+    {% else %}
+        <link rel="stylesheet" href="{{ web_path }}app/css/prism-solarizedlight.css">
+    {% endif %}
 {% endblock %}
 
 {% block title %}{{ gist.title ? gist.title : 'gist.untitled'|trans }} - {{ commit|slice(0, 10) }}{% endblock %}
@@ -61,11 +62,7 @@
                     <div class="tab-content">
                         <div id="view" class="tab-pane active in">
                             <div id="viewer">
-                                {% if gist.cipher %}
-                                    <pre class="brush: {{ gist.type }}; syntaxhighlighter">{{ raw_content|raw }}</pre>
-                                {% else %}
-                                    {{ content|raw }}
-                                {% endif %}
+                                <pre><code {% if gist.cipher %}data-cipher{% endif %} class="language-{{ gist.type }}" data-dependencies="{{ gist.type }}">{{ raw_content }}</code></pre>
                             </div>
 
                             <p id="embed" class="pull-right">
@@ -82,8 +79,6 @@
 
 {% block js %}
     {{ parent() }}
-    
-    {% if gist.cipher %}
-        {{ include('View/cipherJs.html.twig') }}
-    {% endif %}
+
+    <script src="{{ web_path }}app/js/prism.js" {% if gist.cipher %}data-manual{% endif %}></script>
 {% endblock %}

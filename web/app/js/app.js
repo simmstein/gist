@@ -138,7 +138,7 @@ var getKey = function() {
 }
 
 var viewerEvents = function() {
-    var $render = $('.syntaxhighlighter');
+    var $render = $('#viewer code[data-cipher]');
 
     $(document).ready(function() {
         var key = getKey();
@@ -163,7 +163,8 @@ var viewerEvents = function() {
                     });
 
                     $render.text(decrypted.toString(CryptoJS.enc.Utf8));
-                    SyntaxHighlighter.all();
+                    $render.attr('class', $render.data('class'));
+                    Prism.highlightAll();
 
                     to = ' data-key="#key=' + key + '" ';
                 } else {
