@@ -37,7 +37,7 @@ gist:
         raw: '源文件'
         download: '下载'
         clone: '克隆'
-        embed: '引用:'
+        embed: '引用'
         add: '新建'
 
 date:

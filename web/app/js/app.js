@@ -138,13 +138,13 @@ var getKey = function() {
 }
 
 var viewerEvents = function() {
-    var $render = $('.syntaxhighlighter');
+    var $render = $('#viewer code[data-cipher]');
 
     $(document).ready(function() {
         var key = getKey();
 
         var $cipherEditor = $('.cipher-editor');
-        var $embedInput = $('#embed-input');
+        var $embedCode = $('#embed code');
 
         var to = ' ';
 
@@ -163,7 +163,8 @@ var viewerEvents = function() {
                     });
 
                     $render.text(decrypted.toString(CryptoJS.enc.Utf8));
-                    SyntaxHighlighter.all();
+                    $render.attr('class', $render.data('class'));
+                    Prism.highlightAll();
 
                     to = ' data-key="#key=' + key + '" ';
                 } else {
@@ -176,8 +177,9 @@ var viewerEvents = function() {
             }
         }
 
-        if ($embedInput.length) {
-            $embedInput.val($embedInput.val().replace('%key%', to));
+        if ($embedCode.length) {
+            $embedCode.html($embedCode.html().replace('%key%', to));
+            Prism.highlightAll();
         }
     });
 }

@@ -45,14 +45,16 @@ class Gist extends BaseGist
     }
 
     /**
-     * Returns the type for Geshi.
+     * Returns the type for highlighting.
      *
      * @return string
      */
-    public function getGeshiType()
+    public function getHighlightType()
     {
         $data = array(
             'html' => 'xml',
+            'asp' => 'aspnet',
+            'actionscript3' => 'actionscript',
         );
 
         return str_replace(array_keys($data), array_values($data), $this->getType());

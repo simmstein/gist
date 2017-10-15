@@ -1,31 +1,17 @@
 {% extends 'base.html.twig' %}
 
 {% block css %}
-    {% if gist.cipher %}
-        <link type="text/css" rel="Stylesheet" href="{{ web_path }}components/SyntaxHighlighter/styles/shCoreRDark.css" />
-        <link type="text/css" rel="Stylesheet" href="{{ web_path }}components/SyntaxHighlighter/styles/shThemeRDark.css" />
+    {{ parent() }}
+
+    <link rel="stylesheet" href="{{ web_path }}components/Prism/themes/prism.css">
+
+    {% if theme_settings.name == 'dark' %}
+        <link rel="stylesheet" href="{{ web_path }}app/css/prism-okaidia.css">
     {% else %}
-        <link rel="stylesheet" href="{{ web_path }}app/css/geshi/vibrant-ink.css" />
+        <link rel="stylesheet" href="{{ web_path }}app/css/prism-solarizedlight.css">
     {% endif %}
 
-    {{ parent() }}
-    
     <style type="text/css">
-        #embed {
-            padding: 0;
-        }
-
-        #viewer {
-            background: #222;
-        }
-
-        pre {
-            font-size: 14px;
-            padding: 5px;
-			margin-bottom: 0;
-			background: #333;
-        }
-
         .panel-body {
             padding: 0;
         }
@@ -34,9 +20,8 @@
             margin-bottom: 0;
         }
 
-        pre ol {
-            padding-left: 0 !important;
-            list-style: none;
+        .container-fluid {
+            padding: 0;
         }
     </style>
 {% endblock %}
@@ -80,11 +65,7 @@
                     <div class="tab-content">
                         <div id="view" class="tab-pane active in">
                             <div id="viewer">
-                                {% if gist.cipher %}
-                                    <pre class="brush: {{ gist.type }}; syntaxhighlighter">{{ raw_content|raw }}</pre>
-                                {% else %}
-                                    {{ content|raw }}
-                                {% endif %}
+                                <pre><code {% if gist.cipher %}data-cipher{% endif %} class="language-{{ gist.highlightType }}">{{ raw_content }}</code></pre>
                             </div>
                         </div>
                     </div>
@@ -100,37 +81,5 @@
     {{ parent() }}
 
     <script type="text/javascript" src="{{ web_path }}components/iframe-resizer/js/iframeResizer.contentWindow.min.js"></script>
-
-    {% if gist.cipher %}
-        <script type="text/javascript" src="{{ web_path }}components/SyntaxHighlighter/scripts/XRegExp.js"></script> <!-- XRegExp is bundled with the final shCore.js during build -->
-        <script type="text/javascript" src="{{ web_path }}components/SyntaxHighlighter/scripts/shCore.js"></script>
-        <script type="text/javascript" src="{{ web_path }}components/SyntaxHighlighter/scripts/shAutoloader.js"></script>
-        <script type="text/javascript">
-            SyntaxHighlighter.autoloader(
-                ['applescript',                    '{{ web_path }}components/SyntaxHighlighter/scripts/shBrushAppleScript.js' ],
-                ['actionscript3', 'as3',           '{{ web_path }}components/SyntaxHighlighter/scripts/shBrushAS3.js' ],
-                ['bash', 'shell',                  '{{ web_path }}components/SyntaxHighlighter/scripts/shBrushBash.js' ],
-                ['coldfusion', 'cf',               '{{ web_path }}components/SyntaxHighlighter/scripts/shBrushColdFusion.js' ],
-                ['cpp', 'c',                       '{{ web_path }}components/SyntaxHighlighter/scripts/shBrushCpp.js' ],
-                ['c#', 'c-sharp', 'csharp',        '{{ web_path }}components/SyntaxHighlighter/scripts/shBrushCSharp.js' ],
-                ['css',                            '{{ web_path }}components/SyntaxHighlighter/scripts/shBrushCss.js' ],
-                ['delphi', 'pascal',               '{{ web_path }}components/SyntaxHighlighter/scripts/shBrushDelphi.js' ],
-                ['diff', 'patch', 'pas',           '{{ web_path }}components/SyntaxHighlighter/scripts/shBrushDiff.js' ],
-                ['erl', 'erlang',                  '{{ web_path }}components/SyntaxHighlighter/scripts/shBrushErlang.js' ],
-                ['groovy',                         '{{ web_path }}components/SyntaxHighlighter/scripts/shBrushGroovy.js' ],
-                ['java',                           '{{ web_path }}components/SyntaxHighlighter/scripts/shBrushJava.js' ],
-                ['jfx', 'javafx',                  '{{ web_path }}components/SyntaxHighlighter/scripts/shBrushJavaFX.js' ],
-                ['js', 'jscript', 'javascript',    '{{ web_path }}components/SyntaxHighlighter/scripts/shBrushJScript.js' ],
-                ['perl', 'pl',                     '{{ web_path }}components/SyntaxHighlighter/scripts/shBrushPerl.js' ],
-                ['php',                            '{{ web_path }}components/SyntaxHighlighter/scripts/shBrushPhp.js' ],
-                ['text', 'plain',                  '{{ web_path }}components/SyntaxHighlighter/scripts/shBrushPlain.js' ],
-                ['py', 'python',                   '{{ web_path }}components/SyntaxHighlighter/scripts/shBrushPython.js' ],
-                ['ruby', 'rails', 'ror', 'rb',     '{{ web_path }}components/SyntaxHighlighter/scripts/shBrushRuby.js' ],
-                ['scala',                          '{{ web_path }}components/SyntaxHighlighter/scripts/shBrushScala.js' ],
-                ['sql',                            '{{ web_path }}components/SyntaxHighlighter/scripts/shBrushSql.js' ],
-                ['vb', 'vbnet',                    '{{ web_path }}components/SyntaxHighlighter/scripts/shBrushVb.js' ],
-                ['xml', 'xhtml', 'xslt', 'html',   '{{ web_path }}components/SyntaxHighlighter/scripts/shBrushXml.js' ]
-            );
-        </script>
-    {% endif %}
+    <script src="{{ web_path }}app/js/prism.js" {% if gist.cipher %}data-manual{% endif %}></script>
 {% endblock %}

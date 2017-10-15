@@ -12,11 +12,3 @@ $app->extend('twig', function ($twig, $app) {
     
     return $twig;
 });
-
-$app['geshi'] = $app->share(function ($app) {
-    $geshi = new GeSHi();
-    $geshi->enable_classes();
-    $geshi->enable_line_numbers(GESHI_NORMAL_LINE_NUMBERS);
-
-    return $geshi;
-});

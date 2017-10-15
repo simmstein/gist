@@ -20,5 +20,5 @@ $app['git_working_copy'] = $app->share(function ($app) {
 });
 
 $app['gist'] = $app->share(function ($app) {
-    return new Gist($app['gist_path'], $app['git_wrapper'], $app['git_working_copy'], $app['geshi']);
+    return new Gist($app['gist_path'], $app['git_wrapper'], $app['git_working_copy']);
 });

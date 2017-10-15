@@ -38,7 +38,7 @@ gist:
         raw: 'RAW'
         download: 'Download'
         clone: 'Clone'
-        embed: 'Embed:'
+        embed: 'Embed'
         add: 'New'
 
 date:

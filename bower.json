@@ -15,8 +15,8 @@
   "dependencies": {
     "bootstrap": "3.3.4",
     "flag-icon-css": "0.7.1",
-    "SyntaxHighlighter": "3.0.83",
     "iframe-resizer": "2.8.6",
-    "jsdiff": "~2.2.2"
+    "jsdiff": "~2.2.2",
+    "Prism": "~1.8.1"
   }
 }
