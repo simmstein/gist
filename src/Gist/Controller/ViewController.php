@@ -131,7 +131,7 @@ class ViewController extends Controller
                 200,
                 array(
                     'Content-Disposition' => sprintf('filename=%s.%s', $gist->getFile(), $gist->getTypeAsExtension()),
-                    'Content-Length' => filesize($file),
+                    'Content-Length' => mb_strlen($viewOptions['raw_content']),
                     'Content-Type' => 'application/force-download',
                 )
             );
