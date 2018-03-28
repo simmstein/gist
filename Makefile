@@ -31,7 +31,6 @@ update:
 	@echo "-----------------------------------"
 	@echo 
 
-	sh -c 'test -d app && $(GIT) add app && $(GIT) commit -m "Configuration"'
 	$(GIT) pull origin master
 	${MKDIR} -p data/git
 	$(COMPOSER) update
