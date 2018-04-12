@@ -1,0 +1,108 @@
+app:
+    title: '#!GIST'
+    title_prefix: '#!GIST - '
+
+    menu:
+        home:
+            title: 'Home'
+        about:
+            title: 'O projekcie'
+        my:
+            login:
+                title: 'Logowanie'
+            logout:
+                title: 'Wylogowanie'
+            register:
+                title: 'Rejestracja'
+            my:
+                title: 'Konta'
+
+my:
+    title: 'Moje wklejki'
+    nothing: 'Nie ma jeszcze nic!'
+    api:
+        title: 'API'
+        warning: 'Trzymaj to w <strong>sekrecie!</strong>'
+        form:
+            generate: 'Wygeneruj nowy'
+
+
+gist:
+    untitled: 'Bez tytułu'
+    404:
+        title: 'Oops!'
+        message: 'Wklejka nie została znaleziona...'
+    action:
+        view: 'Podgląd'
+        history: 'Commit(s)'
+        raw: 'RAW'
+        download: 'Pobierz'
+        clone: 'Sklonuj'
+        embed: 'Embed'
+        add: 'Nowa'
+
+date:
+    format: 'Y-m-d h:i:s'
+
+footer:
+    text: '<p>Napędzane przez <a href="https://gitnet.fr/deblan/gist">GIST</a>, to jest open source :) - <a href="https://gitnet.fr/deblan/gist#api">API</a></p>'
+
+login:
+    login:
+        title: 'Logowanie'
+        invalid: 'Nie prawidłowy login lub hasło.'
+        form:
+            username:
+                placeholder: 'Login'
+            password:
+                placeholder: 'Hasło'
+            remember_me:
+                label: 'Pamiętaj'
+    register:
+        title: 'Nowe konto'
+        already_exists: 'Ta nazwa użytkownika jest już zarejestrowana!'
+        registred: 'Gratulacje, twoje konto zostało utworzone!'
+        form:
+            username:
+                placeholder: 'Login'
+            current_password:
+                placeholder: 'Obecne hasło'
+            password:
+                placeholder: 'Hasło'
+
+form:
+    error:
+        password: 'Nie prawidłowe hasło.'
+        not_blank: 'To pole nie powinno być puste!'
+    title:
+        placeholder: 'Tytuł'
+    cipher:
+        label: 'Szyfrowanie: %value%'
+        choice:
+            anyway: 'Tak czy inaczej'
+            yes: 'Tak'
+            no: 'Nie'
+    submit: 'Wyślij'
+    filter: 'Filtr'
+    confirm: 'Potwierdzasz?'
+    success:
+        password: 'Hasło zostało zaktualizowane.'
+        gist: 'Wklejka została usunięta.'
+    type:
+        label: 'Język: %value%'
+        choice:
+            all: 'All'
+            html: 'HTML'
+            xml: 'XML'
+            css: 'CSS'
+            javascript: 'JAVASCRIPT'
+            php: 'PHP'
+            sql: 'SQL'
+            yaml: 'YAML'
+            perl: 'PERL'
+            c: 'C/C++'
+            asp: 'ASP'
+            python: 'PYTHON'
+            bash: 'BASH'
+            actionscript3: 'ACTION SCRIPT'
+            text: 'TEXT'
