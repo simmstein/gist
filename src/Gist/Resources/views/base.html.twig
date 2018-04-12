@@ -81,7 +81,7 @@
                         </ul>
                         {% block langs %}
                             <p class="navbar-text navbar-right">
-                                {% for locale, flag in {'en': 'gb', 'fr': 'fr', 'es': 'es', 'de': 'de', 'cn': 'cn'} %}
+                                {% for locale, flag in {'en': 'gb', 'fr': 'fr', 'es': 'es', 'de': 'de', 'cn': 'cn', 'pl': 'pl'} %}
                                     <a class="lang btn btn-xs cipher-link" href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({_locale: locale})) }}">
                                         <span class="flag-icon flag-icon-{{ flag }}"></span>
                                     </a>
