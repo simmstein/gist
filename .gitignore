@@ -5,8 +5,8 @@
 /propel.yaml
 /src/Gist/Model/Base/
 /src/Gist/Model/Map/
-/web/components/
 /app/propel/
+/node_modules/
 /app/config/config.yml
 /app/config/propel/
 /data/

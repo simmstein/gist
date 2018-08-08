@@ -5,7 +5,7 @@ Table of Contents
     * [Requirements](#requirements)
       * [Git](#git)
       * [Composer](#composer)
-      * [Bower](#bower)
+      * [NPM](#npm)
     * [Installation](#installation)
     * [Upgrade](#upgrade)
     * [Configuration](#configuration)
@@ -34,7 +34,7 @@ Requirements
 * GIT
 * MySQL or SQLite (PostgreSQL should works)
 * Composer (php)
-* Bower (node)
+* NPM (nodejs)
 
 ### Git
 
@@ -62,10 +62,9 @@ Else, follow the next instructions:
     # For a global installation
     $ sudo mv composer.phar /usr/local/bin/composer
 
-### Bower
+### NPM
 
     $ sudo apt-get install npm
-    $ sudo npm install -g bower
 
 Installation
 ------------
@@ -162,11 +161,25 @@ Makefile
 
 A Makefile is provided to automate some tasks.
 
-* `make` will install application's dependencies via Composer and Bower,
-* `make optimize` will run Composer's autoloader dump script with classmap
+* `make` will install dependencies via composer and NPM
+* `make composer` will install PHP dependencies via composer
+* `make npm` will install CSS/JS dependencies via NPM
 * `make update` will update the application
-* `make propel` will generate propel's files
+* `make propel` will generate propel migrations (database and files)
 * `make run` will run development server on http://127.0.0.1:8080/
+
+By default, `composer`, `npm`, `git`, `mkdir` and `php` binaries must be in your `$PATH`. You can override it by using these envars:
+
+* `COMPOSER`
+* `NPM`
+* `GIT`
+* `MKDIR`
+* `PHP`
+
+For example:
+
+    $ export COMPOSER=/path/to/composer
+    $ make composer
 
 API
 ---

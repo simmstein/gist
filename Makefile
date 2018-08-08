@@ -1,5 +1,5 @@
 COMPOSER ?= composer
-BOWER ?= bower
+NPM ?= npm
 GIT ?= git
 MKDIR ?= mkdir
 PHP ?= php
@@ -7,47 +7,40 @@ PHP ?= php
 all: update
 
 composer:
-	@echo "Installing application's dependencies"
-	@echo "-------------------------------------"
-	@echo 
+	@echo "Installing PHP dependencies"
+	@echo "---------------------------"
+	@echo
 
 	$(COMPOSER) install $(COMPOSER_INSTALL_FLAGS)
-bower:
-	@echo "Installing application's dependencies"
-	@echo "-------------------------------------"
-	@echo 
+npm:
+	@echo "Installing CSS/JS dependencies"
+	@echo "------------------------------"
+	@echo
 
-	$(BOWER) install
-
-optimize:
-	@echo "Optimizing Composer's autoloader, can take some time"
-	@echo "----------------------------------------------------"
-	@echo 
-
-	$(COMPOSER) dump-autoload --optimize
+	$(NPM) install
 
 update:
 	@echo "Updating application's dependencies"
 	@echo "-----------------------------------"
-	@echo 
+	@echo
 
 	$(GIT) pull origin master
 	${MKDIR} -p data/git
 	$(COMPOSER) update
-	$(BOWER) install
+	$(NPM) install
 
 run:
 	@echo "Run development server"
 	@echo "----------------------"
-	@echo 
+	@echo
 
 	$(PHP) -S 127.0.0.1:8080 -t web
 
 propel:
 	@echo "Propel migration"
 	@echo "----------------"
-	@echo 
-	
+	@echo
+
 	./vendor/propel/propel/bin/propel config:convert
 	./vendor/propel/propel/bin/propel model:build --recursive
 	./vendor/propel/propel/bin/propel migration:diff --recursive

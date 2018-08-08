@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "bootstrap": "^3.3.4",
+    "diff": "^2.2.2",
+    "flag-icon-css": "^0.8.6",
+    "iframe-resizer": "^2.8.6",
+    "jquery": "^1.9.1"
+  }
+}
