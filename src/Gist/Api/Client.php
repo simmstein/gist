@@ -88,7 +88,7 @@ class Client extends BaseClient
     public function update($gist, $content)
     {
         $response = $this->post(
-            str_replace('{gist}', $gist, $this->mergeApiKey(self::LIST)),
+            str_replace('{gist}', $gist, $this->mergeApiKey(self::UPDATE)),
             array(
                 'form_params' => array(
                     'form' => array(
