@@ -158,12 +158,16 @@ class ApiController extends Controller
             return $this->invalidMethodResponse('POST method is required.');
         }
 
-        $gist = GistQuery::create()
-            ->filterByCipher(false)
-            ->filterById((int) $gist)
-            ->_or()
-            ->filterByFile($gist)
-            ->findOne();
+        $query = GistQuery::create()
+            ->filterByCipher(false);
+
+        if (ctype_digit($gist)) {
+            $query->filterById((int) $gist);
+        } else {
+            $query->filterByFile($gist);
+        }
+
+        $gist = $query->findOne();
 
         if (!$gist) {
             return $this->invalidRequestResponse('Invalid Gist');
