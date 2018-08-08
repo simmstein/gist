@@ -15,6 +15,17 @@
         "guzzlehttp/guzzle": "~6.0",
         "symfony/security": "^2.7"
     },
+    "scripts": {
+        "gist-scripts": [
+            "Gist\\Composer\\PostInstallHandler::execute"
+        ],
+        "post-install-cmd": [
+            "@gist-scripts"
+        ],
+        "post-update-cmd": [
+            "@gist-scripts"
+        ]
+    },
     "autoload": {
         "psr-0": {
             "": "src/"

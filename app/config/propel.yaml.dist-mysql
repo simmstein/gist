@@ -5,7 +5,7 @@ propel:
                 adapter: mysql
                 classname: Propel\Runtime\Connection\ConnectionWrapper
                 dsn: "mysql:host=DATABASE_HOST;dbname=DATABASE_NAME"
-                user: "DATABASE_USER"
+                user: "DATABASE_USERNAME"
                 password: "DATABASE_PASSWORD"
                 settings:
                     charset: utf8
