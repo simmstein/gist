@@ -32,7 +32,7 @@ Requirements
 
 * PHP >= 5.4
 * GIT
-* MySQL, PostgreSQL or SQLite
+* MySQL or SQLite (PostgreSQL should works)
 * Composer (php)
 * Bower (node)
 
@@ -74,43 +74,19 @@ Installation
     $ git clone https://gitnet.fr/deblan/gist
     $ cd gist
     $ make
-    $ cp propel-dist.yaml propel.yaml
 
-Edit `propel.yaml`. **Use spaces instead of tabulations**.
+An interactive shell will start. If you want to perform a manual configuration, follow these instructions.
 
-**MySQL**
+If you want to use `MySQL`:
 
-    propel:
-        database:
-            connections:
-                default:
-                    adapter: mysql
-                    # http://www.php.net/manual/en/ref.pdo-mysql.connection.php
-                    dsn: "mysql:host=DATABASE_SERVER;dbname=DATABASE_NAME"
-                    user: DATEBASE_USER
-                    password: DATEBASE_PASSWORD
-                    settings:
-                        charset: utf8
-                        queries:
-                            utf8: "SET NAMES utf8 COLLATE utf8_unicode_ci, COLLATION_CONNECTION = utf8_unicode_ci, COLLATION_DATABASE = utf8_unicode_ci, COLLATION_SERVER = utf8_unicode_ci"
+    $ cp app/config/propel.yaml.dist-mysql propel.yaml
 
-    [...]
+If you want to use `SQLite`:
 
-**SQLITE**
+    $ cp app/config/propel.yaml.dist-sqlite propel.yaml
 
-    propel:
-        database:
-            connections:
-                default:
-                    adapter: sqlite
-                    # http://www.php.net/manual/en/ref.pdo-sqlite.connection.php
-                    dsn: "sqlite:/PATH/TO/gist.sqlite"
-                    user: ~
-                    password: ~
-
-    [...]
-
-Then `$ make propel`.
+Then edit `propel.yaml` and replace the values of `dsn`, `user`, `password` by considering your environment
+and run `$ make propel`.
 
 **Versions >= 1.4.4 only**: `$ cp app/config/config.yml.dist app/config/config.yml`
 
@@ -378,29 +354,6 @@ Console
 
 * **List your gists**: `$ app/console --help gists`
 * **Delete a gist**: `$ app/console --help delete`
-
-Deployment
-----------
-
-Gist uses [Magallanes](http://magephp.com/) to manage deployment.
-
-**Global installation**
-
-    $ composer global require andres-montanez/magallanes
-    # if the envvar PATH contains "$HOME/bin/"
-    $ ln -s ~/.composer/vendor/bin/mage ~/bin/mage
-
-**Local installation**
-
-    $ composer require andres-montanez/magallanes
-
-There is an example of the configuration of an environment in `.mage/config/environment/prod.yml.dist`.
-
-    # global installation
-    $ mage deploy to:prod
-
-    # local installation
-    $ ./vendor/andres-montanez/magallanes/bin/mage deploy to:prod
 
 Contributors
 ------------
