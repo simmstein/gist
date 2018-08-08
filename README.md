@@ -40,41 +40,41 @@ Requirements
 
 Git can maybe be downloaded from your system's repositories.
 
-	$ git config --global user.email "you@example.com"
-	$ git config --global user.name "Your Name"
+    $ git config --global user.email "you@example.com"
+    $ git config --global user.name "Your Name"
 
 ### Composer
 
 Composer can maybe be downloaded from your system's repositories.
 Else, follow the next instructions:
 
-	# With cURL
-	$ curl -sS https://getcomposer.org/installer | php
+    # With cURL
+    $ curl -sS https://getcomposer.org/installer | php
 
-	# With Wget
-	$ wget -O - -q https://getcomposer.org/installer | php
+    # With Wget
+    $ wget -O - -q https://getcomposer.org/installer | php
 
-	$ chmod +x composer.phar
+    $ chmod +x composer.phar
 
-	# For a local installation and if the envvar PATH contains "$HOME/bin/"
-	$ mv composer.phar ~/bin/composer
+    # For a local installation and if the envvar PATH contains "$HOME/bin/"
+    $ mv composer.phar ~/bin/composer
 
-	# For a global installation
-	$ sudo mv composer.phar /usr/local/bin/composer
+    # For a global installation
+    $ sudo mv composer.phar /usr/local/bin/composer
 
 ### Bower
 
-	$ sudo apt-get install npm
-	$ sudo npm install -g bower
+    $ sudo apt-get install npm
+    $ sudo npm install -g bower
 
 Installation
 ------------
 
-	$ cd /path/to/www/
-	$ git clone https://gitnet.fr/deblan/gist
-	$ cd gist
-	$ make
-	$ cp propel-dist.yaml propel.yaml
+    $ cd /path/to/www/
+    $ git clone https://gitnet.fr/deblan/gist
+    $ cd gist
+    $ make
+    $ cp propel-dist.yaml propel.yaml
 
 Edit `propel.yaml`. **Use spaces instead of tabulations**.
 
@@ -120,12 +120,12 @@ See the [configuration section](#configuration) for more information about confi
 
 The web server must have permission to write into `data`.
 
-	$ sudo chown -R www-data:www-data data
+    $ sudo chown -R www-data:www-data data
 
 Your webserver must be configured to serve `web/` as document root. If you use nginx, all virtual paths must be rooted with `web/index.php` or `web/app_dev.php` ([documentation](https://www.nginx.com/resources/wiki/start/topics/recipes/symfony/)). If you use apache, you must enable the `rewrite` module and restart:
 
-	$ sudo a2enmod rewrite
-	$ sudo service apache2 restart
+    $ sudo a2enmod rewrite
+    $ sudo service apache2 restart
 
 `app_dev.php` is the development router. Access is granted for an IP range defined in the same file.
 
@@ -134,8 +134,8 @@ Upgrade
 
 If your version is less than v1.4.2, run: `test -d app && git add app && git commit -m "Configuration"`.
 
-	$ make update
-	$ make propel
+    $ make update
+    $ make propel
 
 If you upgrade to v1.4.1 or more: `app/console migrate:to:v1.4.1`.
 
@@ -282,7 +282,7 @@ Response example:
         "file": "55abcfa7771e0",
         "createdAt": "2015-07-19T16:26:15Z",
         "updatedAt": "2015-07-19T16:30:15Z"
-		"url": "https:\/\/gist.deblan.org\/en\/view\/55abcfa7771e0\/abcgi72967dd95e3461490dcaa310d728d6adef",
+        "url": "https:\/\/gist.deblan.org\/en\/view\/55abcfa7771e0\/abcgi72967dd95e3461490dcaa310d728d6adef",
     },
     {
         "id": 67,
@@ -292,9 +292,9 @@ Response example:
         "file": "xyzbcfa7771e0",
         "createdAt": "2015-08-19T16:26:15Z",
         "updatedAt": "2015-08-19T16:30:15Z"
-		"url": "https:\/\/gist.deblan.org\/en\/view\/5byzbcfa7771e0\/def72967dd95e346koq0dcaa310d728d6artu",
+        "url": "https:\/\/gist.deblan.org\/en\/view\/5byzbcfa7771e0\/def72967dd95e346koq0dcaa310d728d6artu",
     },
-	...
+    ...
 ]
 ```
 
@@ -386,21 +386,21 @@ Gist uses [Magallanes](http://magephp.com/) to manage deployment.
 
 **Global installation**
 
-	$ composer global require andres-montanez/magallanes
-	# if the envvar PATH contains "$HOME/bin/"
-	$ ln -s ~/.composer/vendor/bin/mage ~/bin/mage
+    $ composer global require andres-montanez/magallanes
+    # if the envvar PATH contains "$HOME/bin/"
+    $ ln -s ~/.composer/vendor/bin/mage ~/bin/mage
 
 **Local installation**
 
-	$ composer require andres-montanez/magallanes
+    $ composer require andres-montanez/magallanes
 
 There is an example of the configuration of an environment in `.mage/config/environment/prod.yml.dist`.
 
-	# global installation
-	$ mage deploy to:prod
+    # global installation
+    $ mage deploy to:prod
 
-	# local installation
-	$ ./vendor/andres-montanez/magallanes/bin/mage deploy to:prod
+    # local installation
+    $ ./vendor/andres-montanez/magallanes/bin/mage deploy to:prod
 
 Contributors
 ------------
