@@ -2,7 +2,7 @@
 /.mage/logs/*.log
 /composer.lock
 /vendor/
-/propel.yml
+/propel.yaml
 /src/Gist/Model/Base/
 /src/Gist/Model/Map/
 /web/components/
