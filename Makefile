@@ -26,6 +26,7 @@ update:
 
 	$(GIT) pull origin master
 	${MKDIR} -p data/git
+	${MKDIR} -p data/cache
 	$(COMPOSER) update
 	$(NPM) install
 

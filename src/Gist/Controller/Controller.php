@@ -175,9 +175,17 @@ abstract class Controller
             $params['user'] = $this->getUser();
         }
 
-        return $app['twig']->render(
+        $body = $app['twig']->render(
             $template,
             $params
         );
+
+        $response = new Response($body);
+
+        if (empty($params['no_cache'])) {
+            $response->setTtl(3600 * 24 * 7);
+        }
+
+        return $response;
     }
 }

@@ -11,3 +11,4 @@
 /app/config/propel/
 /data/
 /trans/
+/cache/
