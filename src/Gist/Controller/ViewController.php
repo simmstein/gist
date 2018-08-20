@@ -66,14 +66,14 @@ class ViewController extends Controller
      * @param string  $gist    Gist's ID
      * @param string  $commit  The commit
      *
-     * @return string|Response
+     * @return Response
      */
     public function embedJsAction(Request $request, $gist, $commit)
     {
         $viewOptions = $this->getViewOptions($request, $gist, $commit);
 
         return new Response(
-            $this->render('View/embedJs.html.twig', $viewOptions),
+            $this->render('View/embedJs.html.twig', $viewOptions, false),
             200,
             array(
                 'Content-Type' => 'text/javascript',
@@ -88,7 +88,7 @@ class ViewController extends Controller
      * @param string  $gist    Gist's ID
      * @param string  $commit  The commit
      *
-     * @return string|Response
+     * @return Response
      */
     public function rawAction(Request $request, $gist, $commit)
     {
@@ -114,7 +114,7 @@ class ViewController extends Controller
      * @param string  $gist    Gist's ID
      * @param string  $commit  The commit
      *
-     * @return string|Response
+     * @return Response
      */
     public function downloadAction(Request $request, $gist, $commit)
     {
@@ -133,7 +133,8 @@ class ViewController extends Controller
                     'Content-Disposition' => sprintf('filename=%s.%s', $gist->getFile(), $gist->getTypeAsExtension()),
                     'Content-Length' => mb_strlen($viewOptions['raw_content']),
                     'Content-Type' => 'application/force-download',
-                )
+                ),
+                false
             );
         } else {
             return $this->notFoundResponse($app);
@@ -146,7 +147,7 @@ class ViewController extends Controller
      * @param Request $request
      * @param string  $gist    Gist's ID
      *
-     * @return string|Response
+     * @return Response
      */
     public function revisionsAction(Request $request, $gist)
     {

@@ -9,6 +9,7 @@ use Gist\Model\Gist;
 use GitWrapper\GitException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Form\FormError;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class EditController.
@@ -22,7 +23,7 @@ class EditController extends Controller
      *
      * @param Request $request
      *
-     * @return string
+     * @return Response
      */
     public function createAction(Request $request)
     {
@@ -68,7 +69,7 @@ class EditController extends Controller
      *
      * @param Request $request
      *
-     * @return string
+     * @return Response
      */
     public function cloneAction(Request $request, $gist, $commit)
     {

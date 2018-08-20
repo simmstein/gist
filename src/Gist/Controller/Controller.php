@@ -136,7 +136,6 @@ abstract class Controller
         $app = $this->getApp();
 
         if (!empty($request)) {
-
         }
 
         $securityContext = $app['security.token_storage'];
@@ -160,10 +159,11 @@ abstract class Controller
      *
      * @param string $template
      * @param array  $params
+     * @param bool   $renderResponse
      *
      * @return string
      */
-    public function render($template, array $params = null)
+    public function render($template, array $params = null, $renderResponse = true)
     {
         $app = $this->getApp();
 
@@ -179,6 +179,10 @@ abstract class Controller
             $template,
             $params
         );
+
+        if (!$renderResponse) {
+            return $body;
+        }
 
         $response = new Response($body);
 

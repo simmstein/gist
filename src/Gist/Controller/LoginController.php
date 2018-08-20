@@ -20,7 +20,7 @@ class LoginController extends Controller
      *
      * @param Request $request
      *
-     * @return string
+     * @return Response
      */
     public function registerAction(Request $request)
     {
@@ -72,7 +72,7 @@ class LoginController extends Controller
      *
      * @param Request $request
      *
-     * @return string
+     * @return Response
      */
     public function loginAction(Request $request)
     {

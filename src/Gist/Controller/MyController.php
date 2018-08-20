@@ -7,6 +7,7 @@ use Gist\Form\DeleteGistForm;
 use Gist\Form\FilterGistForm;
 use Gist\Form\UserPasswordForm;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class MyController.
@@ -21,7 +22,7 @@ class MyController extends Controller
      * @param Request $request
      * @param int     $page
      *
-     * @return string
+     * @return Response
      */
     public function myAction(Request $request, $page)
     {
