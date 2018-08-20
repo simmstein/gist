@@ -364,7 +364,7 @@ Console
 
 * **Create a gist**: `$ app/console --help create`
 * **Update a gist**: `$ app/console --help update`
-* **Create user**: `app/console --help user:create`
+* **Create user**: `$ app/console --help user:create`
 * **Show stats**: `$ app/console --help stats`
 
 ### Version >= v1.7.0
