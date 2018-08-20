@@ -30,9 +30,9 @@ https://www.deblan.io/post/517/gist-est-dans-la-place
 Requirements
 ------------
 
-* PHP >= 5.4
+* PHP >= 5.4 with PDO
 * GIT
-* MySQL or SQLite (PostgreSQL should works)
+* MySQL or SQLite (PostgreSQL should work)
 * Composer (php)
 * NPM (nodejs)
 
@@ -64,7 +64,7 @@ Else, follow the next instructions:
 
 ### NPM
 
-    $ sudo apt-get install npm
+    $ sudo apt install npm
 
 Installation
 ------------
@@ -74,22 +74,21 @@ Installation
     $ cd gist
     $ make
 
-An interactive shell will start. If you want to perform a manual configuration, follow these instructions.
+An interactive shell will start. If you want to run the interactive shell manually, run:
 
-If you want to use `MySQL`:
+    $ composer gist-scripts
+
+To perform a manual configuration, follow these instructions.
+
+With `MySQL`:
 
     $ cp app/config/propel.yaml.dist-mysql propel.yaml
 
-If you want to use `SQLite`:
+With `SQLite`:
 
     $ cp app/config/propel.yaml.dist-sqlite propel.yaml
 
-Then edit `propel.yaml` and replace the values of `dsn`, `user`, `password` by considering your environment
-and run `$ make propel`.
-
-If you want to run the interactive shell manually, run:
-
-    $ composer gist-scripts
+Then edit `propel.yaml` and replace the values of `dsn`, `user`, `password` by considering your environment and run `$ make propel`.
 
 **Versions >= 1.4.4 only**: `$ cp app/config/config.yml.dist app/config/config.yml`
 
@@ -116,9 +115,9 @@ If your version is less than v1.4.2, run: `test -d app && git add app && git com
     $ make update
     $ make propel
 
-If you upgrade to v1.4.1 or more: `app/console migrate:to:v1.4.1`.
+If you upgrade from <= v1.4.0 to >= v1.4.1: `app/console migrate:to:v1.4.1`.
 
-If you upgrade to v1.4.4 or more, the configuration is moved to a `app/config/config.yml`: `$ cp app/config/config.yml.dist app/config/config.yml` and see the [configuration section](#configuration) for more information.
+If you upgrade from <= v1.4.3 to >= v1.4.4, the configuration is moved to `app/config/config.yml`: `$ cp app/config/config.yml.dist app/config/config.yml` and see the [configuration section](#configuration) for more information.
 
 If you upgrade to v1.7.0 or more, see the [configuration section](#configurationh) for more information about new options.
 
