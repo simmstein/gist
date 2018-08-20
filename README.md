@@ -87,6 +87,10 @@ If you want to use `SQLite`:
 Then edit `propel.yaml` and replace the values of `dsn`, `user`, `password` by considering your environment
 and run `$ make propel`.
 
+If you want to run the interactive shell manually, run:
+
+    $ composer gist-scripts
+
 **Versions >= 1.4.4 only**: `$ cp app/config/config.yml.dist app/config/config.yml`
 
 See the [configuration section](#configuration) for more information about configuration.
