@@ -65,7 +65,7 @@ class PostInstallHandler
                 $question = new Question('Password: [] ', '');
                 $substitutions['DATABASE_PASSWORD'] = $helper->ask($input, $output, $question);
             } elseif ($dbms === 'SQLite') {
-                $defaultPath = getcwd().'/app/data/gist.sqlite';
+                $defaultPath = getcwd().'/data/gist.sqlite';
                 $question = new Question("Ok! Where do you want me to save datas? [$defaultPath] ", $defaultPath);
                 $substitutions['DATABASE_PATH'] = $helper->ask($input, $output, $question);
                 $templateName = 'propel.yaml.dist-sqlite';
