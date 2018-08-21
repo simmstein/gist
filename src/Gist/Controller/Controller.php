@@ -195,7 +195,9 @@ abstract class Controller
         $response = new Response($body);
 
         if (empty($params['no_cache'])) {
-            $response->setTtl(3600 * 24 * 7);
+            $ttl = 3600 * 24 * 7;
+            $response->setTtl($ttl);
+            $response->setClientTtl($ttl);
         }
 
         return $response;
