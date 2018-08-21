@@ -53,7 +53,7 @@ class ViewController extends Controller
         $viewOptions = $this->getViewOptions($request, $gist, $commit);
 
         if (is_array($viewOptions)) {
-            return $app['twig']->createResponse('View/embed.html.twig', $viewOptions);
+            return $this->createResponse('View/embed.html.twig', $viewOptions);
         } else {
             return $this->notFoundResponse();
         }
