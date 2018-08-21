@@ -198,6 +198,7 @@ abstract class Controller
             $ttl = 3600 * 24 * 7;
             $response->setTtl($ttl);
             $response->setClientTtl($ttl);
+            $response->setExpires(new \DateTime('now +7 days'));
         }
 
         return $response;
