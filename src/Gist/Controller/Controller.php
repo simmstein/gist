@@ -159,11 +159,10 @@ abstract class Controller
      *
      * @param string $template
      * @param array  $params
-     * @param bool   $renderResponse
      *
      * @return string
      */
-    public function render($template, array $params = null, $renderResponse = true)
+    public function render($template, array $params = null)
     {
         $app = $this->getApp();
 
@@ -175,14 +174,23 @@ abstract class Controller
             $params['user'] = $this->getUser();
         }
 
-        $body = $app['twig']->render(
+        return $app['twig']->render(
             $template,
             $params
         );
+    }
 
-        if (!$renderResponse) {
-            return $body;
-        }
+    /**
+     * Creates a Response.
+     *
+     * @param string $template
+     * @param array  $params
+     *
+     * @return Response
+     */
+    public function createResponse($template, array $params = null)
+    {
+        $body = $this->render($template, $params);
 
         $response = new Response($body);
 

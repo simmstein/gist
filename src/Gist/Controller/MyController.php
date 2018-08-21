@@ -120,7 +120,7 @@ class MyController extends Controller
             }
         }
 
-        return $this->render(
+        return $this->createResponse(
             'My/my.html.twig',
             array(
                 'gists' => $gists,

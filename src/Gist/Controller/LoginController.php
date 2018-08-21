@@ -57,7 +57,7 @@ class LoginController extends Controller
             }
         }
 
-        return $this->render(
+        return $this->createResponse(
             'Login/register.html.twig',
             [
                 'form' => $form->createView(),
@@ -97,7 +97,7 @@ class LoginController extends Controller
             $error = $app['translator']->trans('login.login.invalid');
         }
 
-        return $this->render(
+        return $this->createResponse(
             'Login/login.html.twig',
             [
                 'form' => $form->createView(),

@@ -55,7 +55,7 @@ class EditController extends Controller
             }
         }
 
-        return $this->render(
+        return $this->createResponse(
             'Edit/index.html.twig',
             array(
                 'gist' => isset($gist) ? $gist : null,
@@ -110,6 +110,6 @@ class EditController extends Controller
 
         $viewOptions['form'] = $form->createView();
 
-        return $this->render('Edit/clone.html.twig', $viewOptions);
+        return $this->createResponse('Edit/clone.html.twig', $viewOptions);
     }
 }

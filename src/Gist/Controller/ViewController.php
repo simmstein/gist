@@ -31,7 +31,7 @@ class ViewController extends Controller
         $viewOptions = $this->getViewOptions($request, $gist, $commit);
 
         if (is_array($viewOptions)) {
-            return $this->render('View/view.html.twig', $viewOptions);
+            return $this->createResponse('View/view.html.twig', $viewOptions);
         } else {
             return $this->notFoundResponse();
         }
@@ -53,7 +53,7 @@ class ViewController extends Controller
         $viewOptions = $this->getViewOptions($request, $gist, $commit);
 
         if (is_array($viewOptions)) {
-            return $app['twig']->render('View/embed.html.twig', $viewOptions);
+            return $app['twig']->createResponse('View/embed.html.twig', $viewOptions);
         } else {
             return $this->notFoundResponse();
         }
@@ -73,7 +73,7 @@ class ViewController extends Controller
         $viewOptions = $this->getViewOptions($request, $gist, $commit);
 
         return new Response(
-            $this->render('View/embedJs.html.twig', $viewOptions, false),
+            $this->render('View/embedJs.html.twig', $viewOptions),
             200,
             array(
                 'Content-Type' => 'text/javascript',
@@ -165,7 +165,7 @@ class ViewController extends Controller
             return $this->notFoundResponse();
         }
 
-        return $this->render(
+        return $this->createResponse(
             'View/revisions.html.twig',
             array(
                 'gist' => $gist,
