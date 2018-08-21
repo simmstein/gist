@@ -130,6 +130,7 @@ class MyController extends Controller
                 'filterForm' => $filterForm->createView(),
                 'passwordForm' => $passwordForm->createView(),
                 'deleted' => !empty($deleted),
+                'no_cache' => true,
             )
         );
     }

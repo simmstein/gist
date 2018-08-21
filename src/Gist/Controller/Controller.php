@@ -196,9 +196,13 @@ abstract class Controller
 
         if (empty($params['no_cache'])) {
             $ttl = 3600 * 24 * 7;
+            $etag = sha1($response->getContent());
+
             $response->setTtl($ttl);
             $response->setClientTtl($ttl);
             $response->setExpires(new \DateTime('now +7 days'));
+            $response->setLastModified(new \DateTime('now'));
+            $response->setEtag($etag, true);
         }
 
         return $response;
