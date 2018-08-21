@@ -4,8 +4,20 @@ GIST
 GIST is an open-source application to share code.
 https://www.deblan.io/post/517/gist-est-dans-la-place
 
-[Read the wiki for more information](https://gitnet.fr/deblan/gist/wiki/_pages).
+**[Read the wiki for more information](https://gitnet.fr/deblan/gist/wiki/_pages).**
 
-![Gist](https://upload.deblan.org/u/2015-11/565b93a5.png "Gist")
+### Editor
 
-![Gist](https://upload.deblan.org/u/2016-06/57655dec.png "Gist")
+![Gist](https://upload.deblan.org/u/2018-08/5b7ab7a6.png "Gist editor")
+
+### Result 
+
+![Gist](https://upload.deblan.org/u/2018-08/5b7ab7d4.png "Gist result")
+
+### Account
+
+![Gist](https://upload.deblan.org/u/2018-08/5b7aba2d.png "Gist account")
+
+### Embeded Gist
+
+![Gist](https://upload.deblan.org/u/2018-08/5b7ab81c.png "Embeded Gist")
