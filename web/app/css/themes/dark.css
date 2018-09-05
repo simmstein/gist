@@ -56,3 +56,11 @@ body {
 .btn-error:active, .btn-error:hover, .btn-error:focus {
     color: #000;
 }
+
+pre.line-numbers {
+    padding-left: 50px !important;
+}
+
+.line-numbers-rows {
+    top: -4px !important;
+}
