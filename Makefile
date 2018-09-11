@@ -3,6 +3,7 @@ NPM ?= npm
 GIT ?= git
 MKDIR ?= mkdir
 PHP ?= php
+RM ?= rm
 
 all: update clean-cache
 
@@ -11,39 +12,39 @@ composer:
 	@echo "---------------------------"
 	@echo
 
-	$(COMPOSER) install
+	${COMPOSER} install
 
 npm:
 	@echo "Installing CSS/JS dependencies"
 	@echo "------------------------------"
 	@echo
 
-	$(NPM) install
+	${NPM} install
 
 update:
 	@echo "Updating application's dependencies"
 	@echo "-----------------------------------"
 	@echo
 
-	$(GIT) pull origin master
+	${GIT} pull origin master
 	${MKDIR} -p data/git
 	${MKDIR} -p data/cache
-	$(COMPOSER) update
-	$(NPM) install
+	${COMPOSER} update
+	${NPM} install
 
 clean-cache:
 	@echo "Removing cache"
 	@echo "--------------"
 	@echo
 
-	rm -fr cache/*
+	${RM} -fr cache/*
 
 run:
 	@echo "Run development server"
 	@echo "----------------------"
 	@echo
 
-	$(PHP) -S 127.0.0.1:8080 -t web
+	${PHP} -S 127.0.0.1:8080 -t web
 
 propel:
 	@echo "Propel migration"
