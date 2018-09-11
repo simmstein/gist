@@ -4,14 +4,15 @@ GIT ?= git
 MKDIR ?= mkdir
 PHP ?= php
 
-all: update
+all: update clean-cache
 
 composer:
 	@echo "Installing PHP dependencies"
 	@echo "---------------------------"
 	@echo
 
-	$(COMPOSER) install $(COMPOSER_INSTALL_FLAGS)
+	$(COMPOSER) install
+
 npm:
 	@echo "Installing CSS/JS dependencies"
 	@echo "------------------------------"
@@ -29,6 +30,13 @@ update:
 	${MKDIR} -p data/cache
 	$(COMPOSER) update
 	$(NPM) install
+
+clean-cache:
+	@echo "Removing cache"
+	@echo "--------------"
+	@echo
+
+	rm -fr cache/*
 
 run:
 	@echo "Run development server"
