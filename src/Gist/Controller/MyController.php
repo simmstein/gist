@@ -63,7 +63,7 @@ class MyController extends Controller
 
         if (empty($apiKey)) {
             $regenerateApiKey = true;
-        } 
+        }
         // FIXME: CSRF issue!
         elseif ($request->request->get('apiKey') === $apiKey && $request->request->has('generateApiKey')) {
             $regenerateApiKey = true;

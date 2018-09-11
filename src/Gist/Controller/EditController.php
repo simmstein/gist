@@ -60,6 +60,7 @@ class EditController extends Controller
             array(
                 'gist' => isset($gist) ? $gist : null,
                 'form' => $form->createView(),
+                'no_cache' => true,
             )
         );
     }
@@ -109,6 +110,7 @@ class EditController extends Controller
         }
 
         $viewOptions['form'] = $form->createView();
+        $viewOptions['no_cache'] = true;
 
         return $this->createResponse('Edit/clone.html.twig', $viewOptions);
     }

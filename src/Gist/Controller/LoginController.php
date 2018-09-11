@@ -63,6 +63,7 @@ class LoginController extends Controller
                 'form' => $form->createView(),
                 'error' => isset($error) ? $error : '',
                 'success' => isset($success) ? $success : '',
+                'no_cache' => true,
             ]
         );
     }
@@ -102,6 +103,7 @@ class LoginController extends Controller
             [
                 'form' => $form->createView(),
                 'error' => isset($error) ? $error : '',
+                'no_cache' => true,
             ]
         );
     }
