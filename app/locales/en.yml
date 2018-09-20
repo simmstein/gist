@@ -99,6 +99,7 @@ form:
             php: 'PHP'
             sql: 'SQL'
             yaml: 'YAML'
+            markdown: 'MARKDOWN'
             perl: 'PERL'
             c: 'C/C++'
             asp: 'ASP'

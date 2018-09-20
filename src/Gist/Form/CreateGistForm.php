@@ -97,6 +97,7 @@ class CreateGistForm extends AbstractForm
             'sql' => '',
             'xml' => '',
             'yaml' => '',
+            'markdown' => '',
             'perl' => '',
             'c' => '',
             'asp' => '',

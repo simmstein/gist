@@ -75,6 +75,7 @@ class Gist extends BaseGist
             'bash' => 'sh',
             'actionscript3' => 'as',
             'text' => 'txt',
+            'markdown' => 'md',
         );
 
         return str_replace(array_keys($data), array_values($data), $this->getType());
