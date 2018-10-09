@@ -45,7 +45,7 @@ date:
     format: 'Y-m-d h:i:s'
 
 footer:
-    text: '<p>Powered by <a href="https://gitnet.fr/deblan/gist">GIST</a>, it''s open source :) - <a href="https://gitnet.fr/deblan/gist/wiki/1.4+API/">API</a></p>'
+    text: '<p>Powered by <a href="https://gitnet.fr/deblan/gist">GIST</a>, it''s open source :) - <a href="https://gitnet.fr/deblan/gist/wiki/1.4-API/">API</a></p>'
 
 login:
     login:
