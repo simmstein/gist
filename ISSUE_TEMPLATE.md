@@ -13,11 +13,13 @@
 
 ### Steps to reproduce
 
-#### Observed Results
-
 1. ...
 2. ...
 3. ...
+
+#### Observed Results
+
+...
 
 #### Expected Results
 
