@@ -1,5 +1,5 @@
 /* PrismJS 1.15.0
-https://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascript+actionscript+c+csharp+bash+cpp+aspnet+css-extras+diff+markup-templating+markdown+perl+php+php-extras+sql+python+yaml&plugins=line-highlight+line-numbers+autolinker */
+https://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascript+actionscript+c+csharp+bash+cpp+aspnet+css-extras+diff+markup-templating+markdown+perl+php+php-extras+sql+python+yaml&plugins=line-highlight+line-numbers */
 /**
  * prism.js default theme for JavaScript, CSS and HTML
  * Based on dabblet (http://dabblet.com)
@@ -231,6 +231,3 @@ pre[class*="language-"].line-numbers > code {
 			text-align: right;
 		}
 
-.token a {
-	color: inherit;
-}
