@@ -72,13 +72,10 @@ class ViewController extends Controller
     {
         $viewOptions = $this->getViewOptions($request, $gist, $commit);
 
-        return new Response(
-            $this->render('View/embedJs.html.twig', $viewOptions),
-            200,
-            array(
-                'Content-Type' => 'text/javascript',
-            )
-        );
+        $response = $this->createResponse('View/embedJs.html.twig', $viewOptions),
+        $response->headers->set('Content-Type', 'text/javascript');
+
+        return $response;
     }
 
     /**
