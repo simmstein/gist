@@ -31,6 +31,8 @@ class ViewController extends Controller
         $viewOptions = $this->getViewOptions($request, $gist, $commit);
 
         if (is_array($viewOptions)) {
+            $viewOptions['no_cache'] = true;
+
             return $this->createResponse('View/view.html.twig', $viewOptions);
         } else {
             return $this->notFoundResponse();
