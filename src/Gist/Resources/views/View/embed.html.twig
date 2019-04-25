@@ -31,6 +31,12 @@
 {% block nav %}{% endblock %}
 
 {% block body %}
+    {% set routeParams = app.request.attributes.get('_route_params') %}
+
+    {% if type_overrided is defined %}
+        {% set routeParams = routeParams|merge({type: gist.type}) %}
+    {% endif %}
+
     <div class="row">
         <div class="col-md-12" id="embed">
             <div class="panel panel-default">
@@ -47,7 +53,7 @@
                                     </button>
                                     <ul class="dropdown-menu dropdown-menu-right">
                                         <li>
-                                            <a target="_blank" href="{{ path('view', app.request.attributes.get('_route_params')) }}" class="cipher-link">
+                                            <a target="_blank" href="{{ path('view', routeParams) }}" class="cipher-link">
                                                 <span class="btn btn-warning btn-xs">
                                                     {{ commit|slice(0, 10) }}
                                                 </span>
@@ -55,18 +61,18 @@
                                         </li>
                                         {% if not gist.cipher %}
                                             <li>
-                                                <a target="_blank" href="{{ path('raw', app.request.attributes.get('_route_params')) }}">
+                                                <a target="_blank" href="{{ path('raw', routeParams) }}">
                                                     {{ 'gist.action.raw'|trans }}
                                                 </a>
                                             </li>
                                             <li>
-                                                <a target="_blank" href="{{ path('download', app.request.attributes.get('_route_params')) }}">
+                                                <a target="_blank" href="{{ path('download', routeParams) }}">
                                                     {{ 'gist.action.download'|trans }}
                                                 </a>
                                             </li>
                                         {% endif %}
                                         <li>
-                                        <a target="_blank" href="{{ path('clone', app.request.attributes.get('_route_params')) }}" class="cipher-link">
+                                        <a target="_blank" href="{{ path('clone', routeParams) }}" class="cipher-link">
                                                 {{ 'gist.action.clone'|trans }}
                                             </a>
                                         </li>
@@ -75,20 +81,20 @@
                             </div>
                             <div class="visible-md visible-lg">
                                 <div class="text-right actions">
-                                    <a target="_blank" href="{{ path('view', app.request.attributes.get('_route_params')) }}" class="cipher-link"><span class="btn btn-warning btn-xs">{{ commit|slice(0, 10) }}</span></a>
+                                    <a target="_blank" href="{{ path('view', routeParams) }}" class="cipher-link"><span class="btn btn-warning btn-xs">{{ commit|slice(0, 10) }}</span></a>
 
                                     {% if not gist.cipher %}
-                                        <a target="_blank" href="{{ path('raw', app.request.attributes.get('_route_params')) }}" class="btn btn-default btn-sm">
+                                        <a target="_blank" href="{{ path('raw', routeParams) }}" class="btn btn-default btn-sm">
                                             <span class="glyphicon glyphicon-eye-open"></span>
                                             {{ 'gist.action.raw'|trans }}
                                         </a>
-                                        <a target="_blank" href="{{ path('download', app.request.attributes.get('_route_params')) }}" class="btn btn-default btn-sm">
+                                        <a target="_blank" href="{{ path('download', routeParams) }}" class="btn btn-default btn-sm">
                                             <span class="glyphicon glyphicon-save-file"></span>
                                             {{ 'gist.action.download'|trans }}
                                         </a>
                                     {% endif %}
 
-                                    <a target="_blank" href="{{ path('clone', app.request.attributes.get('_route_params')) }}" class="btn btn-success btn-sm cipher-link">
+                                    <a target="_blank" href="{{ path('clone', routeParams) }}" class="btn btn-success btn-sm cipher-link">
                                         <span class="glyphicon glyphicon-copy"></span>
                                         {{ 'gist.action.clone'|trans }}
                                     </a>

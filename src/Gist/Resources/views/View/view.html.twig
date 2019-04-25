@@ -15,6 +15,12 @@
 {% block title %}{{ gist.title ? gist.title : 'gist.untitled'|trans }} - {{ commit|slice(0, 10) }}{% endblock %}
 
 {% block body %}
+    {% set routeParams = app.request.attributes.get('_route_params') %}
+
+    {% if type_overrided is defined %}
+        {% set routeParams = routeParams|merge({type: gist.type}) %}
+    {% endif %}
+
     <div class="row">
         <div class="col-md-12">
             <ul class="nav nav-tabs">
@@ -45,7 +51,7 @@
                                     </button>
                                     <ul class="dropdown-menu dropdown-menu-right">
                                         <li>
-                                            <a target="_blank" href="{{ path('view', app.request.attributes.get('_route_params')) }}" class="cipher-link">
+                                            <a target="_blank" href="{{ path('view', routeParams) }}" class="cipher-link">
                                                 <span class="btn btn-warning btn-xs">
                                                     {{ commit|slice(0, 10) }}
                                                 </span>
@@ -53,18 +59,18 @@
                                         </li>
                                         {% if not gist.cipher %}
                                             <li>
-                                                <a href="{{ path('raw', app.request.attributes.get('_route_params')) }}">
+                                                <a href="{{ path('raw', routeParams) }}">
                                                     {{ 'gist.action.raw'|trans }}
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="{{ path('download', app.request.attributes.get('_route_params')) }}">
+                                                <a href="{{ path('download', routeParams) }}">
                                                     {{ 'gist.action.download'|trans }}
                                                 </a>
                                             </li>
                                         {% endif %}
                                         <li>
-                                            <a href="{{ path('clone', app.request.attributes.get('_route_params')) }}" class="cipher-link">
+                                            <a href="{{ path('clone', routeParams) }}" class="cipher-link">
                                                 {{ 'gist.action.clone'|trans }}
                                             </a>
                                         </li>
@@ -78,17 +84,17 @@
                                     </span>
 
                                     {% if not gist.cipher %}
-                                        <a href="{{ path('raw', app.request.attributes.get('_route_params')) }}" class="btn btn-default btn-sm">
+                                        <a href="{{ path('raw', routeParams) }}" class="btn btn-default btn-sm">
                                             <span class="glyphicon glyphicon-eye-open"></span>
                                             {{ 'gist.action.raw'|trans }}
                                         </a>
-                                        <a href="{{ path('download', app.request.attributes.get('_route_params')) }}" class="btn btn-default btn-sm">
+                                        <a href="{{ path('download', routeParams) }}" class="btn btn-default btn-sm">
                                             <span class="glyphicon glyphicon-save-file"></span>
                                             {{ 'gist.action.download'|trans }}
                                         </a>
                                     {% endif %}
 
-                                    <a href="{{ path('clone', app.request.attributes.get('_route_params')) }}" class="btn btn-success btn-sm cipher-link">
+                                    <a href="{{ path('clone', routeParams) }}" class="btn btn-success btn-sm cipher-link">
                                         <span class="glyphicon glyphicon-copy"></span>
                                         {{ 'gist.action.clone'|trans }}
                                     </a>
@@ -104,6 +110,33 @@
                                 <pre><code {% if gist.cipher %}data-cipher{% endif %} class="line-numbers language-{{ gist.highlightType }}">{{ raw_content }}</code></pre>
                             </div>
                         </div>
+                        <div class="btn-toolbar">
+                            <div class="pull-right">
+                                <div class="btn-group">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                            {{ ('form.type.choice.' ~ gist.type)|trans }}
+                                            <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-right">
+                                            {% for item in types %}
+                                                {% if gist.type != item %}
+                                                    <li>
+                                                        {% set params = app.request.attributes.get('_route_params')|merge({type: item}) %}
+
+                                                        <a href="{{ path('view', params) }}">
+                                                            <label for="type-{{ loop.index }}">
+                                                                {{ ('form.type.choice.' ~ item)|trans }}
+                                                            </label>
+                                                        </a>
+                                                    </li>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -115,7 +148,7 @@
                     <div class="tab-content">
                         <div class="tab-pane active in">
                             <pre><code class="language-html">{{ '<div%key%id="gist-' ~ gist.file ~ '-' ~ commit ~ '" class="gist-container"></div>
-<script src="' ~ app.request.getSchemeAndHttpHost() ~ path('embedjs', app.request.attributes.get('_route_params')) ~ '" async></script>' }}</code></pre>
+<script src="' ~ app.request.getSchemeAndHttpHost() ~ path('embedjs', routeParams) ~ '" async></script>' }}</code></pre>
                         </div>
                     </div>
                 </div>

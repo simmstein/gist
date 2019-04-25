@@ -31,6 +31,15 @@ class ViewController extends Controller
         $viewOptions = $this->getViewOptions($request, $gist, $commit);
 
         if (is_array($viewOptions)) {
+            if ($request->query->has('type')) {
+                $type = $request->query->get('type');
+
+                if (in_array($type, $this->types)) {
+                    $viewOptions['gist']->setType($type);
+                    $viewOptions['type_overrided'] = true;
+                }
+            }
+
             $viewOptions['no_cache'] = true;
 
             return $this->createResponse('View/view.html.twig', $viewOptions);
@@ -55,6 +64,15 @@ class ViewController extends Controller
         $viewOptions = $this->getViewOptions($request, $gist, $commit);
 
         if (is_array($viewOptions)) {
+            if ($request->query->has('type')) {
+                $type = $request->query->get('type');
+
+                if (in_array($type, $this->types)) {
+                    $viewOptions['gist']->setType($type);
+                    $viewOptions['type_overrided'] = true;
+                }
+            }
+
             return $this->createResponse('View/embed.html.twig', $viewOptions);
         } else {
             return $this->notFoundResponse();
@@ -73,6 +91,15 @@ class ViewController extends Controller
     public function embedJsAction(Request $request, $gist, $commit)
     {
         $viewOptions = $this->getViewOptions($request, $gist, $commit);
+
+        if ($request->query->has('type')) {
+            $type = $request->query->get('type');
+
+            if (in_array($type, $this->types)) {
+                $viewOptions['gist']->setType($type);
+                $viewOptions['type_overrided'] = true;
+            }
+        }
 
         $response = $this->createResponse('View/embedJs.html.twig', $viewOptions);
         $response->headers->set('Content-Type', 'text/javascript');

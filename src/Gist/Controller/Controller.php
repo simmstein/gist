@@ -21,6 +21,27 @@ abstract class Controller
     protected $app;
 
     /**
+     * @var array
+     */
+    protected $types = [
+        'html',
+        'css',
+        'javascript',
+        'php',
+        'sql',
+        'xml',
+        'yaml',
+        'markdown',
+        'perl',
+        'c',
+        'asp',
+        'python',
+        'bash',
+        'actionscript3',
+        'text',
+    ];
+
+    /**
      * __construct.
      *
      * @param Application $app
@@ -88,6 +109,7 @@ abstract class Controller
         return array(
             'gist' => $gist,
             'type' => $gist->getType(),
+            'types' => $this->types,
             'history' => $history,
             'commit' => $commit,
             'raw_content' => $content,

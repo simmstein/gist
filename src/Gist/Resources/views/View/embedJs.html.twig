@@ -1,10 +1,16 @@
+{% set routeParams = app.request.attributes.get('_route_params') %}
+
+{% if type_overrided is defined %}
+    {% set routeParams = routeParams|merge({type: gist.type}) %}
+{% endif %}
+
 (function() {
     var iFrameResizeLoaded = function() {
         var div = document.getElementById('gist-{{ gist.file }}-{{ commit }}');
         var iframeId = 'gist-' + (Math.floor(Math.random() * (10000 - 1)) + 1).toString();
         var iframe = document.createElement('iframe');
-        var url = '{{ app.request.getSchemeAndHttpHost() ~ path('embed', app.request.attributes.get('_route_params')) }}';
-        
+        var url = '{{ app.request.getSchemeAndHttpHost() ~ path('embed', routeParams) }}';
+
         if (div.getAttribute('data-key')) {
             url = [url, div.getAttribute('data-key')].join('');
         }
