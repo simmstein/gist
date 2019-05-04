@@ -20,6 +20,7 @@ npm:
 	@echo
 
 	${NPM} install
+	${NPM} update
 
 update:
 	@echo "Updating application's dependencies"
@@ -31,6 +32,7 @@ update:
 	${MKDIR} -p data/cache
 	${COMPOSER} update
 	${NPM} install
+	${NPM} update
 
 clean-cache:
 	@echo "Removing cache"

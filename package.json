@@ -1,9 +1,9 @@
 {
   "dependencies": {
-    "bootstrap": "^3.3.4",
-    "diff": "^2.2.2",
+    "bootstrap": "^3.4.1",
+    "diff": "^2.2.3",
     "flag-icon-css": "^0.8.6",
-    "iframe-resizer": "^2.8.6",
-    "jquery": "^1.9.1"
+    "iframe-resizer": "^2.8.10",
+    "jquery": ">=3.4.0"
   }
 }
